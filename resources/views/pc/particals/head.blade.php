@@ -1,7 +1,7 @@
 <div class="top-hander">
     <div class="w1224 pr clearfix">
         <div class="fl">
-            <link rel="stylesheet" href="css/pc/location.css" type="text/css"><!-- 收货地址，物流运费 -->
+            <link rel="stylesheet" href="{{url('css/pc/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
             <div class="sendaddress pr fl">
                 <span>送货至：</span>
                 <!-- <span>深圳<i class="share-a_a1"></i></span>-->
@@ -18,8 +18,8 @@
                               </ul>
                           </span>
             </div>
-            <script src="js/public/locationJson.js"></script>
-            <script src="js/pc/location.js"></script>
+            <script src="{{url('js/public/locationJson.js')}}"></script>
+            <script src="{{url('js/pc/location.js')}}"></script>
             <script>doInitRegion();</script>
             <div class="fl nologin">
                 <a class="red" href="{{url('login')}}">登录</a>
@@ -64,7 +64,7 @@
 </div>
 <div class="nav-middan-z w1224 clearfix">
     <a class="ecsc-logo" href="/Home/index/index.html">
-        <img src="upload/logo/2018/04-09/814d7e9a0eddcf3754f2e8373a50a19c.png"
+        <img src="{{url('upload/logo/2018/04-09/814d7e9a0eddcf3754f2e8373a50a19c.png')}}"
              style="width: 159px;height: 58px;">
     </a>
     <div class="ecsc-search">
@@ -188,7 +188,7 @@
             <a href="" target="_blank"><i class="share-a_a2"></i> 全部商品分类</a>
         </div>
         <!--全部商品分类-s-->
-        <div class="dd" style="display: block;">
+        <div class="dd" style="">
             <div class="cata-nav" id="cata-nav">
                 <div class="item">
                     <div class="item-left">
@@ -293,27 +293,15 @@
                         <div class="advertisement_down">
                             <a href="javascript:void(0);">
                                 <img class="w-100"
-                                     src="upload/ad/2018/04-13/4335611d9ab78af07e93ff2a31d2c895.jpg" title="">
+                                     src="{{url('upload/ad/2018/04-13/4335611d9ab78af07e93ff2a31d2c895.jpg')}}" title="">
                             </a>
                             <a href="javascript:void(0);">
                                 <img class="w-100"
-                                     src="upload/ad/2018/04-13/382052a07ca4795bf95f8067b88991b0.png" title="">
-                            </a>
-                            <a href="javascript:void(0);">
-                                <img class="w-100"
-                                     src="upload/ad/2018/04-13/964733352359d70a5f43b814e2679ea2.png" title="">
-                            </a>
-                            <a href="javascript:void(0);">
-                                <img class="w-100"
-                                     src="upload/ad/2018/04-13/06fd5a2896edeee49120f8717d642ee1.png" title="">
-                            </a>
-                            <a href="javascript:void(0);">
-                                <img class="w-100"
-                                     src="upload/ad/2018/04-13/e8f1892d1a21c64318c53635a7225e66.png" title="">
+                                     src="{{url('upload/ad/2018/04-13/382052a07ca4795bf95f8067b88991b0.pn')}}g" title="">
                             </a>
                         </div>
                         <a href="javascript:void(0);" class="cata-nav-rigth">
-                            <img class="w-100" src="upload/ad/2018/04-09/6ef2f9b7347fe73acbe067ea77327778.jpg"
+                            <img class="w-100" src="{{url('upload/ad/2018/04-09/6ef2f9b7347fe73acbe067ea77327778.jpg')}}"
                                  title="">
                         </a>
                     </div>
@@ -454,23 +442,23 @@
                         <div class="advertisement_down">
                             <a href="javascript:void(0);">
                                 <img class="w-100"
-                                     src="upload/ad/2018/04-12/3181c862e182923170dcf1e15bc0a2cc.jpg" title="">
+                                     src="{{url('upload/ad/2018/04-12/3181c862e182923170dcf1e15bc0a2cc.jpg')}}" title="">
                             </a>
                             <a href="javascript:void(0);">
                                 <img class="w-100"
-                                     src="upload/ad/2018/04-13/0051c20be128541be1f4cfa41316b1ca.png" title="">
+                                     src="{{url('upload/ad/2018/04-13/0051c20be128541be1f4cfa41316b1ca.png')}}" title="">
                             </a>
                             <a href="javascript:void(0);">
                                 <img class="w-100"
-                                     src="upload/ad/2018/04-12/3181c862e182923170dcf1e15bc0a2cc.jpg" title="">
+                                     src="{{url('upload/ad/2018/04-12/3181c862e182923170dcf1e15bc0a2cc.jpg')}}" title="">
                             </a>
                             <a href="javascript:void(0);">
                                 <img class="w-100"
-                                     src="upload/ad/2018/04-13/cd8a548bcc78a0a2fcc855a644c0e92f.jpg" title="">
+                                     src="{{url('upload/ad/2018/04-13/cd8a548bcc78a0a2fcc855a644c0e92f.jpg')}}" title="">
                             </a>
                         </div>
                         <a href="javascript:void(0);" class="cata-nav-rigth">
-                            <img class="w-100" src="upload/ad/2018/04-09/6ef2f9b7347fe73acbe067ea77327778.jpg"
+                            <img class="w-100" src="{{url('upload/ad/2018/04-09/6ef2f9b7347fe73acbe067ea77327778.jpg')}}"
                                  title="">
                         </a>
                     </div>

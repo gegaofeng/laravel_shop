@@ -16,7 +16,7 @@ Route::namespace('PC')->group(function (){
     Route::get('/','IndexController@index');
     Route::get('login','Auth\LoginController@index');
     Route::get('register','Auth\RegisterController@index');
-    Route::get('goodsList/id/{id}','GoodsController@goodslist');
+    Route::get('goodsList/id/{id}','GoodsController@goodsList');
 
 
 

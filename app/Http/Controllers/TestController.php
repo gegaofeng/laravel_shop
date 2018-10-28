@@ -10,11 +10,11 @@ class TestController extends Controller
 {
     //
     protected $model;
-    public function __construct(GoodsCategoryRepository $navigationRepository) {
-        $this->model=$navigationRepository;
+    public function __construct() {
+        $this->model=new GoodsCategoryRepository();
     }
 
     public function test(){
-        return $this->model->getGoodsCategoryTree();
+        return $this->model->getCatSonTree('62');
     }
 }
