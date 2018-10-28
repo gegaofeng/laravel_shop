@@ -158,7 +158,7 @@ user-select:none;
     height: 6px;
     vertical-align: middle;
     margin-left: 6px;
-    background: url("../images/ico-tphsop-index.png") no-repeat -200px -27px;
+    background: url("/images/pc/ico-tphsop-index.png") no-repeat -200px -27px;
 }
 .ls-dlzc{
     margin-left: 40px;
@@ -252,7 +252,7 @@ user-select:none;
     height: 18px;
     vertical-align: middle;
     margin-right: 10px;
-    background: url("../images/ico-tphsop-index.png") no-repeat -200px -40px;
+    background: url("/images/pc/ico-tphsop-index.png") no-repeat -200px -40px;
 }
 .u-g-cart .c-n .shop-nums{
     display: inline-block;
@@ -312,7 +312,7 @@ user-select:none;
     display: inline-block;
     width: 50px;
     height: 50px;
-    background: url("../images/ico-tphsop-index.png") no-repeat -315px 0;
+    background: url("/images/pc/ico-tphsop-index.png") no-repeat -315px 0;
     position: absolute;
     top: 12px;
     left: 10px
@@ -455,7 +455,7 @@ user-select:none;
     vertical-align: text-bottom;
     margin-right: 10px;
     margin-bottom: -4px;
-    background: url("../images/ico-tphsop-index.png") no-repeat 0 0;
+    background: url("/images/pc/ico-tphsop-index.png") no-repeat 0 0;
 }
 .navitems {
     float: left;
@@ -522,7 +522,7 @@ user-select:none;
     width: 25px;
     height: 27px;
     margin-right: 20px;
-    background-image: url("../images/ico-tphsop-index.png");
+    background-image: url("/images/pc/ico-tphsop-index.png");
     background-repeat: no-repeat;
 }
 .ico-nav-0{
@@ -782,7 +782,7 @@ user-select:none;
     color: #e40000;
     font-size: 21px;
     margin-right: 16px;
-    background-image: url("../images/ico-tphsop-index.png");
+    background-image: url("/images/pc/ico-tphsop-index.png");
     background-repeat: no-repeat;
 }
 .ico-day7{
