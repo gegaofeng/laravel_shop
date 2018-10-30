@@ -1,4 +1,5 @@
 <!doctype html>
+<html>
 <head>
     <meta charset="UTF-8">
     <title> 首页 - 开源商城</title>

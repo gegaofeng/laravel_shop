@@ -14,7 +14,7 @@ class CreateNavigationTable extends Migration
     public function up()
     {
         //
-        Schema::create('shop_navigation',function (Blueprint $table){
+        Schema::create('navigation',function (Blueprint $table){
             $table->increments('id')->comment('前台导航表');
             $table->string('name')->default('')->comment('导航名称');
             $table->tinyInteger('is_show')->default('1')->comment('是否显示');

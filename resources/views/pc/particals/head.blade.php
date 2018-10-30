@@ -1,7 +1,7 @@
 <div class="top-hander">
     <div class="w1224 pr clearfix">
         <div class="fl">
-            <link rel="stylesheet" href="css/pc/location.css" type="text/css"><!-- 收货地址，物流运费 -->
+            <link rel="stylesheet" href="{{url('css/pc/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
             <div class="sendaddress pr fl">
                 <span>送货至：</span>
                 <!-- <span>深圳<i class="share-a_a1"></i></span>-->
@@ -188,7 +188,7 @@
             <a href="" target="_blank"><i class="share-a_a2"></i> 全部商品分类</a>
         </div>
         <!--全部商品分类-s-->
-        <div class="dd" style="display: block;">
+        <div class="dd" style="">
             <div class="cata-nav" id="cata-nav">
                 <div class="item">
                     <div class="item-left">
