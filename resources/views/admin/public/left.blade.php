@@ -18,8 +18,8 @@
                     <li><a href="javascript:void(0);" data-param="index|system">商城设置</a></li>
                     <li><a href="javascript:void(0);" data-param="region|tools">地区&amp;配送</a></li>
                     <li><a href="javascript:void(0);" data-param="index|smstemplate">短信模板</a></li>
-                    <li><a href="javascript:void(0);" data-param="navigationList|system">自定义导航栏</a></li>
-                    <li><a href="javascript:void(0);" data-param="linkList|article">友情链接</a></li>
+                    <li><a href="javascript:void(0);" data-param="navigationlist|system">自定义导航栏</a></li>
+                    <li><a href="javascript:void(0);" data-param="linklist|article">友情链接</a></li>
                     <li><a href="javascript:void(0);" data-param="cleancache|system">清除缓存</a></li>
                     <li><a href="javascript:void(0);" data-param="index|shop">门店自提点</a></li>
                     <li><a href="javascript:void(0);" data-param="index|freight">运费模板</a></li>
@@ -32,11 +32,11 @@
             <dd class="sub-menu" style="top: -70px; display: none;">
                 <ul>
                     <li><a href="javascript:void(0);" data-param="index|user">会员列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="levelList|user">会员等级</a></li>
+                    <li><a href="javascript:void(0);" data-param="levellist|user">会员等级</a></li>
                     <li><a href="javascript:void(0);" data-param="recharge|user">充值记录</a></li>
                     <li><a href="javascript:void(0);" data-param="withdrawals|user">提现申请</a></li>
                     <li><a href="javascript:void(0);" data-param="remittance|user">汇款记录</a></li>
-                    <li><a href="javascript:void(0);" data-param="signList|user">会员签到</a></li>
+                    <li><a href="javascript:void(0);" data-param="signlist|user">会员签到</a></li>
                 </ul>
             </dd>
         </dl>
@@ -44,8 +44,8 @@
             <dt><a href="javascript:void(0);"><span class="ico-system-2"></span><h3>广告</h3></a></dt>
             <dd class="sub-menu" style="top: -140px; display: none;">
                 <ul>
-                    <li><a href="javascript:void(0);" data-param="adList|Ad">广告列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="positionList|Ad">广告位置</a></li>
+                    <li><a href="javascript:void(0);" data-param="adlist|Ad">广告列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="positionlist|Ad">广告位置</a></li>
                 </ul>
             </dd>
         </dl>
@@ -67,7 +67,7 @@
                 <ul>
                     <li><a href="javascript:void(0);" data-param="index|admin">管理员列表</a></li>
                     <li><a href="javascript:void(0);" data-param="role|admin">角色管理</a></li>
-                    <li><a href="javascript:void(0);" data-param="right_list|system">权限资源列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="rightlist|system">权限资源列表</a></li>
                     <li><a href="javascript:void(0);" data-param="supplier|admin">供应商列表</a></li>
                 </ul>
             </dd>
@@ -76,8 +76,8 @@
             <dt><a href="javascript:void(0);"><span class="ico-system-5"></span><h3>模板</h3></a></dt>
             <dd class="sub-menu" style="top: -350px; display: none;">
                 <ul>
-                    <li><a href="javascript:void(0);" data-param="templateList|template">模板设置</a></li>
-                    <li><a href="javascript:void(0);" data-param="pageList|block">自定义页面</a></li>
+                    <li><a href="javascript:void(0);" data-param="templatelist|template">模板设置</a></li>
+                    <li><a href="javascript:void(0);" data-param="pagelist|block">自定义页面</a></li>
                 </ul>
             </dd>
         </dl>
@@ -87,7 +87,7 @@
                 <ul>
                     <li><a href="javascript:void(0);" data-param="index|tools">数据备份</a></li>
                     <li><a href="javascript:void(0);" data-param="restore|tools">数据还原</a></li>
-                    <li><a href="javascript:void(0);" data-param="clear_demo_data|tools">清空演示数据</a></li>
+                    <li><a href="javascript:void(0);" data-param="cleardemodata|tools">清空演示数据</a></li>
                 </ul>
             </dd>
         </dl>
@@ -97,16 +97,16 @@
             <dt><a href="javascript:void(0);"><span class="ico-shop-0"></span><h3>商品</h3></a></dt>
             <dd class="sub-menu" style="top: 0px; display: none;">
                 <ul>
-                    <li><a href="javascript:void(0);" data-param="goodsList|goods">商品列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="goodslist|goods">商品列表</a></li>
                     <li><a href="javascript:void(0);" data-param="index|Import">淘宝导入</a></li>
-                    <li><a href="javascript:void(0);" data-param="categoryList|goods">商品分类</a></li>
-                    <li><a href="javascript:void(0);" data-param="stock_list|goods">库存日志</a></li>
-                    <li><a href="javascript:void(0);" data-param="goodsTypeList|goods">商品模型</a></li>
-                    <li><a href="javascript:void(0);" data-param="specList|goods">商品规格</a></li>
-                    <li><a href="javascript:void(0);" data-param="brandList|goods">品牌列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="goodsAttributeList|goods">商品属性</a></li>
+                    <li><a href="javascript:void(0);" data-param="categorylist|goods">商品分类</a></li>
+                    <li><a href="javascript:void(0);" data-param="stocklist|goods">库存日志</a></li>
+                    <li><a href="javascript:void(0);" data-param="goodstypelist|goods">商品模型</a></li>
+                    <li><a href="javascript:void(0);" data-param="speclist|goods">商品规格</a></li>
+                    <li><a href="javascript:void(0);" data-param="brandlist|goods">品牌列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="goodsattributelist|goods">商品属性</a></li>
                     <li><a href="javascript:void(0);" data-param="index|comment">评论列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="ask_list|comment">商品咨询</a></li>
+                    <li><a href="javascript:void(0);" data-param="asklist|comment">商品咨询</a></li>
                 </ul>
             </dd>
         </dl>
@@ -115,15 +115,15 @@
             <dd class="sub-menu" style="top: -70px; display: none;">
                 <ul>
                     <li><a href="javascript:void(0);" data-param="index|order">订单列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="virtual_list|order">虚拟订单</a></li>
-                    <li><a href="javascript:void(0);" data-param="delivery_list|order">发货单</a></li>
-                    <li><a href="javascript:void(0);" data-param="refund_order_list|order">退款单</a></li>
-                    <li><a href="javascript:void(0);" data-param="return_list|order">退换货</a></li>
-                    <li><a href="javascript:void(0);" data-param="add_order|order">添加订单</a></li>
-                    <li><a href="javascript:void(0);" data-param="order_log|order">订单日志</a></li>
+                    <li><a href="javascript:void(0);" data-param="virtuallist|order">虚拟订单</a></li>
+                    <li><a href="javascript:void(0);" data-param="deliverylist|order">发货单</a></li>
+                    <li><a href="javascript:void(0);" data-param="refundorderlist|order">退款单</a></li>
+                    <li><a href="javascript:void(0);" data-param="returnlist|order">退换货</a></li>
+                    <li><a href="javascript:void(0);" data-param="addorder|order">添加订单</a></li>
+                    <li><a href="javascript:void(0);" data-param="orderlog|order">订单日志</a></li>
                     <li><a href="javascript:void(0);" data-param="index|invoice">发票管理</a></li>
-                    <li><a href="javascript:void(0);" data-param="team_list|team">拼团列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="order_list|team">拼团订单</a></li>
+                    <li><a href="javascript:void(0);" data-param="teamlist|team">拼团列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="orderlist|team">拼团订单</a></li>
                     <li><a href="javascript:void(0);" data-param="index|shoporder">上门自提</a></li>
                 </ul>
             </dd>
@@ -147,11 +147,11 @@
             <dt><a href="javascript:void(0);"><span class="ico-shop-3"></span><h3>分销</h3></a></dt>
             <dd class="sub-menu" style="top: -210px; display: none;">
                 <ul>
-                    <li><a href="javascript:void(0);" data-param="goods_list|distribut">分销商品列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="distributor_list|distribut">分销商列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="tree|distribut">分销关系</a></li>
-                    <li><a href="javascript:void(0);" data-param="grade_list|distribut">分销商等级</a></li>
-                    <li><a href="javascript:void(0);" data-param="rebate_log|distribut">分成日志</a></li>
+                    <li><a href="javascript:void(0);" data-param="goods_list|distribuet">分销商品列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="distributor_list|distribute">分销商列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="tree|distribute">分销关系</a></li>
+                    <li><a href="javascript:void(0);" data-param="grade_list|distribute">分销商等级</a></li>
+                    <li><a href="javascript:void(0);" data-param="rebate_log|distribute">分成日志</a></li>
                 </ul>
             </dd>
         </dl>

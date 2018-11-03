@@ -8,4 +8,7 @@ use App\Http\Controllers\Controller;
 class ArticleController extends Controller
 {
     //
+    public function linkList(){
+        return view('admin.article.linklist');
+    }
 }

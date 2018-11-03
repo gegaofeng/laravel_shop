@@ -1,8 +1,8 @@
 <include file="public/min-header"/>
 
-<link href="__PUBLIC__/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-<script src="__PUBLIC__/plugins/daterangepicker/moment.min.js" type="text/javascript"></script>
-<script src="__PUBLIC__/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<link href="{{asset('plugins/daterangepicker/daterangepicker-bs3.css" ')}} rel="stylesheet" type="text/css" />
+<script src="{{asset('plugins/daterangepicker/moment.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}" type="text/javascript"></script>
 
 <div class="wrapper">
     <!-- Content Header (Page header) -->

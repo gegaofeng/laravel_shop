@@ -8,4 +8,7 @@ use App\Http\Controllers\Controller;
 class SmstemplateController extends Controller
 {
     //
+    public function index(){
+        return view('admin.smstemplate.index');
+    }
 }
