@@ -11,10 +11,10 @@
         <!--<div class="he-nav"></div>-->
         <div class="shop-describe shop-con-describe p">
             <div class="deta-descri">
-                <p class="shopname_de"><span>商品名称：</span><span>{$goods.goods_name}</span></p>
+                <p class="shopname_de"><span>商品名称：</span><span>{{$goods['goods_name']}}</span></p>
                 <div class="ma-d-uli p">
                     <ul>
-                        <li><span>货号：</span><span>{$goods.goods_sn}</span></li>
+                        <li><span>货号：</span><span>{{$goods['goods_sn']}}</span></li>
                         <foreach name="goods_attr_list" item="v" key="k">
                             <li><span>{$goods_attribute[$v[attr_id]]}：</span><span>{$v[attr_value]}</span></li>
                         </foreach>
@@ -30,7 +30,7 @@
             <div class="detail-img-b">
                 <if condition="$goods.video">
                     <video controls="controls" id="detail_video" preload="preload" onended="this.load();">
-                        <source src="{$goods.video}" TYPE="video/mp4"/>
+                        <source src="{{$goods['video']}}" TYPE="video/mp4"/>
                     </video>
                 </if>
                 {$goods.goods_content|htmlspecialchars_decode}

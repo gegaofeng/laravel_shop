@@ -1,26 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
+@extends('pc.layouts.home')
+@section('personal_style')
     <meta charset="UTF-8">
     <title>{$goods.goods_name}-{$tpshop_config['shop_info_store_name']}</title>
     <meta name="keywords" content="{$goods.keywords}"/>
     <meta name="description" content="{$goods.goods_remark}"/>
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/tpshop.css"/>
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/jquery.jqzoom.css">
-    <script src="__STATIC__/js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="__STATIC__/js/move.js" type="text/javascript" charset="utf-8"></script>
-    <script src="__PUBLIC__/js/layer/layer-min.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/jquery.jqzoom.js"></script>
-    <script src="__PUBLIC__/js/global.js"></script>
-    <script src="__PUBLIC__/js/pc_common.js"></script>
-    <link rel="stylesheet" href="__STATIC__/css/location.css" type="text/css"><!-- 收货地址，物流运费 -->
+    <link rel="stylesheet" type="text/css" href="{{asset('static/css/tpshop.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('static/css/jquery.jqzoom.css')}}">
+    <script src="{{asset('static/js/jquery-1.11.3.min.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{asset('static/js/move.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{asset('')}}/js/layer/layer-min.js"></script>
+    <script type="text/javascript" src="{{asset('static')}}/js/jquery.jqzoom.js"></script>
+    <script src="{{asset('/js/global.js')}}"></script>
+    <script src="{{asset('/js/pc_common.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('static/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
     <link rel="shortcut icon" type="image/x-icon"
           href="{$tpshop_config.shop_info_store_ico|default='/public/static/images/logo/storeico_default.png'}"
           media="screen"/>
-</head>
+@endsection
+@section('body')
 <body>
 <!--header-s-->
-<include file="public/header" w="w1224"/>
+@include('pc.particals.head')
 <!--header-e-->
 <div class="search-box p">
     <div class="w1224">
@@ -30,7 +30,7 @@
                 <i class="litt-xyb"></i>
             </foreach>
             <div class="havedox">
-                <span>{$goods.goods_name}</span>
+                <span>{{$goods['goods_name']}}</span>
             </div>
         </div>
 		<!--
@@ -47,7 +47,7 @@
                 <div class="product-photo" id="photoBody">
                     <div class="product-video">
                         <if condition="$goods.video">
-                            <video id="video" src="{$goods.video}" controls="controls" preload="preload"
+                            <video id="video" src="{{$goods['video']}}" controls="controls" preload="preload"
                                    onended="this.load();">
                                 您的浏览器不支持查看此视频，请升级浏览器到最新版本
                             </video>
@@ -83,7 +83,7 @@
                 <div class="collect">
                     <a href="javascript:void(0);" id="collectLink"><i class="collect-ico collect-ico-null"></i>
                         <span class="collect-text">收藏商品</span>
-                        <em class="J_FavCount">({$goods['collect_sum']+$goods['virtual_collect_sum']})</em>
+                        <em class="J_FavCount">({{$goods['collect_sum']+$goods['virtual_collect_sum']}})</em>
                     </a>
                     <!--<a href="javascript:void(0);" id="collectLink"><i class="collect-ico collect-ico-ok"></i>已收藏<em class="J_FavCount">(20)</em></a>-->
                 </div>
@@ -160,7 +160,7 @@
             <input type="hidden" name="is_virtual" value="{$goods.is_virtual}"/><!-- 是否是虚拟商品 -->
             <input type="hidden" name="virtual_limit" id="virtual_limit" value="{$goods.virtual_limit|default=0}"/>
             <div class="detail-ggsl">
-                <h1>{$goods.goods_name}</h1>
+                <h1>{{$goods['goods_name']}}</h1>
                 <div class="presale-time" style="display: none">
                     <div class="pre-icon fl">
                         <span class="ys"><i class="detai-ico"></i><span id="activity_type">抢购活动</span></span>
@@ -184,11 +184,11 @@
                         </ul>
                         <ul>
                             <li class="jaj"><span id="market_price_title">市场价：</span></li>
-                            <li class="though-line"><span><em>￥</em><span id="market_price">{$goods.market_price}</span></span>
+                            <li class="though-line"><span><em>￥</em><span id="market_price">{{$goods['market_price']}}</span></span>
                                 <span class="mobile-buy-cheap">
                                     手机购买更便宜
                                     <i>
-                                    <img class="small-qrcode-h" src="/template/pc/rainbow/static/images/qrcode.png"
+                                    <img class="small-qrcode-h" src="{{asset('static/images/qrcode.png')}}"
                                          alt=""/>
                                     <img class="big-qrcode-h"
                                          img-url="/index.php?m=Home&c=Index&a=qr_code&data={$ShareLink}&head_pic={$head_pic}&back_img={$back_img}"
@@ -206,16 +206,16 @@
                         <if condition="$goods['give_integral'] gt 0">
                             <ul>
                                 <li class="jaj ls4"><span>赠送积分：</span></li>
-                                <li><span class="fullminus">{$goods.give_integral}</span></li>
+                                <li><span class="fullminus">{{$goods['give_integral']}}</span></li>
                             </ul>
                         </if>
                     </div>
                     <div class="shop-cou-ri">
                         <div class="allcomm"><p>累计评价</p>
-                            <p class="f_blue">{$goods['comment_count']}</p></div>
+                            <p class="f_blue">{{$goods['comment_count']}}</p></div>
                         <div class="br1"></div>
                         <div class="allcomm"><p>累计销量</p>
-                            <p class="f_blue">{$goods['sales_sum']+$goods['virtual_sales_sum']}</p></div>
+                            <p class="f_blue">{{$goods['sales_sum']+$goods['virtual_sales_sum']}}</p></div>
                     </div>
                 </div>
                 <if condition="$goods[is_virtual] eq 0">
@@ -238,9 +238,8 @@
                                 </div>
                             </li>
                         </ul>
-                        <script src="__PUBLIC__/js/locationJson.js"></script>
-                        <script src="__STATIC__/js/location.js"></script>
-                        <!-- 收货地址，物流运费 -end-->
+                        {{--<script src="{{asset('/js/locationJson.js')}}"></script>--}}
+                                                <!-- 收货地址，物流运费 -end-->
                     </div>
                 </if>
                 <div class="standard p">
@@ -306,7 +305,7 @@
                                        onblur="altergoodsnum(0)" max=""/>
                                 <a class="add" href="javascript:void(0);" onclick="altergoodsnum(1)">+</a>
                             </div>
-                            <div class="sav_shop">库存：<span id="spec_store_count">{$goods['store_count']}</span></div>
+                            <div class="sav_shop">库存：<span id="spec_store_count">{{$goods['store_count']}}</span></div>
                         </li>
                     </ul>
                 </div>
@@ -373,7 +372,7 @@
     </div>
 </div>
 <!--搭配购组合套餐 s-->
-<include file="goods/goodsInfoCombination"/>
+@include('pc.goods.goodsInfoCombination')
 <!--搭配购组合套餐 e-->
 <div class="detail-main p">
     <div class="w1224">
@@ -409,7 +408,7 @@
                 </div>
             </div>
         </div>
-        <include file="goods/goodsInfoDetail"/>
+        @include('pc.goods.goodsInfoDetail')
     </div>
 </div>
 <script type="text/javascript">
@@ -431,8 +430,8 @@
 
 </script>
 <!--footer-s-->
-<include file="public/footer"/>
-<include file="public/sidebar_cart"/>
+@include('pc.particals.footer')
+@include('pc.public.sidebar_cart')
 <!--看了又看-s-->
 <div style="display: none" id="look_see">
     <foreach name="look_see" item="look" key="k">
@@ -452,8 +451,8 @@
     <!--看了又看-s-->
 </div>
 <!--footer-e-->
-<script src="__STATIC__/js/lazyload.min.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/js/headerfooter.js"></script>
+<script src="{{asset('static/js/lazyload.min.js')}}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="{{asset('static/js/headerfooter.js')}}"></script>
 <script type="text/javascript">
     //判断是否有视频标签
     if ($('#video').length > 0) {
@@ -1000,4 +999,4 @@
 
 </script>
 </body>
-</html>
+@endsection

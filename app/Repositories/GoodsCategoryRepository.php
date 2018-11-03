@@ -74,9 +74,10 @@ class GoodsCategoryRepository extends BaseRepository
         $cat_son = array();
         $cat_son_id_arr = $this->goodsCategory->where('parent_id', $cat_id)->select('id')->get();
         //var_dump($son_cat_id_arr);
-        foreach ($cat_son_id_arr as $item => $value) {
-            $cat_son[] = $value['id'];
-        }
+//        foreach ($cat_son_id_arr as $item => $value) {
+//            $cat_son[] = $value['id'];
+//        }
+        $cat_son=get_arr_column($cat_son_id_arr,'id');
         if (count($cat_son)) {
             return $cat_son;
         } else {

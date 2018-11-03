@@ -20,4 +20,11 @@ class GoodsRepository extends BaseRepository{
         $goods_list=$this->goods->whereIn('cat_id',$category_id)->get();
         return $goods_list;
     }
+    public function getGoodsById($goods_id){
+        $find=$this->goods->has('goodsImages')->find($goods_id);
+        $goods= $this->goods->where('goods_id',$goods_id)->get();
+        var_dump($find);
+//        return $im=$goods->goodsImages;
+        return $find;
+    }
 }

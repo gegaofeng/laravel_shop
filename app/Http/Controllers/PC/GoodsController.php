@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\PC;
 
-use App\Model\Goods;
 use App\Repositories\GoodsCategoryRepository;
 use App\Repositories\GoodsImagesRepository;
 use App\Repositories\GoodsRepository;
@@ -20,13 +19,23 @@ class GoodsController extends Controller
     $this->goodsRepository=new GoodsRepository();
     $this->goodsImagesRepository=new GoodsImagesRepository();
     }
+
+    /**
+     * Notes:
+     * User:
+     * Date:2018/10/31
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function goodsList($id){
         $goods_cat_tree=$this->goodsCategoryRepository->getCatSonTree($id);
-//        var_dump($goods_cat_tree);
         $goods_list=$this->goodsRepository->getGoodsListByCategoryId($goods_cat_tree);
-//         return $goods_list;
-        $goods_id_list=array();
+        $goods_id_list=get_arr_column($goods_list,'goods_id');
         $goods_images=$this->goodsImagesRepository->getGoodsImagesByGoodsId($goods_id_list);
-        return view('pc.goods.goodsList')->with('goods_list',$goods_list);
+        return view('pc.goods.goodsList')->with('goods_list',$goods_list)->with('goods_images',$goods_images);
+    }
+    public function goodsInfo($id){
+        $goods_info=$this->goodsRepository->getGoodsById($id);
+        return view('pc.goods.goodsInfo')->with('goods',$goods_info);
     }
 }

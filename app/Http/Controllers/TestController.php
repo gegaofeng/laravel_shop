@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\GoodsCategoryRepository;
+use App\Repositories\GoodsRepository;
 use App\Repositories\NavigationRepository;
 use Illuminate\Http\Request;
 
@@ -11,10 +12,10 @@ class TestController extends Controller
     //
     protected $model;
     public function __construct() {
-        $this->model=new GoodsCategoryRepository();
+        $this->model=new GoodsRepository();
     }
 
     public function test(){
-        return $this->model->getCatSonTree('62');
+        return $this->model->getGoodsById('62');
     }
 }

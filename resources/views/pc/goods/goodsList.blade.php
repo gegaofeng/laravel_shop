@@ -397,6 +397,57 @@
                 </div>
                 <div class="shop-list-splb p">
                     <ul>
+                        @foreach($goods_list as $goods)
+                            <li>
+                                <div class="s_xsall">
+                                    <div class="xs_img">
+                                        <a href="{{url('goodsinfo/'.$goods['goods_id'])}}">
+                                            <img class="lazy-list"
+                                                 data-original="{{goods_thum_images($goods['goods_id'],236,236)}}"/>
+                                        </a>
+                                    </div>
+                                    <div class="xs_slide">
+                                        <div class="small-xs-shop">
+                                            <ul>
+                                                @foreach($goods_images as $goods_image)
+                                                    @if($goods['goods_id']==$goods_image['goods_id'])
+                                                        <li>
+                                                            <a href="javascript:void(0);">
+                                                                <img class="lazy-list"
+                                                                     data-original="{{$goods_image['image_url']}}"/>
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="price-tag">
+                                        <span class="now"><em class="li_xfo">￥</em><em>1598.00</em></span>
+                                        <span class="old"><em>￥</em><em>1698.00</em></span>
+                                    </div>
+                                    <div class="shop_name2">
+                                        <a href="/Home/Goods/goodsInfo/id/25.html">
+                                            直降200元◆vivo Y85全面屏手机 vivoy85手机 y75 y97官方旗舰店 </a>
+                                    </div>
+                                    <div class="J_btn_statu">
+                                        <div class="p-num">
+                                            <input class="J_input_val" id="number_25" type="text" value="1">
+                                            <p class="act">
+                                                <a href="javascript:void(0);" onClick="goods_add(25);"
+                                                   class="litt-zzyl1"></a>
+                                                <a href="javascript:void(0);" onClick="goods_cut(25);"
+                                                   class="litt-zzyl2"></a>
+                                            </p>
+                                        </div>
+                                        <div class="p-btn">
+                                            <a href="javascript:void(0);"
+                                               onclick="AjaxAddCart(25,$('#number_'+25).val());">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
                         <li>
                             <div class="s_xsall">
                                 <div class="xs_img">
@@ -633,71 +684,6 @@
                                 </div>
                             </div>
                         </li>
-                        @foreach($goods_list as $goods)
-                            <li>
-                                <div class="s_xsall">
-                                    <div class="xs_img">
-                                        <a href="{{url('goodsinfo/'.$goods['goods_id'])}}">
-                                            <img class="lazy-list"
-                                                 data-original="{{goods_thum_images($goods['goods_id'],236,236)}}"/>
-                                        </a>
-                                    </div>
-                                    <div class="xs_slide">
-                                        <div class="small-xs-shop">
-                                            <ul>
-                                                <li>
-                                                    <a href="javascript:void(0);">
-                                                        <img class="lazy-list"
-                                                             data-original="/upload/goods/thumb/25/goods_sub_thumb_854_236_236.png"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">
-                                                        <img class="lazy-list"
-                                                             data-original="/upload/goods/thumb/25/goods_sub_thumb_855_236_236.png"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">
-                                                        <img class="lazy-list"
-                                                             data-original="/upload/goods/thumb/25/goods_sub_thumb_856_236_236.png"/>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">
-                                                        <img class="lazy-list"
-                                                             data-original="/upload/goods/thumb/25/goods_sub_thumb_857_236_236.png"/>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="price-tag">
-                                        <span class="now"><em class="li_xfo">￥</em><em>1598.00</em></span>
-                                        <span class="old"><em>￥</em><em>1698.00</em></span>
-                                    </div>
-                                    <div class="shop_name2">
-                                        <a href="/Home/Goods/goodsInfo/id/25.html">
-                                            直降200元◆vivo Y85全面屏手机 vivoy85手机 y75 y97官方旗舰店 </a>
-                                    </div>
-                                    <div class="J_btn_statu">
-                                        <div class="p-num">
-                                            <input class="J_input_val" id="number_25" type="text" value="1">
-                                            <p class="act">
-                                                <a href="javascript:void(0);" onClick="goods_add(25);"
-                                                   class="litt-zzyl1"></a>
-                                                <a href="javascript:void(0);" onClick="goods_cut(25);"
-                                                   class="litt-zzyl2"></a>
-                                            </p>
-                                        </div>
-                                        <div class="p-btn">
-                                            <a href="javascript:void(0);" onclick="AjaxAddCart(25,$('#number_'+25).val());">加入购物车</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            @endforeach
-
                     </ul>
                 </div>
                 <div class="page p">
@@ -772,7 +758,7 @@
     </script>
     <!--footer-s-->
     @include('pc.particals.footer')
-
+    @include('pc.public.sidebar_cart')
     <style>
         .mod_copyright {
             border-top: 1px solid #EEEEEE;
@@ -834,115 +820,6 @@
             });
         });
     </script>
-    <div class="soubao-sidebar">
-        <div class="soubao-sidebar-bg"></div>
-        <div class="sidertabs tab-lis-1">
-            <div class="sider-top-stra sider-midd-1">
-                <div class="icon-tabe-chan">
-                    <a href="/Home/User/index.html">
-                        <i class="share-side share-side1"></i>
-                        <i class="share-side tab-icon-tip triangleshow"></i>
-                    </a>
-
-                    <div class="dl_login">
-                        <div class="hinihdk">
-                            <img src="/static/images/dl.png"/>
-
-                            <p class="loginafter nologin"><span>你好，请先</span><a href="/Home/user/login.html">登录！</a></p>
-                            <!--未登录-e--->
-                            <!--登录后-s--->
-                            <p class="loginafter islogin">
-                                <span class="id_jq userinfo">陈xxxxxxx</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="/Home/user/logout.html"
-                                                                        title="点击退出">退出！</a>
-                            </p>
-                            <!--未登录-s--->
-                        </div>
-                    </div>
-                </div>
-                <div class="icon-tabe-chan shop-car">
-                    <a href="javascript:void(0);" onclick="ajax_side_cart_list()">
-                        <div class="tab-cart-tip-warp-box">
-                            <div class="tab-cart-tip-warp">
-                                <i class="share-side share-side1"></i>
-                                <i class="share-side tab-icon-tip"></i>
-                                <span class="tab-cart-tip">购物车</span>
-                                <span class="tab-cart-num J_cart_total_num" id="tab_cart_num">0</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="icon-tabe-chan massage">
-                    <a href="/Home/User/message_notice.html" target="_blank">
-                        <i class="share-side share-side1"></i>
-                        <!--<i class="share-side tab-icon-tip"></i>-->
-                        <span class="tab-tip">消息</span>
-                    </a>
-                </div>
-            </div>
-            <div class="sider-top-stra sider-midd-2">
-                <div class="icon-tabe-chan mmm">
-                    <a href="/Home/User/goods_collect.html" target="_blank">
-                        <i class="share-side share-side1"></i>
-                        <!--<i class="share-side tab-icon-tip"></i>-->
-                        <span class="tab-tip">收藏</span>
-                    </a>
-                </div>
-                <div class="icon-tabe-chan hostry">
-                    <a href="/Home/User/visit_log.html" target="_blank">
-                        <i class="share-side share-side1"></i>
-                        <!--<i class="share-side tab-icon-tip"></i>-->
-                        <span class="tab-tip">足迹</span>
-                    </a>
-                </div>
-                <!--<div class="icon-tabe-chan sign">-->
-                <!--<a href="" target="_blank">-->
-                <!--<i class="share-side share-side1"></i>-->
-                <!--&lt;!&ndash;<i class="share-side tab-icon-tip"></i>&ndash;&gt;-->
-                <!--<span class="tab-tip">签到</span>-->
-                <!--</a>-->
-                <!--</div>-->
-            </div>
-        </div>
-        <div class="sidertabs tab-lis-2">
-            <div class="icon-tabe-chan advice">
-                <a title="点击这里给我发消息" href="tencent://message/?uin=123456789&amp;Site=TPshop商城&amp;Menu=yes"
-                   target="_blank">
-                    <i class="share-side share-side1"></i>
-                    <!--<i class="share-side tab-icon-tip"></i>-->
-                    <span class="tab-tip">在线咨询</span>
-                </a>
-            </div>
-            <!--<div class="icon-tabe-chan request">-->
-            <!--<a href="" target="_blank">-->
-            <!--<i class="share-side share-side1"></i>-->
-            <!--&lt;!&ndash;<i class="share-side tab-icon-tip"></i>&ndash;&gt;-->
-            <!--<span class="tab-tip">意见反馈</span>-->
-            <!--</a>-->
-            <!--</div>-->
-            <div class="icon-tabe-chan qrcode">
-                <a href="" target="_blank">
-                    <i class="share-side share-side1"></i>
-                    <i class="share-side tab-icon-tip triangleshow"></i>
-                    <span class="tab-tip qrewm">
-                    <img img-url="/index.php?m=Home&c=Index&a=qr_code&data=http://www.tpshop.test:8080/Mobile/index/app_down.html&head_pic=http://www.tpshop.test/static/images/logo/pc_home_logo_default.png&back_img="/>
-                    扫一扫下载APP
-                </span>
-                </a>
-            </div>
-            <div class="icon-tabe-chan comebacktop">
-                <a href="" target="_blank">
-                    <i class="share-side share-side1"></i>
-                    <!--<i class="share-side tab-icon-tip"></i>-->
-                    <span class="tab-tip">返回顶部</span>
-                </a>
-            </div>
-        </div>
-        <div class="shop-car-sider">
-
-        </div>
-    </div>
-    <script src="/static/js/common.js"></script>
     <!--footer-e-->
     <script src="/static/js/lazyload.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/js/popt.js" type="text/javascript" charset="utf-8"></script>
