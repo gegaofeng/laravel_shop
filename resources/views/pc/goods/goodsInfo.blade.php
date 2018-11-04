@@ -1,9 +1,9 @@
 @extends('pc.layouts.home')
 @section('personal_style')
     <meta charset="UTF-8">
-    <title>{$goods.goods_name}-{$tpshop_config['shop_info_store_name']}</title>
-    <meta name="keywords" content="{$goods.keywords}"/>
-    <meta name="description" content="{$goods.goods_remark}"/>
+    <title>{{$goods['goods_name']}}-{$tpshop_config['shop_info_store_name']}</title>
+    <meta name="keywords" content="{{$goods['keywords']}}"/>
+    <meta name="description" content="{{$goods['goods_remark']}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('static/css/tpshop.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('static/css/jquery.jqzoom.css')}}">
     <script src="{{asset('static/js/jquery-1.11.3.min.js')}}" type="text/javascript" charset="utf-8"></script>

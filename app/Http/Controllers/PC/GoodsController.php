@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PC;
 use App\Repositories\GoodsCategoryRepository;
 use App\Repositories\GoodsImagesRepository;
 use App\Repositories\GoodsRepository;
+use App\Tools\Tools;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

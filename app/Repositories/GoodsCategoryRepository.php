@@ -107,4 +107,11 @@ class GoodsCategoryRepository extends BaseRepository
         }
 
     }
+    public function getParentIdPath($cat_id){
+        $parent_id_path= $this->goodsCategory->where('id',$cat_id)->pluck('parent_id_path');
+        return $parent_id_path;
+    }
+    public function getCatNameById($cat_id){
+
+    }
 }
