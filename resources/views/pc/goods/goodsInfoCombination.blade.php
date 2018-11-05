@@ -12,7 +12,7 @@
         getCombination();
     });
     function getCombination() {
-        var goods_id = {$goods.goods_id};
+        var goods_id = {{$goods['goods_id']}};
         var item_id = $("input[name='item_id']").val();
         var url = "/index.php?m=Home&c=Goods&a=combination";
         $.ajax({
@@ -87,7 +87,7 @@
                         '<img src="'+img+'" />' +
                         '</div>' +
                         '<div class="pror-title">' +
-                        '<h3><a href="/index.php/Home/Goods/goodsInfo/id/'+oo.goods_id+'">' + oo.goods_name + oo.key_name + '</a></h3>' +
+                        '<h3><a href="/goodsinfo/'+oo.goods_id+'">' + oo.goods_name + oo.key_name + '</a></h3>' +
                         '</div>' +
                         '<div class="meal-price">' +
                         '<div class="meal-price-radio">' +

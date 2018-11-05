@@ -21,7 +21,7 @@ class GoodsRepository extends BaseRepository{
         return $goods_list;
     }
     public function getGoodsById($goods_id){
-        $find=$this->goods->has('goodsImages')->find($goods_id);
+        $find=$this->goods->where('goods_id',$goods_id)->first();
         $goods= $this->goods->where('goods_id',$goods_id)->get();
 //        var_dump($find);
 //        return $im=$goods->goodsImages;

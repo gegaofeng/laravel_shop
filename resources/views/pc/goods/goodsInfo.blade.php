@@ -25,10 +25,10 @@
 <div class="search-box p">
     <div class="w1224">
         <div class="search-path fl">
-            <foreach name="navigate_goods" key="k" item="v">
-                <a href="{:U('/Home/Goods/goodsList',array('id'=>$k))}">{$v}</a>
+            @foreach($cat_navigation as $item=>$value)
+                <a href="{{url('goodslist/'.$item)}}">{{$value}}</a>
                 <i class="litt-xyb"></i>
-            </foreach>
+            @endforeach
             <div class="havedox">
                 <span>{{$goods['goods_name']}}</span>
             </div>
@@ -57,8 +57,8 @@
                     <i class="video-play"></i>
                     <!-- 商品大图介绍 start [[-->
                     <div class="product-img jqzoom">
-                        <img id="zoomimg" src="{$goods.goods_id|goods_thum_images=400,400}"
-                             jqimg="{$goods.goods_id|goods_thum_images=800,800}">
+                        <img id="zoomimg" src="{{goods_thum_images($goods['goods_id'],400,400)}}"
+                             jqimg="{{goods_thum_images($goods['goods_id'],800,800)}}">
                     </div>
                     <!-- 商品大图介绍 end ]]-->
                     <!-- 商品小图介绍 start [[-->
@@ -66,14 +66,14 @@
                         <a href="javascript:;" class="next-left next-btn fl disabled"><</a>
                         <div class="pic-hide-box fl">
                             <ul class="small-pic" id="small-pic" style="left:0;">
-                                <volist name="goods_images_list" id="img">
-                                    <li class="small-pic-li <if condition='$i eq 0'>active</if>">
-                                    <a href="javascript:;"><img src="{$img|get_sub_images=$img[goods_id],60,60}"
-                                                                data-img="{$img|get_sub_images=$img[goods_id],400,400}"
-                                                                data-big="{$img|get_sub_images=$img[goods_id],800,800}">
-                                        <i></i></a>
+                                @foreach($goods_images as $image)
+                                    <li class="small-pic-li">
+                                        <a href="javascript:;"><img src="{{get_sub_images($image,$goods['goods_id'],60,60)}}"
+                                                                    data-img="{{get_sub_images($image,$goods['goods_id'],400,400)}}"
+                                                                    data-big="{{get_sub_images($image,$goods['goods_id'],800,800)}}">
+                                            <i></i></a>
                                     </li>
-                                </volist>
+                                @endforeach
                             </ul>
                         </div>
                         <a href="javascript:;" class="next-right next-btn fl">></a></div>
@@ -102,7 +102,7 @@
                     <script>
                         var bd_url = "http://{$_SERVER[HTTP_HOST]}/index.php?m=Home&c=Goods&a=goodsInfo&id={$_GET[id]}";
                         var bd_pic = "http://{$_SERVER[HTTP_HOST]}{$goods[goods_id]|goods_thum_images=400,400}";
-                        var bdText = "{$goods.goods_name}";
+                        var bdText = "{{$goods['goods_name']}}";
                         var is_distribut = getCookie('is_distribut');
                         var user_id = getCookie('user_id');
                         // 如果已经登录了, 并且是分销商
@@ -144,11 +144,11 @@
             </div>
         </div>
         <form id="buy_goods_form" name="buy_goods_form" method="post" action="">
-            <input type="hidden" name="goods_id" value="{$goods.goods_id}"><!-- 商品id -->
-            <input type="hidden" name="goods_prom_type" value="{$goods.prom_type}"/><!-- 活动类型 -->
-            <input type="hidden" name="shop_price" value="{$goods.shop_price}"/><!-- 活动价格 -->
-            <input type="hidden" name="store_count" value="{$goods.store_count}"/><!-- 活动库存 -->
-            <input type="hidden" name="market_price" value="{$goods.market_price}"/><!-- 商品原价 -->
+            <input type="hidden" name="goods_id" value="{{$goods['goods_id']}}"><!-- 商品id -->
+            <input type="hidden" name="goods_prom_type" value="{{$goods['prom_type']}}"/><!-- 活动类型 -->
+            <input type="hidden" name="shop_price" value="{{$goods['shop_price']}}"/><!-- 活动价格 -->
+            <input type="hidden" name="store_count" value="{{$goods['store_count']}}"/><!-- 活动库存 -->
+            <input type="hidden" name="market_price" value="{{$goods['market_price']}}"/><!-- 商品原价 -->
             <input type="hidden" name="start_time" value=""/><!-- 活动开始时间 -->
             <input type="hidden" name="end_time" value=""/><!-- 活动结束时间 -->
             <input type="hidden" name="activity_title" value=""/><!-- 活动标题 -->

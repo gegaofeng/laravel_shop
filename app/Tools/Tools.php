@@ -21,8 +21,14 @@ public static function getNavigationByGoodsId($id,$type=0){
         if ($goods_category_id){
             $parent_id_path=$goods_category_rep->getParentIdPath($goods_category_id) ;
         }
-
-        return $parent_id_path;
+        $cat_arr=explode('_',$parent_id_path['parent_id_path']);
+//        var_dump($cat_arr);
+        foreach ($cat_arr as $cat){
+            if ($cat!=0){
+                $cat_navifation[$cat]=$goods_category_rep->getCatNameById($cat);
+            }
+        }
+        return $cat_navifation;
     }
 }
 }

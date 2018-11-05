@@ -37,6 +37,9 @@ class GoodsController extends Controller
     }
     public function goodsInfo($id){
         $goods_info=$this->goodsRepository->getGoodsById($id);
-        return view('pc.goods.goodsInfo')->with('goods',$goods_info);
+        $cat_navigation=$this->goodsCategoryRepository->getCatNavigationByGoodsId($id);
+        $goods_images=$this->goodsImagesRepository->getGoodsImagesByGoodsId($id);
+        return view('pc.goods.goodsInfo')->with('goods',$goods_info)->with('cat_navigation',$cat_navigation)
+            ->with('goods_images',$goods_images);
     }
 }

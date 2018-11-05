@@ -19,9 +19,14 @@ class GoodsImagesRepository extends BaseRepository
         $this->goods_images = new GoodsImages();
     }
 
-    public function getGoodsImagesByGoodsId(array $goods_id)
+    public function getGoodsImagesByGoodsId($goods_id)
     {
-        $goods_images = $this->goods_images->whereIn('goods_id', $goods_id)->get();
-        return $goods_images;
+        if (is_array($goods_id)){
+            $goods_images = $this->goods_images->whereIn('goods_id', $goods_id)->get();
+            return $goods_images;
+        }
+        $goods_images=$this->goods_images->where('goods_id',$goods_id)->get();
+        return$goods_images;
+
     }
 }

@@ -74,10 +74,10 @@ class GoodsCategoryRepository extends BaseRepository
         $cat_son = array();
         $cat_son_id_arr = $this->goodsCategory->where('parent_id', $cat_id)->select('id')->get();
         //var_dump($son_cat_id_arr);
-//        foreach ($cat_son_id_arr as $item => $value) {
-//            $cat_son[] = $value['id'];
-//        }
-        $cat_son=get_arr_column($cat_son_id_arr,'id');
+        //        foreach ($cat_son_id_arr as $item => $value) {
+        //            $cat_son[] = $value['id'];
+        //        }
+        $cat_son = get_arr_column($cat_son_id_arr, 'id');
         if (count($cat_son)) {
             return $cat_son;
         } else {
@@ -89,16 +89,16 @@ class GoodsCategoryRepository extends BaseRepository
     public function getCatSonTree($cat_id)
     {
         $cat_son_tree = $cat_son = $this->getCatSonId($cat_id);
-        $cat_son_tree_len=count($cat_son_tree);
-        $counter=0;
-        while ($counter<$cat_son_tree_len){
-                $a=$this->getCatSonId($cat_son_tree[$counter]);
-                if (count($a)){
-                    $cat_son_tree= array_merge($cat_son_tree, $a);
-                }
+        $cat_son_tree_len = count($cat_son_tree);
+        $counter = 0;
+        while ($counter < $cat_son_tree_len) {
+            $a = $this->getCatSonId($cat_son_tree[$counter]);
+            if (count($a)) {
+                $cat_son_tree = array_merge($cat_son_tree, $a);
+            }
 
             $counter++;
-            $cat_son_tree_len=count($cat_son_tree);
+            $cat_son_tree_len = count($cat_son_tree);
         }
         if (count($cat_son_tree)) {
             return $cat_son_tree;
@@ -107,11 +107,40 @@ class GoodsCategoryRepository extends BaseRepository
         }
 
     }
-    public function getParentIdPath($cat_id){
-        $parent_id_path= $this->goodsCategory->where('id',$cat_id)->pluck('parent_id_path');
+
+    public function getParentIdPath($cat_id)
+    {
+        $parent_id_path = $this->goodsCategory->where('id', $cat_id)->select('id', 'name', 'parent_id', 'parent_id_path')->first();
         return $parent_id_path;
     }
-    public function getCatNameById($cat_id){
 
+    public function getCatNameById($cat_id)
+    {
+        $cat_name = $this->goodsCategory->where('id', $cat_id)->select('name')->first();
+        return $cat_name['name'];
     }
+
+    public static function getCatNavigationByGoodsId($id, $type = 0)
+    {
+        $goods_category_rep = new GoodsCategoryRepository();
+        $goods_rep = new GoodsRepository();
+        if ($type == 1) {
+            $parent_id_path = $goods_category_rep->getParentIdPath($id);
+            return $parent_id_path;
+        } elseif ($type == 0) {
+            $goods_category_id = $goods_rep->getGoodsCatById($id);
+            if ($goods_category_id) {
+                $parent_id_path = $goods_category_rep->getParentIdPath($goods_category_id);
+            }
+            $cat_arr = explode('_', $parent_id_path['parent_id_path']);
+            //        var_dump($cat_arr);
+            foreach ($cat_arr as $cat) {
+                if ($cat != 0) {
+                    $cat_navifation[$cat] = $goods_category_rep->getCatNameById($cat);
+                }
+            }
+            return $cat_navifation;
+        }
+    }
+
 }
