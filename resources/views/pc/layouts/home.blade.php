@@ -9,7 +9,7 @@
     @section('personal_style')
         @show
     <script src="{{asset('js/pc/jquery-1.11.3.min.js')}}" type="text/javascript" charset="utf-8"></script>
-    <script src="{{asset('js/public/global.js')}}"></script>
+    <script src="{{asset('js/global.js')}}"></script>
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('upload/logo/2018/04-09/516bc70315079d81dc3726991672b4af.png')}}" media="screen">
 </head>
 @section('body')

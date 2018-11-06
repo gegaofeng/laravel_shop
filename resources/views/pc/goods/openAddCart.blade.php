@@ -7,7 +7,7 @@
 <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="__STATIC__/css/detail.css">
+<link rel="stylesheet" type="text/css" href="{{url('css/pc/detail.css')}}">
 <div id="shopdilog">
   <div class="ui-popup ui-popup-modal ui-popup-show ui-popup-focus">
     <div i="dialog" class="ui-dialog">
@@ -25,7 +25,7 @@
                       <span>添加成功</span>
                       <div class="add-cart-btn fn-clear"> 
                           <a href="javascript:;" onclick="javascript:parent.layer.closeAll('iframe');" class="ui-button ui-button-f80 fl go-shopping">继续购物</a> 
-                          <a href="{:U('Home/Cart/index')}" target="_parent" class="ui-button ui-button-122 fl">去购物车结算</a>
+                          <a href="{{url('cart/index')}}" target="_parent" class="ui-button ui-button-122 fl">去购物车结算</a>
                       </div>
                     </div>
                   </div>

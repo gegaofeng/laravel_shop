@@ -18,7 +18,7 @@
                               </ul>
                           </span>
             </div>
-            <script src="{{url('js/public/locationJson.js')}}"></script>
+            <script src="{{url('js/locationJson.js')}}"></script>
             <script src="{{url('js/pc/location.js')}}"></script>
             <script>doInitRegion();</script>
             <div class="fl nologin">

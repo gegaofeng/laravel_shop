@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PC;
 use App\Repositories\GoodsCategoryRepository;
 use App\Repositories\GoodsImagesRepository;
 use App\Repositories\GoodsRepository;
+use App\Repositories\GoodsSpecPriceRepository;
 use App\Tools\Tools;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,10 +16,12 @@ class GoodsController extends Controller
     protected $goodsCategoryRepository;
     protected $goodsRepository;
     protected $goodsImagesRepository;
+    protected $goodsSpecPriceRepository;
     public function __construct() {
     $this->goodsCategoryRepository=new GoodsCategoryRepository();
     $this->goodsRepository=new GoodsRepository();
     $this->goodsImagesRepository=new GoodsImagesRepository();
+    $this->goodsSpecPriceRepository=new GoodsSpecPriceRepository();
     }
 
     /**
@@ -37,9 +40,11 @@ class GoodsController extends Controller
     }
     public function goodsInfo($id){
         $goods_info=$this->goodsRepository->getGoodsById($id);
+        $goods_spec=$this->goodsSpecPriceRepository->getGoodsSpec($id);
         $cat_navigation=$this->goodsCategoryRepository->getCatNavigationByGoodsId($id);
         $goods_images=$this->goodsImagesRepository->getGoodsImagesByGoodsId($id);
+//        return $goods_spec;
         return view('pc.goods.goodsInfo')->with('goods',$goods_info)->with('cat_navigation',$cat_navigation)
-            ->with('goods_images',$goods_images);
+            ->with('goods_images',$goods_images)->with('goods_spec',$goods_spec);
     }
 }

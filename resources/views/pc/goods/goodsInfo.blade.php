@@ -68,7 +68,7 @@
                             <ul class="small-pic" id="small-pic" style="left:0;">
                                 @foreach($goods_images as $image)
                                     <li class="small-pic-li">
-                                        <a href="javascript:;"><img src="{{get_sub_images($image,$goods['goods_id'],60,60)}}"
+                                        <a href="javascript:void(0);"><img src="{{get_sub_images($image,$goods['goods_id'],60,60)}}"
                                                                     data-img="{{get_sub_images($image,$goods['goods_id'],400,400)}}"
                                                                     data-big="{{get_sub_images($image,$goods['goods_id'],800,800)}}">
                                             <i></i></a>
@@ -159,6 +159,7 @@
             <input type="hidden" name="point_rate" value="{$point_rate}"/><!-- 积分兑换比 -->
             <input type="hidden" name="is_virtual" value="{$goods.is_virtual}"/><!-- 是否是虚拟商品 -->
             <input type="hidden" name="virtual_limit" id="virtual_limit" value="{$goods.virtual_limit|default=0}"/>
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="detail-ggsl">
                 <h1>{{$goods['goods_name']}}</h1>
                 <div class="presale-time" style="display: none">
@@ -249,48 +250,43 @@
                         </li>
                     </ul>
                 </div>
-                <notempty name="$goods['brand']">
+                @if(!is_null($goods['brand']))
                     <div class="standard p">
                         <ul>
                             <li class="jaj"><span>品&nbsp;&nbsp;牌：</span></li>
-                            <li class="lawir"><span class="service">{$goods['brand']['name']}</span></li>
+                            <li class="lawir"><span class="service">{{$goods['brand']['name']}}</span></li>
                         </ul>
                     </div>
-                </notempty>
-                <if condition="$goods['is_virtual'] eq 0 and $goods['exchange_integral'] gt 0">
+                @endif
+                @if($goods['is_virtual']== 0 and $goods['exchange_integral'] != 0)
                     <div class="standard p">
                         <ul>
                             <li class="jaj"><span>可&nbsp;&nbsp;用：</span></li>
                             <li class="lawir">
                                 <span class="service" id="integral">
-                                    {:round($goods['shop_price']-$goods['exchange_integral']/$point_rate,2)}
-                                    +{$goods['exchange_integral']}积分
+{{--                                    {{round($goods['shop_price']-$goods['exchange_integral']/$point_rate,2)}}--}}
+                                    {{round($goods['shop_price']-$goods['exchange_integral'],2)}}
+                                    +{{$goods['exchange_integral']}}积分
                                 </span></li>
                         </ul>
                     </div>
-                </if>
+                @endif
 
                 <!-- 规格 start [[-->
-                <foreach name="filter_spec" item="v" key="k">
+                @foreach(json_decode($goods_spec,true) as $item=>$value)
                     <div class="spec_goods_price_div standard p">
                         <ul>
-                            <li class="jaj"><span>{$k}：</span></li>
+                            <li class="jaj"><span>{{$value['name']}}：</span></li>
                             <li class="lawir colo">
-                                <foreach name="v" item="v2" key="k2">
-                                    <input type="radio" hidden id="goods_spec_{$v2[item_id]}" name="goods_spec[{$k}]" value="{$v2[item_id]}"/>
-                                    <a id="goods_spec_a_{$v2[item_id]}" class="spec_item">
-                                        <if condition="$v2[src] neq ''">
-                                            <img src="{$v2[src]}" style="width: 40px;height: 40px;"/>
-                                            <span class="dis_alintro">{$v2[item]}</span>
-                                            <else/>
-                                            {$v2[item]}
-                                        </if>
-                                    </a>
-                                </foreach>
+{{--                                {{var_dump($value['goods_spec_item'])}}--}}
+                                @foreach($value['goods_spec_item'] as $spec_item)
+                                    <input type="radio" hidden id="goods_spec_{{$spec_item['id']}}" name="goods_spec[{{$spec_item['id']}}]" value="{{$spec_item['id']}}"/>
+                                    <a id="goods_spec_a_{{$spec_item['id']}}" class="spec_item">{{$spec_item['item']}}</a>
+                                @endforeach
                             </li>
                         </ul>
                     </div>
-                </foreach>
+                @endforeach
                 <script>
 
                 </script>
@@ -352,8 +348,8 @@
                 <!-- 预售 e -->
                 <div class="standard p">
                     <div class="standard p">
-                        <a id="buy_now" class="paybybill buy_button" href="javascript:;" style="display: none">立即购买</a>
-                        <a id="join_cart" class="addcar buy_button" href="javascript:;" style="display: none"><i class="sk"></i>加入购物车</a>
+                        <a id="buy_now" class="paybybill buy_button" href="javascript:;" style="">立即购买</a>
+                        <a id="join_cart" class="addcar buy_button" href="javascript:;" style=""><i class="sk"></i>加入购物车</a>
                     </div>
                 </div>
             </div>
@@ -372,7 +368,7 @@
     </div>
 </div>
 <!--搭配购组合套餐 s-->
-@include('pc.goods.goodsInfoCombination')
+{{--@include('pc.goods.goodsInfoCombination')--}}
 <!--搭配购组合套餐 e-->
 <div class="detail-main p">
     <div class="w1224">
@@ -408,7 +404,7 @@
                 </div>
             </div>
         </div>
-        @include('pc.goods.goodsInfoDetail')
+        {{--@include('pc.goods.goodsInfoDetail')--}}
     </div>
 </div>
 <script type="text/javascript">
@@ -430,8 +426,8 @@
 
 </script>
 <!--footer-s-->
-@include('pc.particals.footer')
-@include('pc.public.sidebar_cart')
+{{--@include('pc.particals.footer')--}}
+{{--@include('pc.public.sidebar_cart')--}}
 <!--看了又看-s-->
 <div style="display: none" id="look_see">
     <foreach name="look_see" item="look" key="k">
@@ -453,41 +449,85 @@
 <!--footer-e-->
 <script src="{{asset('static/js/lazyload.min.js')}}" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="{{asset('static/js/headerfooter.js')}}"></script>
-<script type="text/javascript">
-    //判断是否有视频标签
-    if ($('#video').length > 0) {
-        $('#photoBody').addClass('videoshow-ac');
-    }
-    //点击关闭视频
-    $('.video-play').click(function (event) {
-        $('#photoBody').addClass('videoshow-ac').removeClass('picshow-ac');
-        video.play();
+<script>
+    //缩略图切换
+    $('.small-pic-li').mouseenter(function () {
+        if ($('#video').length > 0) {
+            $('.close-video').trigger('click');
+        }
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+        $('#zoomimg').attr('src', $(this).find('img').attr('data-img')).attr('jqimg', $(this).find('img').attr('data-big'));
     });
-    //点击播放视频
-    $('.close-video').click(function (event) {
-        $('#photoBody').addClass('picshow-ac').removeClass('videoshow-ac');
-        video.pause();
-    });
-    var commentType = 1;// 默认评论类型
-    var spec_goods_price = {$spec_goods_price |default= 'null'};//规格库存价格
-    $(document).ready(function () {
-        /*商品缩略图放大镜*/
-        $(".jqzoom").jqueryzoom({
-            xzoom: 500,
-            yzoom: 500,
-            offset: 1,
-            position: "right",
-            preload: 1,
-            lens: 1
-        });
-        replace_look();
-        initSpec();
+    //点击切换规格
+    $(document).on('click', '.spec_item', function () {
+        var spec_item_img_src = $(this).find('img').attr('src');
+        if (spec_item_img_src != '') {
+            $('#zoomimg').attr('jqimg', spec_item_img_src).attr('src', spec_item_img_src);
+        }
+        $(this).addClass('red').siblings('a').removeClass('red');
+        $(this).siblings('input').removeAttr('checked');
+        $(this).prev('input').attr('checked', 'checked').prop('checked', 'checked');
+        if ($('#video').length > 0) {
+            //判断是否有视频标签
+            $('#photoBody').addClass('picshow-ac');
+            video.pause();
+        }
+        // 更新商品价格
         initGoodsPrice();
-        changeImg();
-    });
-
-    var buy_now = $('#buy_now');
-    var join_cart = $('#join_cart');
+        //获取搭配购列表
+        // getCombination();
+    })
+    //初始化商品价格库存
+    function initGoodsPrice() {
+        var goods_id = $('input[name="goods_id"]').val();
+        var goods_num = parseInt($('#number').val());
+        if (!$.isEmptyObject(spec_goods_price)) {
+            var goods_spec_arr = [];
+            $("input[name^='goods_spec']").each(function () {
+                if ($(this).attr('checked') == 'checked') {
+                    goods_spec_arr.push($(this).val());
+                }
+            });
+            var spec_key = goods_spec_arr.sort(sortNumber).join('_');  //排序后组合成 key
+            if (spec_goods_price[spec_key] != undefined) {
+                var item_id = spec_goods_price[spec_key]['item_id'];
+                $('input[name=item_id]').val(item_id);
+            } else {
+                $("#goods_price").html("<em>￥</em>" + 0); //变动价格显示
+                $('#spec_store_count').html(0);
+                $('input[name="shop_price"]').attr('value', 0);//商品价格
+                $('input[name="store_count"]').attr('value', 0);//商品库存
+                $('.buy_button').addClass('buy_bt_disable');
+                return false;
+            }
+        }
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            data: {goods_id: goods_id, item_id: item_id, goods_num: goods_num},
+            url: "{:U('Home/Goods/activity')}",
+            success: function (data) {
+                if (data.status == 1) {
+                    $('input[name="goods_prom_type"]').attr('value', data.result.goods.prom_type);//商品活动类型
+                    $('input[name="shop_price"]').attr('value', data.result.goods.shop_price);//商品价格
+                    $('input[name="store_count"]').attr('value', data.result.goods.store_count);//商品库存
+                    $('input[name="market_price"]').attr('value', data.result.goods.market_price);//商品原价
+                    $('input[name="start_time"]').attr('value', data.result.goods.start_time);//活动开始时间
+                    $('input[name="end_time"]').attr('value', data.result.goods.end_time);//活动结束时间
+                    $('input[name="activity_title"]').attr('value', data.result.goods.activity_title);//活动标题
+                    $('input[name="prom_detail"]').attr('value', data.result.goods.prom_detail);//促销详情
+                    $('input[name="activity_is_on"]').attr('value', data.result.goods.activity_is_on);//活动是否正在进行中
+                    price_ladder = data.result.goods.price_ladder;
+                    goods_activity_theme();
+                    buy_button();
+                }
+                doInitRegion();
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
     //购买按钮显示
     function buy_button(){
         var is_virtual = $("input[name='is_virtual']").val();//是否是虚拟商品
@@ -630,16 +670,6 @@
     }
 
     //缩略图切换
-    $('.small-pic-li').mouseenter(function () {
-        if ($('#video').length > 0) {
-            $('.close-video').trigger('click');
-        }
-        $(this).siblings().removeClass('active');
-        $(this).addClass('active');
-        $('#zoomimg').attr('src', $(this).find('img').attr('data-img')).attr('jqimg', $(this).find('img').attr('data-big'));
-    });
-
-    //缩略图切换
     function changeImg() {
         var $picBox = $('#small-pic');
         var $picList = $picBox.find('.small-pic-li');
@@ -705,55 +735,6 @@
         $('#store_count').text(maxnum - num); //更新库存数量
         $('#number').val(num);
         /*        initGoodsPrice();*/
-    }
-
-    //初始化商品价格库存
-    function initGoodsPrice() {
-        var goods_id = $('input[name="goods_id"]').val();
-        var goods_num = parseInt($('#number').val());
-        if (!$.isEmptyObject(spec_goods_price)) {
-            var goods_spec_arr = [];
-            $("input[name^='goods_spec']").each(function () {
-                if ($(this).attr('checked') == 'checked') {
-                    goods_spec_arr.push($(this).val());
-                }
-            });
-            var spec_key = goods_spec_arr.sort(sortNumber).join('_');  //排序后组合成 key
-            if (spec_goods_price[spec_key] != undefined) {
-                var item_id = spec_goods_price[spec_key]['item_id'];
-                $('input[name=item_id]').val(item_id);
-            } else {
-                $("#goods_price").html("<em>￥</em>" + 0); //变动价格显示
-                $('#spec_store_count').html(0);
-                $('input[name="shop_price"]').attr('value', 0);//商品价格
-                $('input[name="store_count"]').attr('value', 0);//商品库存
-                $('.buy_button').addClass('buy_bt_disable');
-                return false;
-            }
-        }
-        $.ajax({
-            type: 'post',
-            dataType: 'json',
-            data: {goods_id: goods_id, item_id: item_id, goods_num: goods_num},
-            url: "{:U('Home/Goods/activity')}",
-            success: function (data) {
-                if (data.status == 1) {
-                    $('input[name="goods_prom_type"]').attr('value', data.result.goods.prom_type);//商品活动类型
-                    $('input[name="shop_price"]').attr('value', data.result.goods.shop_price);//商品价格
-                    $('input[name="store_count"]').attr('value', data.result.goods.store_count);//商品库存
-                    $('input[name="market_price"]').attr('value', data.result.goods.market_price);//商品原价
-                    $('input[name="start_time"]').attr('value', data.result.goods.start_time);//活动开始时间
-                    $('input[name="end_time"]').attr('value', data.result.goods.end_time);//活动结束时间
-                    $('input[name="activity_title"]').attr('value', data.result.goods.activity_title);//活动标题
-                    $('input[name="prom_detail"]').attr('value', data.result.goods.prom_detail);//促销详情
-                    $('input[name="activity_is_on"]').attr('value', data.result.goods.activity_is_on);//活动是否正在进行中
-                    price_ladder = data.result.goods.price_ladder;
-                    goods_activity_theme();
-                    buy_button();
-                }
-                doInitRegion();
-            }
-        });
     }
 
     //价格阶梯显示
@@ -977,25 +958,41 @@
         }
     });
 
-    //点击切换规格
-    $(document).on('click', '.spec_item', function () {
-        var spec_item_img_src = $(this).find('img').attr('src');
-        if (spec_item_img_src != '') {
-            $('#zoomimg').attr('jqimg', spec_item_img_src).attr('src', spec_item_img_src);
-        }
-        $(this).addClass('red').siblings('a').removeClass('red');
-        $(this).siblings('input').removeAttr('checked');
-        $(this).prev('input').attr('checked', 'checked').prop('checked', 'checked');
-        if ($('#video').length > 0) {
-            //判断是否有视频标签
-            $('#photoBody').addClass('picshow-ac');
-            video.pause();
-        }
-        // 更新商品价格
+    //判断是否有视频标签
+    if ($('#video').length > 0) {
+        $('#photoBody').addClass('videoshow-ac');
+    }
+    //点击关闭视频
+    $('.video-play').click(function (event) {
+        $('#photoBody').addClass('videoshow-ac').removeClass('picshow-ac');
+        video.play();
+    });
+    //点击播放视频
+    $('.close-video').click(function (event) {
+        $('#photoBody').addClass('picshow-ac').removeClass('videoshow-ac');
+        video.pause();
+    });
+    var commentType = 1;// 默认评论类型
+    var spec_goods_price = null;//规格库存价格
+    $(document).ready(function () {
+        /*商品缩略图放大镜*/
+        $(".jqzoom").jqueryzoom({
+            xzoom: 500,
+            yzoom: 500,
+            offset: 1,
+            position: "right",
+            preload: 1,
+            lens: 1
+        });
+        replace_look();
+        initSpec();
         initGoodsPrice();
-        //获取搭配购列表
-        getCombination();
-    })
+        changeImg();
+    });
+
+    var buy_now = $('#buy_now');
+    var join_cart = $('#join_cart');
+
 
 </script>
 </body>

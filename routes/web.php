@@ -21,7 +21,8 @@ Route::namespace('PC')->group(function (){
 
 
 
-
+    Route::post('cart/ajaxaddcart','CartController@ajaxAddCart');
+    Route::get('cart/openaddcart','CartController@openAddCart');
 });
 
 
