@@ -10,21 +10,31 @@ if (!function_exists('goods_thum_images')) {
     function goods_thum_images($goods_id, $width, $height, $item_id = 0)
     {
 
-        if (empty($goods_id))
+        if (empty($goods_id)){
             return '';
+        }
+
         //判断缩略图是否存在
         $path = "upload/goods/thumb/$goods_id/";
         $goods_thumb_name = "goods_thumb_{$goods_id}_{$item_id}_{$width}_{$height}";
 
         // 这个商品 已经生成过这个比例的图片就直接返回了
-        if (is_file($path . $goods_thumb_name . '.jpg'))
+        if (is_file($path . $goods_thumb_name . '.jpg')){
             return '/' . $path . $goods_thumb_name . '.jpg';
-        if (is_file($path . $goods_thumb_name . '.jpeg'))
+        }
+
+        if (is_file($path . $goods_thumb_name . '.jpeg')){
             return '/' . $path . $goods_thumb_name . '.jpeg';
-        if (is_file($path . $goods_thumb_name . '.gif'))
+        }
+
+        if (is_file($path . $goods_thumb_name . '.gif')){
             return '/' . $path . $goods_thumb_name . '.gif';
-        if (is_file($path . $goods_thumb_name . '.png'))
+        }
+
+        if (is_file($path . $goods_thumb_name . '.png')){
             return '/' . $path . $goods_thumb_name . '.png';
+        }
+
         //        $original_img = '';//先定义空字符变量
         //        if($item_id){
         //            $original_img = Db::name('spec_goods_price')->where(["goods_id"=>$goods_id,'item_id'=>$item_id])->cache(true, 30, 'original_img_cache')->value('spec_img');
@@ -82,14 +92,22 @@ if (!function_exists('get_sub_images')) {
         $goods_thumb_name = "goods_sub_thumb_{$sub_img['img_id']}_{$width}_{$height}";
 
         //这个缩略图 已经生成过这个比例的图片就直接返回了
-        if (is_file($path . $goods_thumb_name . '.jpg'))
+        if (is_file($path . $goods_thumb_name . '.jpg')){
             return '/' . $path . $goods_thumb_name . '.jpg';
-        if (is_file($path . $goods_thumb_name . '.jpeg'))
+        }
+
+        if (is_file($path . $goods_thumb_name . '.jpeg')){
             return '/' . $path . $goods_thumb_name . '.jpeg';
-        if (is_file($path . $goods_thumb_name . '.gif'))
+        }
+
+        if (is_file($path . $goods_thumb_name . '.gif')){
             return '/' . $path . $goods_thumb_name . '.gif';
-        if (is_file($path . $goods_thumb_name . '.png'))
+        }
+
+        if (is_file($path . $goods_thumb_name . '.png')){
             return '/' . $path . $goods_thumb_name . '.png';
+        }
+
 
 //            $ossClient = new \app\common\logic\OssLogic;
 //            if (($ossUrl = $ossClient->getGoodsAlbumThumbUrl($sub_img['image_url'], $width, $height))) {

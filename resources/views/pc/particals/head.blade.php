@@ -10,7 +10,10 @@
                                   <li class="summary-stock though-line">
                                       <div class="dd" style="border-right:0px;width:200px;">
                                           <div class="store-selector add_cj_p">
-                                              <div class="text"><div></div><b></b></div>
+                                              <div class="text">
+                                                  <div></div>
+                                                  <b></b>
+                                              </div>
                                               <div onclick="$(this).parent().removeClass('hover')" class="close"></div>
                                           </div>
                                       </div>

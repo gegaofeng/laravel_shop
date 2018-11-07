@@ -17,7 +17,8 @@ class GoodsSpecPriceRepository extends BaseRepository{
         $this->GoodsSpecPrice=new GoodsSpecPrice();
     }
     public function getGoodsSpec($goods_id){
-        $keys=$this->GoodsSpecPrice->where('goods_id',$goods_id)->orderBy('store_count')->get();
+        $keys=$this->getGoodsSpecPriceByGoodsId($goods_id);
+//        $keys=$this->GoodsSpecPrice->where('goods_id',$goods_id)->orderBy('store_count')->get();
         $key_str='';
         if (!$keys->isempty()){
             foreach ($keys as $key){
@@ -31,9 +32,12 @@ class GoodsSpecPriceRepository extends BaseRepository{
             })->with('goodsSpecItem')->get();
             return $filters;
         }else{
-            return 'empty';
+            return json_encode(array());
         }
 
 
+    }
+    public function getGoodsSpecPriceByGoodsId($goods_id,$order='store_count'){
+        return $this->GoodsSpecPrice->where('goods_id',$goods_id)->orderBy($order)->get();
     }
 }

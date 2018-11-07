@@ -26,7 +26,6 @@ class GoodsImagesRepository extends BaseRepository
             return $goods_images;
         }
         $goods_images=$this->goods_images->where('goods_id',$goods_id)->get();
-        return$goods_images;
-
+        return $goods_images;
     }
 }

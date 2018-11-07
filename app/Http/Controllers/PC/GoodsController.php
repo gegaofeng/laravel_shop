@@ -43,8 +43,12 @@ class GoodsController extends Controller
         $goods_spec=$this->goodsSpecPriceRepository->getGoodsSpec($id);
         $cat_navigation=$this->goodsCategoryRepository->getCatNavigationByGoodsId($id);
         $goods_images=$this->goodsImagesRepository->getGoodsImagesByGoodsId($id);
+        $spec_goods_price=$this->goodsSpecPriceRepository->getGoodsSpecPriceByGoodsId($id);
 //        return $goods_spec;
         return view('pc.goods.goodsInfo')->with('goods',$goods_info)->with('cat_navigation',$cat_navigation)
-            ->with('goods_images',$goods_images)->with('goods_spec',$goods_spec);
+            ->with('goods_images',$goods_images)->with('goods_spec',$goods_spec)->with('spec_goods_price',$spec_goods_price);
+    }
+    public function activity(){
+        return json_encode(array('status'=>1));
     }
 }

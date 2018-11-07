@@ -9,7 +9,7 @@
     <script src="{{asset('static/js/jquery-1.11.3.min.js')}}" type="text/javascript" charset="utf-8"></script>
     <script src="{{asset('static/js/move.js')}}" type="text/javascript" charset="utf-8"></script>
     <script src="{{asset('')}}/js/layer/layer-min.js"></script>
-    <script type="text/javascript" src="{{asset('static')}}/js/jquery.jqzoom.js"></script>
+    <script type="text/javascript" src="{{asset('static/js/jquery.jqzoom.js')}}"></script>
     <script src="{{asset('/js/global.js')}}"></script>
     <script src="{{asset('/js/pc_common.js')}}"></script>
     <link rel="stylesheet" href="{{asset('static/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
@@ -157,8 +157,8 @@
             <input type="hidden" name="item_id" value="{$Request.param.item_id}"/><!-- 商品规格id -->
             <input type="hidden" name="exchange_integral" value="{$goods.exchange_integral}"/><!-- 积分 -->
             <input type="hidden" name="point_rate" value="{$point_rate}"/><!-- 积分兑换比 -->
-            <input type="hidden" name="is_virtual" value="{$goods.is_virtual}"/><!-- 是否是虚拟商品 -->
-            <input type="hidden" name="virtual_limit" id="virtual_limit" value="{$goods.virtual_limit|default=0}"/>
+            <input type="hidden" name="is_virtual" value="{{$goods['is_virtual']}}"/><!-- 是否是虚拟商品 -->
+            <input type="hidden" name="virtual_limit" id="virtual_limit" value="{{$goods['virtual_limit']}}"/>
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="detail-ggsl">
                 <h1>{{$goods['goods_name']}}</h1>
@@ -219,7 +219,7 @@
                             <p class="f_blue">{{$goods['sales_sum']+$goods['virtual_sales_sum']}}</p></div>
                     </div>
                 </div>
-                <if condition="$goods[is_virtual] eq 0">
+                @if($goods['is_virtual']==0)
                     <div class="standard p">
                         <!-- 收货地址，物流运费 -start-->
                         <ul class="list1">
@@ -230,7 +230,8 @@
                                     <div class="store-selector add_cj_p">
                                         <div class="text" style="width: 150px;">
                                             <div></div>
-                                            <b></b></div>
+                                            <b></b>
+                                        </div>
                                         <div onclick="$(this).parent().removeClass('hover')" class="close"></div>
                                     </div>
                                     <span id="dispatching_msg" style="display: none;">可配送</span>
@@ -239,10 +240,12 @@
                                 </div>
                             </li>
                         </ul>
-                        {{--<script src="{{asset('/js/locationJson.js')}}"></script>--}}
-                                                <!-- 收货地址，物流运费 -end-->
+                        <script src="{{asset('/js/locationJson.js')}}"></script>
+                        <script src="{{asset('/js/pc/location.js')}}"></script>
+                        <script>doInitRegion();</script>
+                                                                        <!-- 收货地址，物流运费 -end-->
                     </div>
-                </if>
+                @endif
                 <div class="standard p">
                     <ul>
                         <li class="jaj"><span>服&nbsp;&nbsp;务：</span></li>
@@ -313,37 +316,6 @@
                     <a href="javascript:" class="jieti-anniu price_ladder_more">
                         展开
                     </a>
-                    <script>
-                        function satrhide() {
-                            var b = $('.presell_allpri ul li').length;
-                            for (var i = 4; i < b; i++) {
-                                $('.presell_allpri ul li').eq(i).hide();
-                            }
-                        };
-
-                        function satrshow() {
-                            var b = $('.presell_allpri ul li').length;
-                            for (var i = 4; i < b; i++) {
-                                $('.presell_allpri ul li').eq(i).show();
-                            }
-                        };
-                        satrhide();
-                        $(function () {
-                            $('.jieti-anniu').click(function () {
-                                satrshow();
-                                $(this).hide();
-                            });
-
-                            $('.allpre-ne-ter').mouseleave(function () {
-                                satrhide();
-                                if (price_ladder.length > 4) {
-                                    $('.jieti-anniu').show();
-                                } else {
-                                    $('.jieti-anniu').hide();
-                                }
-                            });
-                        })
-                    </script>
                 </div>
                 <!-- 预售 e -->
                 <div class="standard p">
@@ -482,6 +454,7 @@
     function initGoodsPrice() {
         var goods_id = $('input[name="goods_id"]').val();
         var goods_num = parseInt($('#number').val());
+        let _token=$('input[name="_token"]').val();
         if (!$.isEmptyObject(spec_goods_price)) {
             var goods_spec_arr = [];
             $("input[name^='goods_spec']").each(function () {
@@ -505,8 +478,9 @@
         $.ajax({
             type: 'post',
             dataType: 'json',
-            data: {goods_id: goods_id, item_id: item_id, goods_num: goods_num},
-            url: "{:U('Home/Goods/activity')}",
+            headers:{'X-CSRF-TOKEN':_token},
+            data: {goods_id: goods_id, item_id: item_id, goods_num: goods_num,_token:_token},
+            url: "/goods/activity",
             success: function (data) {
                 if (data.status == 1) {
                     $('input[name="goods_prom_type"]').attr('value', data.result.goods.prom_type);//商品活动类型
@@ -528,6 +502,35 @@
     }
 </script>
 <script type="text/javascript">
+    function satrhide() {
+        var b = $('.presell_allpri ul li').length;
+        for (var i = 4; i < b; i++) {
+            $('.presell_allpri ul li').eq(i).hide();
+        }
+    };
+
+    function satrshow() {
+        var b = $('.presell_allpri ul li').length;
+        for (var i = 4; i < b; i++) {
+            $('.presell_allpri ul li').eq(i).show();
+        }
+    };
+    satrhide();
+    $(function () {
+        $('.jieti-anniu').click(function () {
+            satrshow();
+            $(this).hide();
+        });
+
+        $('.allpre-ne-ter').mouseleave(function () {
+            satrhide();
+            if (price_ladder.length > 4) {
+                $('.jieti-anniu').show();
+            } else {
+                $('.jieti-anniu').hide();
+            }
+        });
+    })
     //购买按钮显示
     function buy_button(){
         var is_virtual = $("input[name='is_virtual']").val();//是否是虚拟商品
