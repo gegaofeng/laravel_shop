@@ -399,7 +399,7 @@
 </script>
 <!--footer-s-->
 {{--@include('pc.particals.footer')--}}
-{{--@include('pc.public.sidebar_cart')--}}
+@include('pc.public.sidebar_cart')
 <!--看了又看-s-->
 <div style="display: none" id="look_see">
     <foreach name="look_see" item="look" key="k">

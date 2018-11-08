@@ -33,7 +33,7 @@ $('#hd-my-cart').hover(function () {
 	header_cart_list_over = 1;
 	$.ajax({
 		type: "GET",
-		url: "/index.php?m=Home&c=Cart&a=header_cart_list",//+tab,
+		url: "/cart/ajaxgetcartlist",//+tab,
 		success: function (data) {
 			$("#hd-my-cart > #show_minicart").html(data);
 			get_cart_num();
