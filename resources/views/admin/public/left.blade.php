@@ -44,8 +44,8 @@
             <dt><a href="javascript:void(0);"><span class="ico-system-2"></span><h3>广告</h3></a></dt>
             <dd class="sub-menu" style="top: -140px; display: none;">
                 <ul>
-                    <li><a href="javascript:void(0);" data-param="adlist|Ad">广告列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="positionlist|Ad">广告位置</a></li>
+                    <li><a href="javascript:void(0);" data-param="adlist|ad">广告列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="positionlist|ad">广告位置</a></li>
                 </ul>
             </dd>
         </dl>
@@ -53,11 +53,11 @@
             <dt><a href="javascript:void(0);"><span class="ico-system-3"></span><h3>文章</h3></a></dt>
             <dd class="sub-menu" style="top: -210px; display: none;">
                 <ul>
-                    <li><a href="javascript:void(0);" data-param="articleList|article">文章列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="categoryList|article">文章分类</a></li>
-                    <li><a href="javascript:void(0);" data-param="linkList|article">友情链接</a></li>
+                    <li><a href="javascript:void(0);" data-param="articlelist|article">文章列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="categorylist|article">文章分类</a></li>
+                    <li><a href="javascript:void(0);" data-param="linklist|article">友情链接</a></li>
                     <li><a href="javascript:void(0);" data-param="agreement|article">会员协议</a></li>
-                    <li><a href="javascript:void(0);" data-param="topicList|topic">专题列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="topiclist|topic">专题列表</a></li>
                 </ul>
             </dd>
         </dl>
@@ -98,7 +98,7 @@
             <dd class="sub-menu" style="top: 0px; display: none;">
                 <ul>
                     <li><a href="javascript:void(0);" data-param="goodslist|goods">商品列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="index|Import">淘宝导入</a></li>
+                    <li><a href="javascript:void(0);" data-param="index|import">淘宝导入</a></li>
                     <li><a href="javascript:void(0);" data-param="categorylist|goods">商品分类</a></li>
                     <li><a href="javascript:void(0);" data-param="stocklist|goods">库存日志</a></li>
                     <li><a href="javascript:void(0);" data-param="goodstypelist|goods">商品模型</a></li>
@@ -147,11 +147,11 @@
             <dt><a href="javascript:void(0);"><span class="ico-shop-3"></span><h3>分销</h3></a></dt>
             <dd class="sub-menu" style="top: -210px; display: none;">
                 <ul>
-                    <li><a href="javascript:void(0);" data-param="goods_list|distribuet">分销商品列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="goodslist|distribute">分销商品列表</a></li>
                     <li><a href="javascript:void(0);" data-param="distributor_list|distribute">分销商列表</a></li>
                     <li><a href="javascript:void(0);" data-param="tree|distribute">分销关系</a></li>
-                    <li><a href="javascript:void(0);" data-param="grade_list|distribute">分销商等级</a></li>
-                    <li><a href="javascript:void(0);" data-param="rebate_log|distribute">分成日志</a></li>
+                    <li><a href="javascript:void(0);" data-param="gradelist|distribute">分销商等级</a></li>
+                    <li><a href="javascript:void(0);" data-param="rebatelog|distribute">分成日志</a></li>
                 </ul>
             </dd>
         </dl>
@@ -161,9 +161,9 @@
                 <ul>
                     <li><a href="javascript:void(0);" data-param="index|wechat">公众号配置</a></li>
                     <li><a href="javascript:void(0);" data-param="menu|wechat">微信菜单管理</a></li>
-                    <li><a href="javascript:void(0);" data-param="auto_reply|wechat">自动回复</a></li>
-                    <li><a href="javascript:void(0);" data-param="fans_list|wechat">粉丝列表</a></li>
-                    <li><a href="javascript:void(0);" data-param="template_msg|wechat">模板消息</a></li>
+                    <li><a href="javascript:void(0);" data-param="autoreply|wechat">自动回复</a></li>
+                    <li><a href="javascript:void(0);" data-param="fanslist|wechat">粉丝列表</a></li>
+                    <li><a href="javascript:void(0);" data-param="templatemsg|wechat">模板消息</a></li>
                     <li><a href="javascript:void(0);" data-param="materials|wechat">素材管理</a></li>
                 </ul>
             </dd>
@@ -173,12 +173,12 @@
             <dd class="sub-menu" style="top: -350px; display: none;">
                 <ul>
                     <li><a href="javascript:void(0);" data-param="index|report">销售概况</a></li>
-                    <li><a href="javascript:void(0);" data-param="saleTop|report">销售排行</a></li>
-                    <li><a href="javascript:void(0);" data-param="userTop|report">会员排行</a></li>
-                    <li><a href="javascript:void(0);" data-param="saleList|report">销售明细</a></li>
+                    <li><a href="javascript:void(0);" data-param="saletop|report">销售排行</a></li>
+                    <li><a href="javascript:void(0);" data-param="usertop|report">会员排行</a></li>
+                    <li><a href="javascript:void(0);" data-param="salelist|report">销售明细</a></li>
                     <li><a href="javascript:void(0);" data-param="user|report">会员统计</a></li>
                     <li><a href="javascript:void(0);" data-param="finance|report">运营概览</a></li>
-                    <li><a href="javascript:void(0);" data-param="expense_log|report">平台支出记录</a></li>
+                    <li><a href="javascript:void(0);" data-param="expenselog|report">平台支出记录</a></li>
                 </ul>
             </dd>
         </dl>
@@ -213,7 +213,7 @@
             <dd class="sub-menu" style="top: -70px; display: none;">
                 <ul>
                     <li><a href="javascript:void(0);" data-param="index|mobileapp">安卓APP管理</a></li>
-                    <li><a href="javascript:void(0);" data-param="ios_audit|mobileapp">苹果APP管理</a></li>
+                    <li><a href="javascript:void(0);" data-param="iosaudit|mobileapp">苹果APP管理</a></li>
                 </ul>
             </dd>
         </dl>

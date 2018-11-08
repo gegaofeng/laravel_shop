@@ -8,4 +8,7 @@ use App\Http\Controllers\Controller;
 class BlockController extends Controller
 {
     //
+    public function pageList(){
+        return view('admin.block.pageList');
+    }
 }

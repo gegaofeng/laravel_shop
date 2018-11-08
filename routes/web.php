@@ -58,7 +58,7 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/tools',),function(){
     Route::get('/','ToolsController@index');
     Route::get('index','ToolsController@index');
     Route::get('restore','ToolsController@restore');
-    Route::get('cleardemodata','ToolsController@clearDemoDate');
+    Route::get('cleardemodata','ToolsController@clearDemoData');
     Route::get('region','ToolsController@region');
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/shop',),function(){
@@ -106,9 +106,9 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/report',),function(){
     Route::get('salelist','ReportController@saleList');
     Route::get('user','ReportController@user');
     Route::get('finance','ReportController@finance');
-    Route::get('expense_log','ReportController@expenseLog');
+    Route::get('expenselog','ReportController@expenseLog');
 });
-Route::group(array('namespace'=>'Admin','prefix'=>'admin/Combination',),function(){
+Route::group(array('namespace'=>'Admin','prefix'=>'admin/combination',),function(){
     Route::get('/','CombinationController@index');
     Route::get('index','CombinationController@index');
 });
@@ -116,7 +116,7 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/Combination',),function
     Route::get('/','CombinationController@index');
     Route::get('index','CombinationController@index');
 });
-Route::group(array('namespace'=>'Admin','prefix'=>'admin/Wechat',),function(){
+Route::group(array('namespace'=>'Admin','prefix'=>'admin/wechat',),function(){
     Route::get('index','WechatController@index');
     Route::get('menu','WechatController@menu');
     Route::get('auto_reply','WechatController@autoReply');
@@ -124,12 +124,12 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/Wechat',),function(){
     Route::get('template_msg','WechatController@templateMsg');
     Route::get('materials','WechatController@materials');
 });
-Route::group(array('namespace'=>'Admin','prefix'=>'admin/Distribute',),function(){
-    Route::get('goods_list','DistributeController@goodsList');
+Route::group(array('namespace'=>'Admin','prefix'=>'admin/distribute',),function(){
+    Route::get('goodslist','DistributeController@goodsList');
     Route::get('distributor_list','DistributeController@distributorList');
     Route::get('tree','DistributeController@tree');
-    Route::get('grade_list','DistributeController@gradeList');
-    Route::get('rebate_log','DistributeController@rebateLog');
+    Route::get('gradelist','DistributeController@gradeList');
+    Route::get('rebatelog','DistributeController@rebateLog');
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/promotion',),function(){
     Route::get('flash_sale','TopicController@flashSale');
@@ -172,12 +172,19 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/admin',),function(){
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/goods',),function(){
     Route::get('goodslist','GoodsController@goodList');
-    Route::get('categorylist','GoodsController@goodList');
-    Route::get('stocklist','GoodsController@goodList');
-    Route::get('goodstypelist','GoodsController@goodList');
-    Route::get('speclist','GoodsController@goodList');
-    Route::get('goodsattributelist','GoodsController@goodList');
-    Route::get('brandslist','GoodsController@goodList');
+    Route::get('categorylist','GoodsController@categoryList');
+    Route::get('stocklist','GoodsController@stockList');
+    Route::get('goodstypelist','GoodsController@goodsTypeList');
+    Route::get('speclist','GoodsController@specList');
+    Route::get('goodsattributelist','GoodsController@goodsAttributeList');
+    Route::get('brandlist','GoodsController@brandList');
+});
+Route::group(array('namespace'=>'Admin','prefix'=>'admin/plugin',),function(){
+    Route::get('index','PluginController@index');
+});
+Route::group(array('namespace'=>'Admin','prefix'=>'admin/mobileapp',),function(){
+    Route::get('index','MobileAppController@index');
+    Route::get('iosaudit','MobileAppController@iosAudit');
 });
 
 Route::get('test','TestController@Test');

@@ -37,5 +37,7 @@ class SystemController extends Controller {
     public function cleanCache() {
         return view('admin.system.cleancache');
     }
-
+        public function rightList(){
+        return view('admin.system.rightList');
+    }
 }

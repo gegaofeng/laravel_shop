@@ -8,4 +8,7 @@ use App\Http\Controllers\Controller;
 class TemplateController extends Controller
 {
     //
+    public function templateList(){
+        return view('admin.template.templateList');
+    }
 }
