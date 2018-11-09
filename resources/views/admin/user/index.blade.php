@@ -1,5 +1,3 @@
-<!doctype html>
-<html>
 @include('admin.public.layout')
 <body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
 <div id="append_parent"></div>

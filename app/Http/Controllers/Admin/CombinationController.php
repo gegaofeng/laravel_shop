@@ -8,4 +8,7 @@ use App\Http\Controllers\Controller;
 class CombinationController extends Controller
 {
     //
+    public function index(){
+        return view('admin.combination.index');
+    }
 }

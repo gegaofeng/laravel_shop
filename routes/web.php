@@ -126,17 +126,17 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/wechat',),function(){
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/distribute',),function(){
     Route::get('goodslist','DistributeController@goodsList');
-    Route::get('distributor_list','DistributeController@distributorList');
+    Route::get('distributor_list','DistributeController@distributeList');
     Route::get('tree','DistributeController@tree');
     Route::get('gradelist','DistributeController@gradeList');
     Route::get('rebatelog','DistributeController@rebateLog');
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/promotion',),function(){
-    Route::get('flash_sale','TopicController@flashSale');
-    Route::get('group_buy_list','TopicController@groupBuyList');
-    Route::get('prom_goods_list','TopicController@promGoodsList');
-        Route::get('prom_order_list','TopicController@promOrderList');
-    Route::get('pre_sell_list','TopicController@preSellList');
+    Route::get('flash_sale','PromotionController@flashSale');
+    Route::get('group_buy_list','PromotionController@groupBuyList');
+    Route::get('prom_goods_list','PromotionController@promGoodsList');
+        Route::get('prom_order_list','PromotionController@promOrderList');
+    Route::get('pre_sell_list','PromotionController@preSellList');
 
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/order',),function(){

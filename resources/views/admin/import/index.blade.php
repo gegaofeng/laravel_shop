@@ -1,4 +1,4 @@
-<include file="public/layout" />
+@include("admin.public.layout")
 <!--物流配置 css -start-->
 <script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
 <style>

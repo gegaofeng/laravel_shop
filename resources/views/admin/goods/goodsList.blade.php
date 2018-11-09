@@ -1,4 +1,4 @@
-<include file="public/layout" />
+@include("admin.public.layout")
 <style>
     span.type-virtual {
         background-color: #3598DC;

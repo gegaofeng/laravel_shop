@@ -56,10 +56,10 @@
         $('#admincpNavTabs_' + _modules).show().find('dl').removeClass('active').first().addClass('active').find('dd').find('li > a:first').click();
     });
     
-    if ($.cookie('workspaceParam') == null) {
+    if ($.cookie('workspaceParam') === null) {
         // 默认选择第一个菜单
         //$('.nc-module-menu').find('li:first > a').click();
-        openItem('welcome|Index');
+        openItem('welcome|home');
     } else {
         openItem($.cookie('workspaceParam'));
     }
