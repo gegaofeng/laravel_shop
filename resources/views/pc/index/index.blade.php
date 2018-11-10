@@ -3872,6 +3872,5 @@
     }
     init();
 </script>
-<script src="js/pc/common.js" type="text/javascript" charset="utf-8"></script>
 </body>
 @endsection

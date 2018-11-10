@@ -423,12 +423,12 @@
                                         </div>
                                     </div>
                                     <div class="price-tag">
-                                        <span class="now"><em class="li_xfo">￥</em><em>1598.00</em></span>
-                                        <span class="old"><em>￥</em><em>1698.00</em></span>
+                                        <span class="now"><em class="li_xfo">￥</em><em>{{$goods['shop_price']}}</em></span>
+                                        <span class="old"><em>￥</em><em>{{$goods['market_price']}}</em></span>
                                     </div>
                                     <div class="shop_name2">
-                                        <a href="/Home/Goods/goodsInfo/id/25.html">
-                                            直降200元◆vivo Y85全面屏手机 vivoy85手机 y75 y97官方旗舰店 </a>
+                                        <a href="{{url('goodsinfo/'.$goods['goods_id'])}}">
+                                            {{$goods['goods_name']}}</a>
                                     </div>
                                     <div class="J_btn_statu">
                                         <div class="p-num">
@@ -506,180 +506,6 @@
                                     </div>
                                     <div class="p-btn">
                                         <a href="javascript:void(0);" onclick="AjaxAddCart(1,$('#number_'+1).val());">加入购物车</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="s_xsall">
-                                <div class="xs_img">
-                                    <a href="/Home/Goods/goodsInfo/id/13.html">
-                                        <img class="lazy-list"
-                                             data-original="/upload/goods/thumb/13/goods_thumb_13_0_236_236.png"/>
-                                    </a>
-                                </div>
-                                <div class="xs_slide">
-                                    <div class="small-xs-shop">
-                                        <ul>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/13/goods_sub_thumb_852_236_236.png"/>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/13/goods_sub_thumb_853_236_236.png"/>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="price-tag">
-                                    <span class="now"><em class="li_xfo">￥</em><em>1699.00</em></span>
-                                    <span class="old"><em>￥</em><em>1799.00</em></span>
-                                </div>
-                                <div class="shop_name2">
-                                    <a href="/Home/Goods/goodsInfo/id/13.html">
-                                        【套餐赠耳机】HUAWEI/华为 畅享8 Plus 全面屏手机 </a>
-                                </div>
-                                <div class="J_btn_statu">
-                                    <div class="p-num">
-                                        <input class="J_input_val" id="number_13" type="text" value="1">
-                                        <p class="act">
-                                            <a href="javascript:void(0);" onClick="goods_add(13);"
-                                               class="litt-zzyl1"></a>
-                                            <a href="javascript:void(0);" onClick="goods_cut(13);"
-                                               class="litt-zzyl2"></a>
-                                        </p>
-                                    </div>
-                                    <div class="p-btn">
-                                        <a href="javascript:void(0);" onclick="AjaxAddCart(13,$('#number_'+13).val());">加入购物车</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="s_xsall">
-                                <div class="xs_img">
-                                    <a href="/Home/Goods/goodsInfo/id/16.html">
-                                        <img class="lazy-list"
-                                             data-original="/upload/goods/thumb/16/goods_thumb_16_0_236_236.png"/>
-                                    </a>
-                                </div>
-                                <div class="xs_slide">
-                                    <div class="small-xs-shop">
-                                        <ul>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/16/goods_sub_thumb_69_236_236.png"/>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/16/goods_sub_thumb_70_236_236.png"/>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/16/goods_sub_thumb_71_236_236.png"/>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/16/goods_sub_thumb_72_236_236.png"/>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="price-tag">
-                                    <span class="now"><em class="li_xfo">￥</em><em>48.00</em></span>
-                                    <span class="old"><em>￥</em><em>76.00</em></span>
-                                </div>
-                                <div class="shop_name2">
-                                    <a href="/Home/Goods/goodsInfo/id/16.html">
-                                        华为耳机原装手机 荣耀9/8/v9/p9/mate9/8/p10/v10/7x/6x 华为AM115（标准版） </a>
-                                </div>
-                                <div class="J_btn_statu">
-                                    <div class="p-num">
-                                        <input class="J_input_val" id="number_16" type="text" value="1">
-                                        <p class="act">
-                                            <a href="javascript:void(0);" onClick="goods_add(16);"
-                                               class="litt-zzyl1"></a>
-                                            <a href="javascript:void(0);" onClick="goods_cut(16);"
-                                               class="litt-zzyl2"></a>
-                                        </p>
-                                    </div>
-                                    <div class="p-btn">
-                                        <a href="javascript:void(0);" onclick="AjaxAddCart(16,$('#number_'+16).val());">加入购物车</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="s_xsall">
-                                <div class="xs_img">
-                                    <a href="/Home/Goods/goodsInfo/id/25.html">
-                                        <img class="lazy-list"
-                                             data-original="/upload/goods/thumb/25/goods_thumb_25_0_236_236.png"/>
-                                    </a>
-                                </div>
-                                <div class="xs_slide">
-                                    <div class="small-xs-shop">
-                                        <ul>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/25/goods_sub_thumb_854_236_236.png"/>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/25/goods_sub_thumb_855_236_236.png"/>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/25/goods_sub_thumb_856_236_236.png"/>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/25/goods_sub_thumb_857_236_236.png"/>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="price-tag">
-                                    <span class="now"><em class="li_xfo">￥</em><em>1598.00</em></span>
-                                    <span class="old"><em>￥</em><em>1698.00</em></span>
-                                </div>
-                                <div class="shop_name2">
-                                    <a href="/Home/Goods/goodsInfo/id/25.html">
-                                        直降200元◆vivo Y85全面屏手机 vivoy85手机 y75 y97官方旗舰店 </a>
-                                </div>
-                                <div class="J_btn_statu">
-                                    <div class="p-num">
-                                        <input class="J_input_val" id="number_25" type="text" value="1">
-                                        <p class="act">
-                                            <a href="javascript:void(0);" onClick="goods_add(25);"
-                                               class="litt-zzyl1"></a>
-                                            <a href="javascript:void(0);" onClick="goods_cut(25);"
-                                               class="litt-zzyl2"></a>
-                                        </p>
-                                    </div>
-                                    <div class="p-btn">
-                                        <a href="javascript:void(0);" onclick="AjaxAddCart(25,$('#number_'+25).val());">加入购物车</a>
                                     </div>
                                 </div>
                             </div>

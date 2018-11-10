@@ -184,6 +184,7 @@
             </div>
         </div>
     </div>
+    <script src="{{asset('static/js/common.js')}}"></script>
 </div>
 <div class="nav w1224 clearfix">
     <div class="categorys home_categorys">
