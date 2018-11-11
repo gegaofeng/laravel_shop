@@ -9,14 +9,14 @@ namespace App\Repositories;
 use App\Model\Navigation;
 
 class NavigationRepository extends BaseRepository {
-    protected $model;
+    protected $navigation;
 
     /**
      * NavigationRepository constructor.
      * @param Navigation $navigation
      */
     public function __construct(Navigation $navigation) {
-        $this->model=$navigation;
+        $this->navigation=$navigation;
     }
 
     /**
@@ -28,6 +28,6 @@ class NavigationRepository extends BaseRepository {
      */
     public function getAll($sortColumn='sort',$sort='desc')
     {
-        return $this->model->orderBy($sortColumn,$sort)->get();
+        return $this->navigation->orderBy($sortColumn, $sort)->get();
     }
 }

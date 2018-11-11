@@ -17,10 +17,19 @@ Route::namespace('PC')->group(function (){
     Route::get('login','Auth\LoginController@index');
     Route::get('register','Auth\RegisterController@index');
     Route::get('goodsList/id/{id}','GoodsController@goodsList');
+    Route::get('goodsinfo/{id}','GoodsController@goodsInfo');
+    Route::post('goods/activity','GoodsController@activity');
 
 
 
 
+});
+Route::group(['namespace'=>'PC','prefix'=>'cart'],function (){
+    Route::get('/','CartController@index');
+    Route::get('index','CartController@index');
+    Route::post('ajaxaddcart','CartController@ajaxAddCart');
+    Route::get('openaddcart','CartController@openAddCart');
+    Route::get('ajaxgetcartlist','CartController@ajaxGetCartList');
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin'),function(){
     Route::get('/','AuthController@login');
@@ -188,3 +197,6 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/mobileapp',),function()
 });
 
 Route::get('test','TestController@Test');
+Route::get('tt',function (){
+    return view('pc.particals.head');
+});

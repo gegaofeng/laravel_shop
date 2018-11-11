@@ -1,5 +1,8 @@
 
 @extends('pc.layouts.home')
+@section('personal_style')
+    <link rel="stylesheet" type="text/css" href="{{asset('css/pc/index.css')}}">
+    @endsection
 @section('body')
 <body class="gray_f5">
 <!--header-s-->
@@ -3869,6 +3872,5 @@
     }
     init();
 </script>
-<script src="js/pc/common.js" type="text/javascript" charset="utf-8"></script>
 </body>
 @endsection
