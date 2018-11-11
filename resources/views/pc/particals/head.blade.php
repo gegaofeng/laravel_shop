@@ -474,7 +474,7 @@
                             <h3 class="cata-nav-name">
                                 <div class="cata-nav-wrap">
                                     <i class="ico ico-nav-{{$key}}"></i>
-                                    <a href="{{url('goodsList/id',$goods_category['id'])}}">{{$goods_category['mobile_name']}}</a>
+                                    <a href="{{url('goodslist/id',$goods_category['id'])}}">{{$goods_category['mobile_name']}}</a>
                                 </div>
                             </h3>
                         </div>
@@ -488,11 +488,11 @@
                                 @foreach($goods_category['tmenu'] as $tmenu)
                                     <dl class="clearfix">
                                         <dt>
-                                            <a href="{{url('goodsList/id',$tmenu['id'])}}">{{$tmenu['name']}}</a>
+                                            <a href="{{url('goodslist/id',$tmenu['id'])}}">{{$tmenu['name']}}</a>
                                         </dt>
                                         <dd class="clearfix">
                                             @foreach($tmenu['sub_menu'] as $sub_mune)
-                                                <a href="{{url('goodsList/id',$sub_mune['id'])}}">{{$sub_mune['name']}}</a>
+                                                <a href="{{url('goodslist/id',$sub_mune['id'])}}">{{$sub_mune['name']}}</a>
                                             @endforeach
                                         </dd>
                                     </dl>

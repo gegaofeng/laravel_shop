@@ -33,6 +33,6 @@ class TestController extends Controller
 //        return view('test')->with('data',$data);
 //        return $this->model->getGoodsById(96);
         $tools=new Tools();
-        return $tools::create_goods_thum_images(88,236,236);
+        return $tools::create_goods_thum_images(202,236,236);
     }
 }

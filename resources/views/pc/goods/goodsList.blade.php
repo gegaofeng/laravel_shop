@@ -423,7 +423,8 @@
                                         </div>
                                     </div>
                                     <div class="price-tag">
-                                        <span class="now"><em class="li_xfo">￥</em><em>{{$goods['shop_price']}}</em></span>
+                                        <span class="now"><em
+                                                    class="li_xfo">￥</em><em>{{$goods['shop_price']}}</em></span>
                                         <span class="old"><em>￥</em><em>{{$goods['market_price']}}</em></span>
                                     </div>
                                     <div class="shop_name2">
@@ -432,11 +433,14 @@
                                     </div>
                                     <div class="J_btn_statu">
                                         <div class="p-num">
-                                            <input class="J_input_val" id="number_25" type="text" value="1">
+                                            <input class="J_input_val" id="number_{{$goods['goods_id']}}" type="text"
+                                                   value="1">
                                             <p class="act">
-                                                <a href="javascript:void(0);" onClick="goods_add(25);"
+                                                <a href="javascript:void(0);"
+                                                   onClick="goods_add({{$goods['goods_id']}});"
                                                    class="litt-zzyl1"></a>
-                                                <a href="javascript:void(0);" onClick="goods_cut(25);"
+                                                <a href="javascript:void(0);"
+                                                   onClick="goods_cut({{$goods['goods_id']}});"
                                                    class="litt-zzyl2"></a>
                                             </p>
                                         </div>
