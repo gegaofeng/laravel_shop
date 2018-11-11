@@ -1,4 +1,4 @@
-<include file="public/layout" />
+@include("admin.public.layout")
 <link href="__PUBLIC__/static/css/weixin-mp.css" rel="stylesheet"/>
 <body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
 <div id="append_parent"></div>

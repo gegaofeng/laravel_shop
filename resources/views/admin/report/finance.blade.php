@@ -1,4 +1,4 @@
-<include file="public/layout" />
+@include("admin.public.layout")
 <script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
 <body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
 <div id="append_parent"></div>

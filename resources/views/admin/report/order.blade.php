@@ -1,4 +1,4 @@
-<include file="public/min-header" />
+@include("admin.public.layout")
 <link href="__PUBLIC__/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
 <script src="__PUBLIC__/plugins/daterangepicker/moment.min.js" type="text/javascript"></script>
 <script src="__PUBLIC__/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>

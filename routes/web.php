@@ -119,9 +119,9 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/Combination',),function
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/wechat',),function(){
     Route::get('index','WechatController@index');
     Route::get('menu','WechatController@menu');
-    Route::get('auto_reply','WechatController@autoReply');
-    Route::get('fans_list','WechatController@fansList');
-    Route::get('template_msg','WechatController@templateMsg');
+    Route::get('autoreply','WechatController@autoReply');
+    Route::get('fanslist','WechatController@fansList');
+    Route::get('templatemsg','WechatController@templateMsg');
     Route::get('materials','WechatController@materials');
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/distribute',),function(){

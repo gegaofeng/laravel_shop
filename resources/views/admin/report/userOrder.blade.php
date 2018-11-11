@@ -1,4 +1,4 @@
-<include file="public/layout" />
+@include("admin.public.layout")
 <script type="text/javascript" src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
 <script type="text/javascript" src="__PUBLIC__/static/js/perfect-scrollbar.min.js"></script>
 <body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">

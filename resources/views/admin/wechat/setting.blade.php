@@ -1,4 +1,4 @@
-<include file="public/layout" />
+@include("admin.public.layout")
  
 <style type="text/css">
 html, body {

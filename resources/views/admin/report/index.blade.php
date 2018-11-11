@@ -1,4 +1,4 @@
-<include file="public/layout" />
+@include("admin.public.layout")
 <script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
 <body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
 <div id="append_parent"></div>
@@ -7,29 +7,30 @@
 	<div class="fixed-bar">
 		<div class="item-title">
 			<div class="subject">
-				<h3>报表统计 - 销量排行</h3>
-				<h5>网站系统报表统计</h5>
+				<h3>统计报表 - 销售概况</h3>
+				<h5>网站系统销售概况</h5>
 			</div>
 		</div>
 	</div>
 	<!-- 操作说明 -->
-	<div id="explanation" class="explanation" style="color: rgb(44, 188, 163); background-color: rgb(237, 251, 248); width: 99%; height: 100%;">
+	<div class="explanation">
 		<div id="checkZoom" class="title"><i class="fa fa-lightbulb-o"></i>
 			<h4 title="提示相关设置操作时应注意的要点">操作提示</h4>
 			<span title="收起提示" id="explanationZoom" style="display: block;"></span>
 		</div>
 		<ul>
-			<li>销量排行, 由平台设置管理.</li>
-		</ul>
+				<li>可根据时间查询某个时间段的销售统计.</li>
+				<li>每日销售金额、销售商品数.</li>
+			</ul>
 	</div>
 	<div class="flexigrid">
 		<div class="mDiv">
 			<div class="ftitle">
-				<h3>销量排行列表</h3>
-				<h5>(共{$page->totalRows}条记录)</h5>
+				<h3>销售概况</h3>
+				<h5>今日销售总额：￥<empty name="today.today_amount">0<else/>{$today.today_amount}</empty>|人均客单价：￥{$today.sign}|今日订单数：{$today.today_order}|今日取消订单：{$today.cancel_order}</h5>
 			</div>
 			<div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
-			<form class="navbar-form form-inline" id="search-form" method="post" action="{:U('Report/saleTop')}" onSubmit="return check_form();">
+			<form class="navbar-form form-inline" id="search-form" method="get" action="{:U('Report/index')}" >
 				<div class="sDiv">
 					<div class="sDiv2" style="margin-right: 10px;">
 						<input type="text" size="30" name="start_time" id="start_time" value="{$start_time}" placeholder="起始时间" class="qsbox">
@@ -39,15 +40,13 @@
 						<input type="text" size="30" name="end_time" id="end_time" value="{$end_time}" placeholder="截止时间" class="qsbox">
 						<input type="button" class="btn" value="截止时间">
 					</div>
-					<div class="sDiv2" style="margin-right: 10px;">
-						<input type="text" size="30" name="goods_name" id="goods_name" value="{$_POST[goods_name]}" placeholder="商品名称" class="qsbox">
-					</div>
 					<div class="sDiv2">
-						<input class="btn" value="搜索" type="submit">
+						<input class="btn" value="搜索" type="button" onclick="return check_form();">
 					</div>
 				</div>
 			</form>
 		</div>
+		<div id="statistics" style="height: 400px;"></div>
 		<div class="hDiv">
 			<div class="hDivBox">
 				<table cellspacing="0" cellpadding="0">
@@ -57,25 +56,19 @@
 							<div style="width: 24px;"><i class="ico-check"></i></div>
 						</th>
 						<th align="center" abbr="article_title" axis="col3" class="">
-							<div style="text-align: center; width: 50px;" class="">排行</div>
+							<div style="text-align: center; width: 120px;" class="">时间</div>
 						</th>
-						<th align="left" abbr="ac_id" axis="col4" class="">
-							<div style="text-align: left; width: 400px;" class="">商品名称</div>
+						<th align="center" abbr="ac_id" axis="col4" class="">
+							<div style="text-align: center; width: 100px;" class="">订单数</div>
 						</th>
 						<th align="center" abbr="article_show" axis="col5" class="">
-							<div style="text-align: center; width: 100px;" class="">货号</div>
+							<div style="text-align: center; width: 100px;" class="">销售总额</div>
 						</th>
 						<th align="center" abbr="article_time" axis="col6" class="">
-							<div style="text-align: center; width: 50px;" class="">销售量</div>
+							<div style="text-align: center; width: 100px;" class="">客单价</div>
 						</th>
-						<th align="center" abbr="article_time" axis="col6" class="">
-							<div style="text-align: center; width: 100px;" class="">销售额</div>
-						</th>
-						<th align="center" abbr="article_time" axis="col6" class="">
-							<div style="text-align: center; width: 100px;" class="">均价</div>
-						</th>
-						<th align="center" abbr="article_time" axis="col6" class="">
-							<div style="text-align: center; width: 100px;" class="">明细</div>
+						<th align="center" axis="col1" class="handle">
+							<div style="text-align: center; width: 150px;">操作</div>
 						</th>
 						<th style="width:100%" axis="col7">
 							<div></div>
@@ -94,27 +87,21 @@
 							<td class="sign">
 								<div style="width: 24px;"><i class="ico-check"></i></div>
 							</td>
-							<td align="left" class="">
-								<div style="text-align: left; width: 50px;">{$k+1+(($p-1)*$page_size)}</div>
-							</td>
-							<td align="left" class="">
-								<div style="text-align: left; width: 400px;">{$vo.goods_name}</div>
-							</td>
-							<td align="left" class="">
-								<div style="text-align: center; width: 100px;">{$vo.goods_sn}</div>
+							<td align="center" class="">
+								<div style="text-align: center; width: 120px;">{$vo.day}</div>
 							</td>
 							<td align="center" class="">
-								<div style="text-align: center; width: 50px;">{$vo.sale_num}</div>
+								<div style="text-align: center; width: 100px;">{$vo.order_num}</div>
 							</td>
 							<td align="center" class="">
-								<div style="text-align: center; width: 100px;">{$vo.sale_amount}</div>
+								<div style="text-align: center; width: 100px;">{$vo.amount}</div>
 							</td>
 							<td align="center" class="">
-								<div style="text-align: center; width: 100px;">{$vo['sale_amount']/$vo.sale_num|round=###,2}</div>
+								<div style="text-align: center; width: 100px;">{$vo.sign}</div>
 							</td>
-							<td align="center" class="">
-								<div style="text-align: center; width: 100px;">
-								<a href="{:U('Report/saleList',array('goods_id'=>$vo[goods_id]))}" class="btn blue"><i class="fa fa-search"></i>查看</a>
+							<td align="center" class="handle">
+								<div style="text-align: center; width: 170px; max-width:170px;">
+									<a href="{:U('Report/saleOrder',array('start_time'=>$vo['day'],'end_time'=>$vo['end']))}" class="btn blue"><i class="fa fa-search"></i>查看订单列表</a>
 								</div>
 							</td>
 							<td align="" class="" style="width: 100%;">
@@ -125,12 +112,77 @@
 					</tbody>
 				</table>
 			</div>
-            {$page->show()}
 			<div class="iDiv" style="display: none;"></div>
 		</div>
-	</div>
+	 </div>
 </div>
-<script>
+<script src="__PUBLIC__/js/echart/echarts.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/echart/macarons.js"></script>
+<script src="__PUBLIC__/js/echart/china.js"></script>
+<script src="__PUBLIC__/dist/js/app.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var res = {$result};
+	var myChart = echarts.init(document.getElementById('statistics'),'macarons');
+	option = {
+		tooltip : {
+			trigger: 'axis'
+		},
+		toolbox: {
+			show : true,
+			feature : {
+				mark : {show: true},
+				dataView : {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				restore : {show: true},
+				saveAsImage : {show: true}
+			}
+		},
+		calculable : true,
+		legend: {
+			data:['交易金额','订单数','客单价']
+		},
+		xAxis : [
+			{
+				type : 'category',
+				data : res.time
+			}
+		],
+		yAxis : [
+			{
+				type : 'value',
+				name : '金额',
+				axisLabel : {
+					formatter: '{value} ￥'
+				}
+			},
+			{
+				type : 'value',
+				name : '客单价',
+				axisLabel : {
+					formatter: '{value} ￥'
+				}
+			}
+		],
+		series : [
+			{
+				name:'交易金额',
+				type:'bar',
+				data:res.amount
+			},
+			{
+				name:'订单数',
+				type:'bar',
+				data:res.order
+			},
+			{
+				name:'客单价',
+				type:'line',
+				yAxisIndex: 1,
+				data:res.sign
+			}
+		]
+	};
+	myChart.setOption(option);
 	$(document).ready(function(){
 		// 表格行点击选中切换
 		$('#flexigrid > table>tbody >tr').click(function(){
@@ -141,6 +193,7 @@
 		$('.fa-refresh').click(function(){
 			location.href = location.href;
 		});
+
 		$('#start_time').layDate();
 		$('#end_time').layDate();
 	});
@@ -148,11 +201,11 @@
 	function check_form(){
 		var start_time = $.trim($('#start_time').val());
 		var end_time =  $.trim($('#end_time').val());
-		if(start_time == '' ^ end_time == ''){
+		if(start_time == '' || end_time == ''){
 			layer.alert('请选择完整的时间间隔', {icon: 2});
 			return false;
 		}		 
-		return true;
+		$('#search-form').submit();
 	}
 </script>
 </body>

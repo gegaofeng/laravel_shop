@@ -525,7 +525,7 @@ input.error,textarea.error{ background-color: #FFF0F0;background-repeat: repeat;
 .contentWarp_item .section_select .desc span{ display:block; margin-top:5px;}
 
 .contentWarp_item .section_select .item_price .desc{ float:right; margin-right:20px;}
-.contentWarp_item .section_select .item_comment .desc{ margin-left:80px;}
+.contentWarp_item .section_select .item_comment .desc{ float:right; margin-right:20px;}
 .contentWarp_item .section_select .item_order .icon{ float:right; margin-right:80px;}
 .contentWarp_item .section_select .item_order .desc,.contentWarp_item .section_select .item_comment .desc{ color:#666;}
 .contentWarp_item .section_select .item_order .desc .tit{ color:#32cc7f;}
