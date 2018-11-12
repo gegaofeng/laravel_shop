@@ -41,7 +41,7 @@
         <h3>商品列表</h3>
         <h5></h5>
           <div class="fbutton">
-              <a href="http://help.tp-shop.cn/Index/Help/info/cat_id/5/id/5.html" target="_blank">
+              <a href="javascript:void(0)" target="_blank">
                   <div class="add" title="帮助">
                       <span>帮助</span>
                   </div>
@@ -197,7 +197,7 @@
         cur_page = page; //当前页面 保存为全局变量
         $.ajax({
             type: "POST",
-            url: "/index.php?m=Admin&c=goods&a=ajaxGoodsList&p=" + page,//+tab,
+            url: "/api/admin/goods/ajaxgoodslist?page=" + page,//+tab,
             data: $('#' + form).serialize(),// 你的formid
             success: function (data) {
                 $("#flexigrid").html('');

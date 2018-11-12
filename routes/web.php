@@ -121,7 +121,7 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/combination',),function
     Route::get('/','CombinationController@index');
     Route::get('index','CombinationController@index');
 });
-Route::group(array('namespace'=>'Admin','prefix'=>'admin/Combination',),function(){
+Route::group(array('namespace'=>'Admin','prefix'=>'admin/combination',),function(){
     Route::get('/','CombinationController@index');
     Route::get('index','CombinationController@index');
 });
@@ -187,6 +187,7 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/goods',),function(){
     Route::get('speclist','GoodsController@specList');
     Route::get('goodsattributelist','GoodsController@goodsAttributeList');
     Route::get('brandlist','GoodsController@brandList');
+    Route::get('addeditgoods/{id}','GoodsController@addEditGoods');
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/plugin',),function(){
     Route::get('index','PluginController@index');

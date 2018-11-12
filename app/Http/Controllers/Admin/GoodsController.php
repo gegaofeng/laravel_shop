@@ -4,10 +4,15 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\GoodsRepository;
 
 class GoodsController extends Controller
 {
     //
+    private $goodsRepository;
+    public function __construct() {
+        $this ->goodsRepository=new GoodsRepository();
+    }
     public function goodList(){
         return view('admin.goods.goodsList');
     }
@@ -28,5 +33,13 @@ class GoodsController extends Controller
     }
     public function goodsAttributeList(){
         return view('admin.goods.goodsAttributeList');
+    }
+    public function addEditGoods(){
+        return view('admin.goods.addEditGoods');
+    }
+
+        public function ajaxGoodsList(){
+        $goods_list= $this ->goodsRepository-> getGoodsList();
+        return view('admin.goods.ajaxGoodsList')-> with('goods_list',$goods_list);
     }
 }

@@ -1,4 +1,4 @@
-﻿$(function() {
+$(function() {
 //使用title内容作为tooltip提示文字
     $(document).tooltip({
         track: true
@@ -41,7 +41,6 @@
     });
     // 侧边导航三级级菜单点击
     $('.sub-menu').find('a').click(function(){
-//        openItem('www.baidu.com');
         openItem($(this).attr('data-param'));
     });
     
@@ -56,7 +55,7 @@
         $('#admincpNavTabs_' + _modules).show().find('dl').removeClass('active').first().addClass('active').find('dd').find('li > a:first').click();
     });
     
-    if ($.cookie('workspaceParam') === null) {
+    if ($.cookie('workspaceParam') == null) {
         // 默认选择第一个菜单
         //$('.nc-module-menu').find('li:first > a').click();
         openItem('welcome|home');

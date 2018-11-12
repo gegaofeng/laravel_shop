@@ -30,4 +30,8 @@ class GoodsRepository extends BaseRepository{
     public function getGoodsCatById($goods_id){
         return $this->goods->where('goods_id',$goods_id)->pluck('cat_id');
     }
+    public function getGoodsList(){
+        $goods_list= $this ->goods->paginate(15);
+        return $goods_list;
+    }
 }

@@ -17,7 +17,7 @@
 	 }
 	 $.ajax({
 		 type: "POST",
-		 url: "/cart/ajaxaddcart",
+		 url: "/index.php?m=Home&c=Cart&a=ajaxAddCart",
 		 data: data,
 		 dataType: 'json',
 		 success: function (data) {
@@ -47,7 +47,7 @@
 				 title: '温馨提示',
 				 skin: 'layui-layer-rim', //加上边框
 				 area: ['490px', '386px'], //宽高
-				 content: "/cart/openaddcart"
+				 content: "/index.php?m=Home&c=Goods&a=open_add_cart"
 			 });
 		 }
 	 });
