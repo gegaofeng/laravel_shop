@@ -36,11 +36,7 @@ class GoodsController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function goodsList($id){
-        $goods_cat_tree=$this->goodsCategoryRepository->getCatSonTree($id);
-        $goods_list=$this->goodsRepository->getGoodsListByCategoryId($goods_cat_tree);
-        $goods_id_list=get_arr_column($goods_list,'goods_id');
-        $goods_images=$this->goodsImagesRepository->getGoodsImagesByGoodsId($goods_id_list);
-        return view('pc.goods.goodsList')->with('goods_list',$goods_list)->with('goods_images',$goods_images);
+        return view('pc.goods.goodsList')->with('id',$id);
     }
 
     /**
@@ -69,5 +65,12 @@ class GoodsController extends Controller
      */
     public function activity(){
         return json_encode(array('status'=>1));
+    }
+    public function ajaxGetGoodsList(Request $request){
+        $goods_cat_tree=$this->goodsCategoryRepository->getCatSonTree($request['id']);
+        $goods_list=$this->goodsRepository->getGoodsListByCategoryId($goods_cat_tree);
+        $goods_id_list=get_arr_column($goods_list,'goods_id');
+        $goods_images=$this->goodsImagesRepository->getGoodsImagesByGoodsId($goods_id_list);
+        return view('pc.goods.ajaxGetGoodsList')->with('goods_list',$goods_list)->with('goods_images',$goods_images);
     }
 }

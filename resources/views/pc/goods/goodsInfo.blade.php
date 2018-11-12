@@ -1,18 +1,14 @@
 @extends('pc.layouts.home')
 @section('personal_style')
-    <meta charset="UTF-8">
     <title>{{$goods['goods_name']}}-{$tpshop_config['shop_info_store_name']}</title>
     <meta name="keywords" content="{{$goods['keywords']}}"/>
     <meta name="description" content="{{$goods['goods_remark']}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('static/css/tpshop.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('static/css/jquery.jqzoom.css')}}">
-    <script src="{{asset('static/js/jquery-1.11.3.min.js')}}" type="text/javascript" charset="utf-8"></script>
-    <script src="{{asset('static/js/move.js')}}" type="text/javascript" charset="utf-8"></script>
-    <script src="{{asset('')}}/js/layer/layer-min.js"></script>
-    <script type="text/javascript" src="{{asset('static/js/jquery.jqzoom.js')}}"></script>
-    <script src="{{asset('/js/global.js')}}"></script>
-    <script src="{{asset('/js/pc_common.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('static/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
+    <link rel="stylesheet" type="text/css" href="{{asset('home/css/tpshop.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('home/css/jquery.jqzoom.css')}}">
+    <script src="{{asset('home/js/move.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{asset('js/layer/layer-min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('home/js/jquery.jqzoom.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('home/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
     <link rel="shortcut icon" type="image/x-icon"
           href="{$tpshop_config.shop_info_store_ico|default='/public/static/images/logo/storeico_default.png'}"
           media="screen"/>
@@ -240,8 +236,8 @@
                                 </div>
                             </li>
                         </ul>
-                        <script src="{{asset('/js/locationJson.js')}}"></script>
-                        <script src="{{asset('/js/pc/location.js')}}"></script>
+                        <script src="{{asset('home/js/locationJson.js')}}"></script>
+                        <script src="{{asset('home/js/location.js')}}"></script>
                         <script>doInitRegion();</script>
                                                                         <!-- 收货地址，物流运费 -end-->
                     </div>
@@ -419,8 +415,8 @@
     <!--看了又看-s-->
 </div>
 <!--footer-e-->
-<script src="{{asset('static/js/lazyload.min.js')}}" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="{{asset('static/js/headerfooter.js')}}"></script>
+<script src="{{asset('home/js/lazyload.min.js')}}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="{{asset('home/js/headerfooter.js')}}"></script>
 <script>
     //缩略图切换
     $('.small-pic-li').mouseenter(function () {

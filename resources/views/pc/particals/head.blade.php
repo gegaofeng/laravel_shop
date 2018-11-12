@@ -1,7 +1,7 @@
 <div class="top-hander">
     <div class="w1224 pr clearfix">
         <div class="fl">
-            <link rel="stylesheet" href="{{url('css/pc/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
+            <link rel="stylesheet" href="{{url('home/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
             <div class="sendaddress pr fl">
                 <span>送货至：</span>
                 <!-- <span>深圳<i class="share-a_a1"></i></span>-->
@@ -21,8 +21,8 @@
                               </ul>
                           </span>
             </div>
-            <script src="{{url('js/locationJson.js')}}"></script>
-            <script src="{{url('js/pc/location.js')}}"></script>
+            <script src="{{url('home/js/locationJson.js')}}"></script>
+            <script src="{{url('home/js/location.js')}}"></script>
             <script>doInitRegion();</script>
             <div class="fl nologin">
                 <a class="red" href="{{url('login')}}">登录</a>
@@ -66,7 +66,7 @@
     </div>
 </div>
 <div class="nav-middan-z w1224 clearfix">
-    <a class="ecsc-logo" href="/Home/index/index.html">
+    <a class="ecsc-logo" href="{{url('/')}}">
         <img src="{{url('upload/logo/2018/04-09/814d7e9a0eddcf3754f2e8373a50a19c.png')}}"
              style="width: 159px;height: 58px;">
     </a>
@@ -184,7 +184,7 @@
             </div>
         </div>
     </div>
-    <script src="{{asset('static/js/common.js')}}"></script>
+    <script src="{{asset('home/js/common.js')}}"></script>
 </div>
 <div class="nav w1224 clearfix">
     <div class="categorys home_categorys">

@@ -126,7 +126,7 @@
     width: 9px;
     height: 5px;
     overflow: hidden;
-    background: url(/images/sprite.png?144220910272456) -67px -36px no-repeat
+    background: url(../images/sprite.png?144220910272456) -67px -36px no-repeat
 }
 
 .m-navitems ul li .u-dl .u-dd {
@@ -237,7 +237,7 @@
 }
 
 .account-sprite,.account-acc1,.account-acc2,.account-acc3,.account-acc4,.account-acc5,.account-acc6,.account-acc7,.account-acc8,.account-acc9,.account-acco1 {
-    background-image: url("/images/pc/account-s5559bf6e3d.png");
+    background-image: url("../images/account-s5559bf6e3d.png");
     background-repeat: no-repeat
 }
 
@@ -451,7 +451,7 @@
 }
 
 .menu-ri-t .mu-afte ul li .icon-card {
-    background: url(/images/pc/sprite.png) -27px -54px no-repeat;
+    background: url(../images/sprite.png) -27px -54px no-repeat;
     width: 15px;
     height: 11px;
     left: -41px;
@@ -459,7 +459,7 @@
 }
 
 .menu-ri-t .mu-afte ul li .icon-balance {
-    background: url(/images/pc/sprite.png) -15px -54px no-repeat;
+    background: url(../images/sprite.png) -15px -54px no-repeat;
     width: 12px;
     height: 15px;
     left: -41px;
@@ -467,7 +467,7 @@
 }
 
 .menu-ri-t .mu-afte ul li .icon-point {
-    background: url(/images/pc/sprite.png) 0 -54px no-repeat;
+    background: url(../images/sprite.png) 0 -54px no-repeat;
     width: 15px;
     height: 15px;
     left: -41px;
@@ -475,7 +475,7 @@
 }
 
 .menu-ri-t .mu-afte ul li .icon-coupon {
-    background: url(/images/pc/sprite.png) -42px -54px no-repeat;
+    background: url(../images/sprite.png) -42px -54px no-repeat;
     width: 15px;
     height: 10px;
     left: -41px;
@@ -484,7 +484,7 @@
 
 .menu-ri-t .mu-afte ul li .icon-ar {
     display: inline-block;
-    background: url(/images/pc/sprite.png) -77px 0 no-repeat;
+    background: url(../images/sprite.png) -77px 0 no-repeat;
     width: 5px;
     height: 9px;
     right: 31px;
@@ -625,7 +625,7 @@
 
 .coll-coupon .shop-sc-t .coupon-bgimg {
     float: left;
-    background: url(/images/pc/coupon.png) no-repeat;
+    background: url(../images/coupon.png) no-repeat;
     width: 175px;
     height: 91px;
     padding: 0 17px
@@ -1001,7 +1001,7 @@
 }
 
 .ear {
-    background: url(/images/pc/ear.png) no-repeat;
+    background: url(../images/ear.png) no-repeat;
     width: 24px;
     height: 26px;
     display: inline-block;
@@ -1016,7 +1016,7 @@
     position: absolute;
     right: 0px;
     top: -8px;
-    background: url(/images/pc/dele.png) 11px center no-repeat
+    background: url(../images/dele.png) 11px center no-repeat
 }
 
 .dele:hover {
@@ -1200,7 +1200,7 @@
 }
 
 .top-up {
-    background: url(/images/pc/yhq.png) no-repeat;
+    background: url(../images/yhq.png) no-repeat;
     width: 24px;
     height: 24px;
     display: inline-block;
@@ -1366,7 +1366,7 @@
     top: 0;
     left: 50%;
     margin-left: -23px;
-    background: url(/images/pc/coupon20160715.png) 0 -272px no-repeat
+    background: url(../images/coupon20160715.png) 0 -272px no-repeat
 }
 
 .coupon-item .c-type .c-type-bottom {
@@ -1375,7 +1375,7 @@
     height: 3px;
     bottom: 0;
     left: 0;
-    background: url(/images/pc/coupon20160715.png) -3px -296px no-repeat
+    background: url(../images/coupon20160715.png) -3px -296px no-repeat
 }
 
 .coupon-item-d .c-type .c-type-bottom {
@@ -1495,7 +1495,7 @@
     right: 0;
     top: 0;
     overflow: hidden;
-    background: url(/images/pc/coupon20160715.png) -261px 0;
+    background: url(../images/coupon20160715.png) -261px 0;
     cursor: pointer;
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
@@ -1576,7 +1576,7 @@
 }
 
 .money,.frozen {
-    background: url(/images/pc/money.png) no-repeat;
+    background: url(../images/money.png) no-repeat;
     width: 41px;
     height: 36px;
     display: inline-block;
@@ -1645,7 +1645,7 @@
 }
 
 .frozen {
-    background: url(/images/pc/frozen.png) no-repeat
+    background: url(../images/frozen.png) no-repeat
 }
 
 .time-sala {
@@ -1729,7 +1729,7 @@
 }
 
 .tixbox .paydegs span i {
-    background: url(/images/pc/gri.png) no-repeat;
+    background: url(../images/gri.png) no-repeat;
     width: 16px;
     height: 16px;
     display: inline-block;
@@ -1861,7 +1861,7 @@
 }
 
 .kyjf,.dsxjf,.gqjf {
-    background: url(/images/pc/jfhg.png) no-repeat;
+    background: url(../images/jfhg.png) no-repeat;
     width: 36px;
     height: 36px;
     display: inline-block;
@@ -2151,7 +2151,7 @@
 }
 
 .mm_b {
-    background: url(/images/pc/b_xd.png) no-repeat;
+    background: url(../images/b_xd.png) no-repeat;
     width: 12px;
     height: 6px;
     display: inline-block;
@@ -2235,7 +2235,7 @@
 }
 
 .feetprin .u-title i {
-    background: url(/images/pc/ryh.png) no-repeat;
+    background: url(../images/ryh.png) no-repeat;
     position: absolute;
     width: 25px;
     height: 27px;
@@ -2435,7 +2435,7 @@
 }
 
 .ph_c,.em_c {
-    background: url(/images/pc/infro.png) no-repeat;
+    background: url(../images/infro.png) no-repeat;
     width: 13px;
     height: 22px;
     display: inline-block;
@@ -2454,7 +2454,7 @@
 }
 
 .level-sprite,.level-level1,.level-level2,.level-level3,.level-level4,.level-level5,.level-level6,.level-level7,.level-level8,.level-level9,.level-level91,.level-level92 {
-    background-image: url('/images/pc/level-s0b74de8d7d.png');
+    background-image: url('../images/level-s0b74de8d7d.png');
     background-repeat: no-repeat
 }
 
@@ -2681,7 +2681,7 @@
 
 .ad_col:after {
     content: "";
-    background: url(/images/pc/level-s0b74de8d7d.png) no-repeat;
+    background: url(../images/level-s0b74de8d7d.png) no-repeat;
     background-position: 0 -485px;
     width: 63px;
     height: 56px;
@@ -2980,7 +2980,7 @@
 }
 
 .thirset .wshef .spassw {
-    background: url(/images/pc/spassw.png) no-repeat;
+    background: url(../images/spassw.png) no-repeat;
     height: 33px;
     width: 19px;
     position: absolute;
@@ -3065,7 +3065,7 @@
 }
 
 .verifyi-next .qrzf {
-    background: url(/images/pc/srzq.png) no-repeat;
+    background: url(../images/srzq.png) no-repeat;
     width: 14px;
     height: 14px;
     display: inline-block;
@@ -3250,7 +3250,7 @@
 }
 
 .y-sprite,.y-comp,.y-comp2,.y-comp3,.y-comp4,.y-comp5,.y-comp6,.y-comp7,.y-comp8,.y-comp9,.y-comp91 {
-    background-image: url("/images/pc/y-saea8bece45.png");
+    background-image: url("../images/y-saea8bece45.png");
     background-repeat: no-repeat
 }
 
@@ -3329,7 +3329,7 @@
 
 .com-topyue:after {
     content: "";
-    background: url(/images/pc/147.png);
+    background: url(../images/147.png);
     width: 100%;
     height: 7px;
     position: absolute;
@@ -3555,7 +3555,7 @@
     content: "";
     width: 8px;
     height: 8px;
-    background: url(/images/pc/rh5.png);
+    background: url(../images/rh5.png);
     position: absolute;
     background-position: -19px -3px;
     left: 3px;
@@ -3564,7 +3564,7 @@
 
 .listchatu ul li:after {
     content: "";
-    background: url(/images/pc/tiny.png);
+    background: url(../images/tiny.png);
     width: 1px;
     height: 100%;
     position: absolute;
@@ -3765,7 +3765,7 @@
 }
 
 .earp {
-    background: url(/images/pc/earp.png) no-repeat;
+    background: url(../images/earp.png) no-repeat;
     width: 24px;
     height: 26px;
     display: inline-block;
@@ -3890,7 +3890,7 @@
 
 .checkuoz .shwa:after {
     content: "";
-    background: url(/images/pc/zygroup.png) no-repeat;
+    background: url(../images/zygroup.png) no-repeat;
     width: 12px;
     height: 9px;
     position: absolute;
@@ -3922,7 +3922,7 @@
 }
 
 .tjsq {
-    background: url(/images/pc/zygroup.png) no-repeat;
+    background: url(../images/zygroup.png) no-repeat;
     display: inline-block
 }
 
@@ -3940,7 +3940,7 @@
 
 .firshe:before {
     content: "";
-    background: url(/images/pc/zygroup.png) no-repeat;
+    background: url(../images/zygroup.png) no-repeat;
     position: absolute;
     width: 16px;
     height: 16px;
@@ -4123,7 +4123,7 @@
 }
 
 .uploadpt .rigdetaque .ptm {
-    background: url(/images/pc/zygroup.png) no-repeat;
+    background: url(../images/zygroup.png) no-repeat;
     width: 32px;
     height: 24px;
     display: inline-block;
@@ -4237,7 +4237,7 @@
     display: inline-block;
     width: 14px;
     height: 15px;
-    background: url("/images/pc/ico-contact-small.png") no-repeat 0 0;
+    background: url("../images/ico-contact-small.png") no-repeat 0 0;
     margin-right: 5px;
     margin-bottom:-4px;
 }
@@ -4275,7 +4275,7 @@
     width: 566px;
     height: 68px;
     margin: 54px auto 0;
-    background-image: url("/images/pc/progress-bar-1.png");
+    background-image: url("../images/progress-bar-1.png");
     background-repeat: no-repeat;
     background-position: 0 0;
 }
@@ -4769,7 +4769,7 @@
 }
 
 .greatco a i {
-    background: url(/images/pc/goodc.png) no-repeat;
+    background: url(../images/goodc.png) no-repeat;
     width: 26px;
     height: 26px;
     display: inline-block;
@@ -5070,7 +5070,7 @@
 }
 
 .judgp {
-    background: url(/images/pc/loginchat.png) no-repeat;
+    background: url(../images/loginchat.png) no-repeat;
     display: inline-block
 }
 
@@ -5169,7 +5169,7 @@
 }
 
 .trade {
-    background: url(/images/pc/trade.png);
+    background: url(../images/trade.png);
     width: 12px;
     height: 16px;
     display: inline-block;
@@ -5233,7 +5233,7 @@
 }
 
 .las-sprite,.las-clock,.las-ear,.las-flo,.las-flo2,.las-flo3,.las-flo4,.las-flo_g,.las-flo_g2,.las-flo_g3,.las-flo_g4,.las-pass1,.las-pass2,.las-pass3,.las-pass4,.las-pd,.las-pp,.las-warning,.las-wty {
-    background-image: url('/images/pc/las-sf04055e99c.png');
+    background-image: url('../images/las-sf04055e99c.png');
     background-repeat: no-repeat
 }
 
@@ -6189,7 +6189,7 @@
 }
 
 .explay_sales_head i {
-    background: url(/images/pc/conversition.png) no-repeat;
+    background: url(../images/conversition.png) no-repeat;
     width: 21px;
     height: 21px;
     display: inline-block;
@@ -6253,7 +6253,7 @@
 
 .myself_head:before {
     content: "";
-    background: url(/images/pc/sig.png) no-repeat;
+    background: url(../images/sig.png) no-repeat;
     width: 14px;
     height: 33px;
     position: absolute;
@@ -6411,7 +6411,7 @@
 
 .timeline_ch .near:before {
     content: "";
-    background: url(/images/pc/lc.png) no-repeat;
+    background: url(../images/lc.png) no-repeat;
     position: absolute;
     left: -22px;
     top: 6px;
@@ -6615,7 +6615,7 @@
     cursor: pointer;
 }
 .withdraw-select-labels {
-    background:url(/images/pc/tixian-chengs.png) no-repeat 8px 8px ;
+    background:url(../images/tixian-chengs.png) no-repeat 8px 8px ;
     background-size:50% 50% ;
 }
 .withdraw-select-dl-color{
@@ -6626,7 +6626,7 @@
     width: 53px;
 }
 .withdraw-select-labels{
-    background: url(/images/pc/tx-chengs.png) no-repeat 5px 5px;
+    background: url(../images/tx-chengs.png) no-repeat 5px 5px; 
 }
 .withdraw-Bindings{
     width: 970px;
@@ -6658,7 +6658,7 @@
     width: 20px;
     height: 22px;
     display: inline-block;
-    background: url(/images/pc/tix-bianji.png)no-repeat;
+    background: url(../images/tix-bianji.png)no-repeat;
     vertical-align: middle;
     margin-right: 10px;
 }   
@@ -6836,7 +6836,7 @@
     top: 16px;
     width: 16px;
     height: 16px;
-    background: url(/images/pc/bind-x.png)no-repeat;
+    background: url(../images/bind-x.png)no-repeat;
     background-size:100% 100%;
     cursor: pointer;
 } 

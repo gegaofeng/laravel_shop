@@ -17,7 +17,7 @@ class GoodsRepository extends BaseRepository{
         $this->goodsCategoryRepository=new GoodsCategoryRepository();
     }
     public function getGoodsListByCategoryId($category_id){
-        $goods_list=$this->goods->whereIn('cat_id',$category_id)->get();
+        $goods_list=$this->goods->whereIn('cat_id',$category_id)->paginate(5);
         return $goods_list;
     }
     public function getGoodsById($goods_id){

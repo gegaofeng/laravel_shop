@@ -28,7 +28,7 @@ Route::group(['namespace' => 'PC', 'prefix' => 'cart'], function ()
 {
     Route::get('/', 'CartController@index');
     Route::get('index', 'CartController@index');
-    Route::post('ajaxaddcart', 'CartController@ajaxAddCart');
+    Route::any('ajaxaddcart', 'CartController@ajaxAddCart');
     Route::get('openaddcart', 'CartController@openAddCart');
     Route::get('ajaxgetcartlist', 'CartController@ajaxGetCartList');
 }

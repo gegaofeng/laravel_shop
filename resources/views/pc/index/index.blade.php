@@ -1,14 +1,14 @@
 
 @extends('pc.layouts.home')
 @section('personal_style')
-    <link rel="stylesheet" type="text/css" href="{{asset('css/pc/index.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('home/css/index.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('home/css/base.css')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="upload/logo/2018/04-09/516bc70315079d81dc3726991672b4af.png"
+          media="screen">
     @endsection
 @section('body')
 <body class="gray_f5">
 <!--header-s-->
-<link rel="stylesheet" type="text/css" href="{{asset('css/pc/base.css')}}">
-<link rel="shortcut icon" type="image/x-icon" href="upload/logo/2018/04-09/516bc70315079d81dc3726991672b4af.png"
-      media="screen">
 @include('pc/particals/head')
 
 

@@ -61,7 +61,7 @@
     width: 40px;
     height: 40px;
     border-bottom: 1px solid #ddd;
-    background-image: url("/images/pc/ico-tphsop-index.png");
+    background-image: url("../images/ico-tphsop-index.png");
     background-repeat: no-repeat;
 }
 .ico-slidebar4{
@@ -224,7 +224,7 @@
     height: 80px;
     color: #fff;
     background-color:#000;
-    background-image:url("/images/pc/ico-arrow-banner.png");
+    background-image:url("../images/ico-arrow-banner.png");
     background-repeat: no-repeat;
     opacity: .2;
 }
@@ -265,7 +265,7 @@
     padding-top: 20px;
     height: 180px;
     overflow: hidden;
-    background: url("/images/pc/bg-brand.jpg") no-repeat 0 20px;
+    background: url("../images/bg-brand.jpg") no-repeat 0 20px;
 }
 .adv3 .recommend-brand{
     float: left;
