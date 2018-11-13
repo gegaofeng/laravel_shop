@@ -1,41 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
+@extends('pc.layouts.home')
+@section('personal_style')
 	<title>我的购物车列表</title>
-	<link rel="stylesheet" type="text/css" href="__STATIC__/css/tpshop.css" />
-	<script src="__STATIC__/js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="__PUBLIC__/js/global.js" type="text/javascript" charset="utf-8"></script>
-	<script src="__PUBLIC__/js/locationJson.js"></script>
-	<script src="__STATIC__/js/location.js" type="text/javascript" charset="utf-8"></script>
-	<script src="__PUBLIC__/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
-	<script src="__PUBLIC__/js/pc_common.js"></script>
-	<link rel="stylesheet" href="__STATIC__/css/location.css" type="text/css"><!-- 收货地址，物流运费 -->
-</head>
+	<link rel="stylesheet" type="text/css" href="{{url('static/css/tpshop.css')}}" />
+	<link rel="stylesheet" href="{{url('static/css/base.css')}}">
+	<script src="{{url('js/locationJson.js')}}"></script>
+	<script src="{{url('static/js/location.js')}}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{url('js/layer/layer.js')}}" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="{{url('static/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
 <style>
 	.coupon_whether{ overflow:auto; height: 500px; width:400px; }
 </style>
+	@endsection
+@section('body')
 <body>
 <!--顶部广告-s-->
-<adv pid="1" limit="1" item="v">
-	<div class="topic-banner" style="background: #f37c1e;">
-		<div class="w1224">
-			<a href="{$v.ad_link}">
-				<img src="{$v[ad_code]}"/>
-			</a>
-			<i onclick="$('.topic-banner').hide();"></i>
-		</div>
-	</div>
-</adv>
+{{--<adv pid="1" limit="1" item="v">--}}
+	{{--<div class="topic-banner" style="background: #f37c1e;">--}}
+		{{--<div class="w1224">--}}
+			{{--<a href="{$v.ad_link}">--}}
+				{{--<img src="{$v[ad_code]}"/>--}}
+			{{--</a>--}}
+			{{--<i onclick="$('.topic-banner').hide();"></i>--}}
+		{{--</div>--}}
+	{{--</div>--}}
+{{--</adv>--}}
 <!--顶部广告-e-->
 <!--header-s-->
 <div class="tpshop-tm-hander p" style="border-bottom: 0;">
-	<include file="public/sign-header" />
+	@include("pc.public.sign-header")
 	<div class="nav-middan-z p tphsop2_0">
 		<div class="header w1224">
 			<div class="ecsc-logo fon_gwcshcar">
 				<a href="/" class="logo">
-					<img src="{$tpshop_config['shop_info_store_logo']|default='__PUBLIC__/static/images/logo/pc_home_logo_default.png'}" style="max-width: 240px;max-height: 80px;">
+					<img src="{{url('static/images/logo/pc_home_logo_default.png')}}" style="max-width: 240px;max-height: 80px;">
 				</a>
 			</div>
 			<div class="ecsc-search mycarlist_search">
@@ -195,7 +192,9 @@
 					<!--搭配套餐标题 s-->
 					<div class="meal-conts-name p edge_{$cart.id}" style="border-bottom: 1px solid #d5d5d5;">
 						<div class="fl">
-							<input class="check-box" name="checkItem" value="{$cart['id']}" type="checkbox" <if condition='$cart[selected] eq 1'>checked="checked"</if> style="display: none;">
+							<input class="check-box" name="checkItem" value="{$cart['id']}" type="checkbox"
+							{{--<if condition='$cart[selected] eq 1'>checked="checked"</if> --}}
+							style="display: none;">
 							<i data-goods-id="{$cart['goods_id']}" data-goods-cat-id3="{$cart['goods']['cat_id']}" data-cart-id="{$cart['id']}" data-type="{$cart['prom_type']}" class="checkall checkItem <if condition='$cart[selected] eq 1'>checkall-true</if>"></i>
 						</div>
 						<!--<div class="meal-conts-tltle">-->
@@ -207,7 +206,8 @@
 						<!--</span>-->
 					</div>
 				</if>
-				<div class="shoplist_detail_a edge_{$cart.id}" style="border-top: <if condition='$key==0'> 1px solid #d5d5d5<else />none</if> ">
+				<div class="shoplist_detail_a edge_{$cart.id}" style="border-top:1px" >
+				{{--<if condition='$key==0'> 1px solid #d5d5d5<else />none</if>--}}
 
 					<if condition="$cart['combination_cart']">
 						<!--搭配套餐 s-->
@@ -1321,6 +1321,4 @@
     }
 </script>
 </body>
-
-
-</html>
+	@endsection

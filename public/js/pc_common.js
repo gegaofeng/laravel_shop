@@ -13,11 +13,12 @@
 	 if (form.length > 0) {
 		 data = form.serialize();
 	 } else {
-		 data = {goods_id: goods_id, goods_num: num};
+		 data = {goods_id: goods_id, goods_num: num,};
 	 }
 	 $.ajax({
 		 type: "POST",
 		 url: "/cart/ajaxaddcart",
+		 headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
 		 data: data,
 		 dataType: 'json',
 		 success: function (data) {

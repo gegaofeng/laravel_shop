@@ -155,7 +155,6 @@
             <input type="hidden" name="point_rate" value="{$point_rate}"/><!-- 积分兑换比 -->
             <input type="hidden" name="is_virtual" value="{{$goods['is_virtual']}}"/><!-- 是否是虚拟商品 -->
             <input type="hidden" name="virtual_limit" id="virtual_limit" value="{{$goods['virtual_limit']}}"/>
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="detail-ggsl">
                 <h1>{{$goods['goods_name']}}</h1>
                 <div class="presale-time" style="display: none">

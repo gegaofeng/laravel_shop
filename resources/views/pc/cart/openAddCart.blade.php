@@ -7,7 +7,7 @@
 <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="{{url('css/pc/detail.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url('home/css/detail.css')}}">
 <div id="shopdilog">
   <div class="ui-popup ui-popup-modal ui-popup-show ui-popup-focus">
     <div i="dialog" class="ui-dialog">
