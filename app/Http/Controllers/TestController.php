@@ -17,7 +17,7 @@ class TestController extends Controller
     //
     protected $model;
     public function __construct() {
-        $this->model=new GoodsRepository();
+//        $this->model=new GoodsRepository();
     }
 
     public function test(){
@@ -32,7 +32,15 @@ class TestController extends Controller
 ////        return $data;
 //        return view('test')->with('data',$data);
 //        return $this->model->getGoodsById(96);
-        $tools=new Tools();
-        return $tools::create_goods_thum_images(88,236,236);
+//        $tools=new Tools();
+//        return $tools::create_goods_thum_images(88,236,236);
+//        $goods_cat=new GoodsCategoryRepository();
+//        return view('test')->with('test',$goods_cat-> getSortGoodsCategory());
+//        return $goods_cat-> getCatSonTree(14);
+//        return 1;
+        $brand=new \App\Repositories\BrandRepository();
+        return $brand-> getSortBrands(33);
+        $cat=new GoodsCategoryRepository();
+//        return $cat-> getCatSonTree(13);
     }
 }

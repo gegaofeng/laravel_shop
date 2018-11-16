@@ -52,13 +52,11 @@ class GoodsCategoryRepository extends BaseRepository
                     $tree[] = $val;
                 }
             }
-
             foreach ($arr as $k => $v) {
                 foreach ($v as $kk => $vv) {
                     $arr[$k][$kk]['sub_menu'] = empty($crr[$vv['id']]) ? array() : $crr[$vv['id']];
                 }
             }
-
             foreach ($tree as $val) {
                 $val['tmenu'] = empty($arr[$val['id']]) ? array() : $arr[$val['id']];
                 $result[] = $val;
@@ -103,7 +101,7 @@ class GoodsCategoryRepository extends BaseRepository
         if (count($cat_son_tree)) {
             return $cat_son_tree;
         } else {
-            return '该分类下不存子分类';
+            return [$cat_id];
         }
 
     }
@@ -142,5 +140,32 @@ class GoodsCategoryRepository extends BaseRepository
             return $cat_navifation;
         }
     }
-
+    public function getSortGoodsCategory(){
+        $category_list= $this ->goodsCategory->get(array('id','name','parent_id','level'));
+                $name_list = array();
+                $a=array();
+        foreach($category_list as $k => $v)
+        {
+            $name = getFirstCharter($v['name']) .' '. $v['name']; // 前面加上拼音首字母
+            $name_list[] = $v['name'] = $name;
+            $a[$k] = $v;
+        }
+//        var_dump( $a);
+       array_multisort($name_list,SORT_STRING,SORT_ASC,$a);
+        return $a;
+    }
+    public function getCatListByParentId($id=0){
+        $cat_list= $this ->goodsCategory->whereParentId($id)->get();
+        return $cat_list;
+    }
+    public function getParentCatById($id){
+        $parent_id_path= $this -> getParentIdPath($id);
+//        return $parent_id_path;
+        $parent_cat= explode('_', $parent_id_path['parent_id_path']);
+        return $parent_cat;
+    }
+    public function getSonCatById($id){
+        $cat_list= $this ->goodsCategory->where('parent_id',$id)->get();
+        return $cat_list;
+    }
 }

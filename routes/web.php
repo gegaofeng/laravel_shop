@@ -187,7 +187,7 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/goods',),function(){
     Route::get('speclist','GoodsController@specList');
     Route::get('goodsattributelist','GoodsController@goodsAttributeList');
     Route::get('brandlist','GoodsController@brandList');
-    Route::get('addeditgoods/{id}','GoodsController@addEditGoods');
+    Route::get('addeditgoods/{id?}','GoodsController@addEditGoods');
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/plugin',),function(){
     Route::get('index','PluginController@index');
@@ -195,6 +195,9 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/plugin',),function(){
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/mobileapp',),function(){
     Route::get('index','MobileAppController@index');
     Route::get('iosaudit','MobileAppController@iosAudit');
+});
+Route::group(array('namespace'=>'Admin','prefix'=>'admin/uploadify'),function(){
+    Route::get('upload','UploadifyController@upload');
 });
 
 Route::get('test','TestController@Test');

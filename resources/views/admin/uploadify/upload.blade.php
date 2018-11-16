@@ -2,8 +2,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <title>文件管理</title>
-<link rel="stylesheet" type="text/css" href="/public/plugins/webuploader/webuploader.css">
-<link rel="stylesheet" type="text/css" href="/public/plugins/webuploader/css/style.css">
+<link rel="stylesheet" type="text/css" href="{{url('/plugins/webuploader/webuploader.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url('/plugins/webuploader/css/style.css')}}">
 </head>
 <body>
 <div class="upload-box">
@@ -82,14 +82,14 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="/public/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="/public/plugins/webuploader/webuploader.min.js"></script>
-<script type="text/javascript" src="/public/plugins/webuploader/upload.js"></script>
+<script type="text/javascript" src="{{url('/js/jquery-1.10.2.min.js')}}"></script>
+<script type="text/javascript" src="{{url('/plugins/webuploader/webuploader.min.js')}}"></script>
+<script type="text/javascript" src="{{url('/plugins/webuploader/upload.js')}}"></script>
 <script>
 $(function(){
 	moudle = 'Admin';
 	var config = {
-			"swf":"/public/plugins/webuploader/Uploader.swf",
+			"swf":"/plugins/webuploader/Uploader.swf",
 			"server":"{$info.upload}",
 			"filelistPah":"{$info.fileList}",
 			"delPath":"{:U('Uploadify/delupload')}",

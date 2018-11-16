@@ -54,15 +54,15 @@
         <div class="sDiv2">           
           <select name="cat_id" id="cat_id" class="select">
             <option value="">所有分类</option>
-            <foreach name="categoryList" item="v" key="k" >
-                <option value="{$v['id']}"> {$v['name']}</option>
-            </foreach>
+            @foreach($category_list as $v )
+                <option value="{{$v['id']}}"> {{$v['name']}}</option>
+            @endforeach
           </select>
           <select name="brand_id" id="brand_id" class="select">
             <option value="">所有品牌</option>
-                <foreach name="brandList" item="v" key="k" >
-                   <option value="{$v['id']}">{$v['name']}</option>
-                </foreach>
+                @foreach($brand_list as $v)
+                   <option value="{{$v['id']}}">{{$v['name']}}</option>
+                @endforeach
           </select>          
           <select name="is_on_sale" id="is_on_sale" class="select">
             <option value="">全部</option>                  
@@ -139,7 +139,7 @@
     <div class="tDiv">
       <div class="tDiv2">
         <div class="fbutton">       
-          <a href="{:U('Admin/goods/addEditGoods')}">
+          <a href="{{url('admin/goods/addeditgoods')}}">
           <div class="add" title="添加商品">
             <span><i class="fa fa-plus"></i>添加商品</span>
           </div>

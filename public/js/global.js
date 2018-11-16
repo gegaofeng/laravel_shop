@@ -184,7 +184,7 @@ function checkTelphone(tel){
  */
 function GetUploadify(num,elementid,path,callback,fileType)
 {	   	
-	var upurl ='/index.php?m=Admin&c=Uploadify&a=upload&num='+num+'&input='+elementid+'&path='+path+'&func='+callback+'&fileType='+fileType;
+	var upurl ='/admin/uploadify/upload?num='+num+'&input='+elementid+'&path='+path+'&func='+callback+'&fileType='+fileType;
     var title = '上传图片';
     if(fileType == 'Flash'){
         title = '上传视频';
@@ -277,17 +277,19 @@ function GetRTime(end_time){
 function get_category(id,next,select_id){
     $.ajax({
         type : "GET",
-        url  : '/index.php?m=Home&c=api&a=get_category&parent_id='+ id,
+        url  : '/api/getsoncategory',
+        data:{'parent_id':id},
         dataType:'json',
         success: function(data) {
-			var html = "<option value='0'>请选择商品分类</option>";
+            var html = "<option value='0'>请选择商品分类</option>";
             if(data.status == 1){
+                console.log(data.result)
                 for (var i=0 ;i<data.result.length;i++){
                     html+= "<option value='"+data.result[i].id+"'>"+data.result[i].name+"</option>";
                 }
             }
             $('#'+next).empty().html(html);
-			(select_id > 0) && $('#'+next).val(select_id);//默认选中
+            (select_id > 0) && $('#'+next).val(select_id);//默认选中
         }
     });
 }

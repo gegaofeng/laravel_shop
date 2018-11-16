@@ -123,10 +123,10 @@
         <!--表单数据-->
         <form method="post" id="addEditGoodsForm">
             <input type="hidden" name="goods_id" value="{{$goods['goods_id']}}">
-            <input type="hidden" name="_token" value="{{csrf_token()}}" />
+            <input type="hidden" name="__token__" value="{$Request.token}" />
             <input type="hidden" value="{$Request.param.is_distribut}" name="is_distribut" disabled="disabled"/>
-            <input type="hidden" value="{{$level_cat['1']}}" name="level_cat_1" disabled="disabled"/>
-            <input type="hidden" value="{{$level_cat['2']}}" name="level_cat_2" disabled="disabled"/>
+            <input type="hidden" value="{$level_cat['1']}" name="level_cat_1" disabled="disabled"/>
+            <input type="hidden" value="{$level_cat['2']}" name="level_cat_2" disabled="disabled"/>
             <input type="hidden" value="{$level_cat['3']}" name="level_cat_3" disabled="disabled"/>
             <input type="hidden" value="{$goods['brand_id']|default = 0}" name="goods_brand_id" disabled="disabled"/>
             <!--通用信息-->
@@ -185,16 +185,13 @@
                         <select name="cat_id" id="cat_id" class="small form-control">
                             <option value="0">请选择商品分类</option>
                             @foreach($cat_list as $k=>$v)
-                                <option value="{{$v['id']}}"
-                                        @if($v['id'] == $level_cat['1'])
-                                        selected="selected"
-                                        @endif
-                                        >
+                                <option value="{{$v['id']}}" <if condition="$v['id'] eq $level_cat['1']">selected="selected"</if>>
                                 {{$v['name']}}
                                 </option>
                             @endforeach
                         </select>
-                        <select name="cat_id_2" id="cat_id_2" onChange="get_category(this.value, 'cat_id_3', '0');getCategoryBrandList(this.value)" class="small form-control">
+                        <select name="cat_id_2" id="cat_id_2" onChange="get_category(this.value, 'cat_id_3', '0');getCategoryBrandList(this.value)"
+                                onclick="get_category(this.value, 'cat_id_3', '0');getCategoryBrandList(this.value)" class="small form-control">
                             <option value="0">请选择商品分类</option>
                         </select>
                         <select name="cat_id_3" id="cat_id_3" class="small form-control">
@@ -895,7 +892,7 @@
         function getCategoryBrandList(val) {
             var goods_brand_id = $("input[name='goods_brand_id']").val();
             $.ajax({
-                'url': "{{url('api/getcatbrandlist')}}",
+                'url': "{:U('goods/getCategoryBrandList')}",
                 'data': {cart_id: val},
                 'dataType': 'json',
                 success: function (data) {

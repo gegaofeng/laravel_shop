@@ -24,4 +24,9 @@ Route::group(['namespace'=>'admin'],function(){
         
     });
 });
+Route::group(['namespace'=>'Common'],function(){
+    //goodscat
+    Route::get('getsoncategory','GoodsCategoryController@ajaxGetSonCategory');
+    Route::get('getcatbrandlist','GoodsBrandController@ajaxGetCatBrandList');
+});
 
