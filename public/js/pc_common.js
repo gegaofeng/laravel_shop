@@ -50,7 +50,16 @@
 				 area: ['490px', '386px'], //宽高
 				 content: "/cart/openaddcart"
 			 });
-		 }
+		 },
+		 error:function () {
+             layer.open({
+                 type: 1,
+                 title: '温馨提示',
+                 skin: 'layui-layer-rim', //加上边框
+                 area: ['490px', '386px'], //宽高
+				 content:'加入购车失败,请重试'
+             });
+         }
 	 });
  }
  //购买兑换商品

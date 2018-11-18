@@ -15,6 +15,6 @@ class LoginController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(){
-        return view('pc.auth.login');
+        return view('pc.user.login');
     }
 }

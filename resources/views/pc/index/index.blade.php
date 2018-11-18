@@ -9,7 +9,7 @@
 @section('body')
 <body class="gray_f5">
 <!--header-s-->
-@include('pc/particals/head')
+@include('pc.public.head')
 
 
 <!--header-e-->
@@ -3708,7 +3708,7 @@
         </div>
     </div>
 </div>
-@include('pc/particals/footer')
+@include('pc.public.footer')
 <!--楼层导航-s-->
 <ul class="floor-nav" id="floor-nav" style="margin-top: -143px; display: none;">
     <li class="floor-nav-ac">

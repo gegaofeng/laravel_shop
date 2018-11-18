@@ -2,7 +2,6 @@
 @section('personal_style')
 	<title>我的购物车列表</title>
 	<link rel="stylesheet" type="text/css" href="{{url('static/css/tpshop.css')}}" />
-	<link rel="stylesheet" href="{{url('static/css/base.css')}}">
 	<script src="{{url('js/locationJson.js')}}"></script>
 	<script src="{{url('static/js/location.js')}}" type="text/javascript" charset="utf-8"></script>
 	<script src="{{url('js/layer/layer.js')}}" type="text/javascript" charset="utf-8"></script>
@@ -124,7 +123,7 @@
 			<div class="cont_aloinfon">
 				<i class="tit_sad"></i>
 				<span class="nitp">您还没有登录！登录后购物车的商品将保存在您的账号中</span>
-				<a class="loging_ex" href="{:U('Home/User/login')}">立即登录</a>
+				<a class="loging_ex" href="{{url('login')}}">立即登录</a>
 			</div>
 		</if>
 	</div>
@@ -142,7 +141,7 @@
 					购物车空空的哦~，去看看心仪的商品吧~
 				</li>
 				<li class="mt10" style="padding-left: 100px;">
-					<a href="{:U('Home/User/login')}" class="btn-1 login-btn nologin">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="{{url('login')}}" class="btn-1 login-btn nologin">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="/" class="btn-1 login-btn islogin">去购物</a>
 				</li>
 			</ul>
@@ -658,7 +657,7 @@
 <!--删除商品弹窗-e-->
 <div class="ui-mask"></div>
 <!--footer-s-->
-<include file="public/footer" />
+@include("pc.public.footer")
 <!--footer-e-->
 <script type="text/javascript">
     $(document).ready(function(){
@@ -1154,7 +1153,7 @@
     {
         var uname = getCookie('uname');
         if (uname == '') {
-            $('#collect-products .s-panel-main').html('<p class="wefoc"><a href="{:U('User/login')}">登录</a>后将显示您之前关注的商品</p>');
+            $('#collect-products .s-panel-main').html('<p class="wefoc"><a href="{{url('login')}}">登录</a>后将显示您之前关注的商品</p>');
         } else {
             $.ajax({
                 type : "get",

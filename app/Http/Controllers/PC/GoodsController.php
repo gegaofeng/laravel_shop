@@ -63,8 +63,13 @@ class GoodsController extends Controller
      * Date:2018/11/11
      * @return string
      */
-    public function activity(){
-        return json_encode(array('status'=>1));
+    public function activity(Request $request){
+        $goods_id=$request['goods_id'];
+        $item_id=$request['item_id'];
+        $goods_num=$request['goods_num'];
+        $goods=$this->goodsRepository->getGoodsById($goods_id);
+        //商品活动逻辑省略待完善
+        return json_encode(array('status'=>1,'result'=>['goods'=>$goods]));
     }
     public function ajaxGetGoodsList(Request $request){
         $goods_cat_tree=$this->goodsCategoryRepository->getCatSonTree($request['id']);

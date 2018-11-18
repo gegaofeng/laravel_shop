@@ -1,16 +1,21 @@
-@section('personal_style')
-    <link rel="stylesheet" type="text/css" href="{{asset('css/pc/myaccount.css')}}">
-    <script src="{{asset('js/public/layer/layer.js')}}" type="text/javascript"></script>
-    @endsection
-@extends('pc.layouts.home')
-
-@section('body')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录-{$tpshop_config['shop_info_store_title']}</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/tpshop.css" />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/myaccount.css" />
+    <script src="__STATIC__/js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__PUBLIC__/static/js/layer/layer.js" type="text/javascript"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="{$tpshop_config.shop_info_store_ico|default='/public/static/images/logo/storeico_default.png'}" media="screen"/>
+</head>
 <body>
 <div class="loginsum_cm">
     <div class="w1224 p">
         <div class="login-dl">
             <a href="/index.php" title="首页">
-                <img src="/upload/logo/2018/04-09/814d7e9a0eddcf3754f2e8373a50a19c.png">
+                <img src="{$tpshop_config.shop_info_store_logo|default='/public/static/images/logo/pc_home_logo_default.png'}"/>
             </a>
         </div>
         <div class="login-welcome">
@@ -21,16 +26,18 @@
 <div class="loginsum_main" style="background: #bf1919;">
     <div class="w1224 p">
         <div class="advertisement">
-            <a href="javascript:void(0);">
-                <img src="/upload/ad/2018/04-13/4335611d9ab78af07e93ff2a31d2c895.jpg" title="" style="">
-            </a>
+            <adv pid="11" item="v" key="k">
+                <a href="{$v[ad_link]}">
+                    <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}"/>
+                </a>
+            </adv>
         </div>
         <div class="login_form">
             <div class="lo_intext">
                 <div class="layel1">
-                    <span>账户登录</span>
-                    <p style="font-size:12px;line-height:35px;">测试账号:13800138006密码:123456</p>
-                </div>
+                    <span>账户登录</span>   
+                     <p style="font-size:12px;line-height:35px;">测试账号:13800138006密码:123456</p>                 
+                </div>                
                 <form id="loginform" method="post">
                     <div class="layel2">
                         <div class="text_uspa">
@@ -45,21 +52,21 @@
                             <input type="text" class="text_cmu" value="" placeholder="验证码" name="verify_code" id="verify_code" autocomplete="off">
                         </div>
                         <div class="check_cum_img">
-                            <img src="/index.php?m=Home&amp;c=User&amp;a=verify" id="verify_code_img" onclick="verify()">
+                            <img src="/index.php?m=Home&c=User&a=verify" id="verify_code_img" onclick="verify()"/>
                         </div>
                         <div class="sum_reme_for p">
-                            <div class="autplog">
+                           <div class="autplog">
                                 <!--<label>-->
-                                <!--<input type="hidden" name="referurl" id="referurl" value="/index.php/Home/User/index.html">-->
-                                <!--<input type="checkbox" class="u-ckb J-auto-rmb"  name="autologin" value="1">自动登录-->
+                                    <!--<input type="hidden" name="referurl" id="referurl" value="{$referurl}">-->
+                                    <!--<input type="checkbox" class="u-ckb J-auto-rmb"  name="autologin" value="1">自动登录-->
                                 <!--</label>--><!--功能没实现-->
-                            </div>
+                           </div>
                             <div class="foget_pwt">
-                                <a href="/index.php/Home/User/forget_pwd.html">忘记密码？</a>
+                                <a href="{:U('Home/User/forget_pwd')}">忘记密码？</a>
                             </div>
                         </div>
                         <div class="login_bnt">
-                            <a href="javascript:void(0);" onclick="checkSubmit();" class="J-login-submit" name="sbtbutton">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+                            <a href="javascript:void(0);" onClick="checkSubmit();" class="J-login-submit" name="sbtbutton">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
                         </div>
                     </div>
                 </form>
@@ -67,30 +74,38 @@
                     <div class="contactsty">
                         <div class="tecant_c">
                             <ul>
-                                <li>
-                                    <a class="justclix" href="/index.php/home/LoginApi/login/oauth/alipay.html" title="支付宝">
-                                        <i class="judgp co_alipay"></i>
-                                        <span>支付宝</span>
-                                    </a>
-                                </li>
-                                <li class="spacer"></li>
-                                <li>
-                                    <a class="justclix" href="/index.php/home/LoginApi/login/oauth/qq.html" title="QQ">
-                                        <i class="judgp co_qq"></i>
-                                        <span>QQ</span>
-                                    </a>
-                                </li>
-                                <li class="spacer"></li>
-                                <li>
-                                    <a class="justclix" href="/index.php/home/LoginApi/login/oauth/weixin.html" title="weixin">
-                                        <i class="judgp co_wechat"></i>
-                                        <span>微信</span>
-                                    </a>
-                                </li>
+                                <tpshop sql="select * from __PREFIX__plugin where type='login' AND status = 1" item="v" key="k">
+                                    <if condition="$v['code'] eq 'weixin'">
+                                        <li class="spacer"></li>
+                                        <li>
+                                            <a class="justclix" href="{:U('LoginApi/login',array('oauth'=>'weixin'))}" title="weixin">
+                                                <i class="judgp co_wechat"></i>
+                                                <span>微信</span>
+                                            </a>
+                                        </li>
+                                    </if>
+                                    <if condition="$v['code'] eq 'qq'">
+                                        <li class="spacer"></li>
+                                        <li>
+                                            <a class="justclix" href="{:U('LoginApi/login',array('oauth'=>'qq'))}" title="QQ">
+                                                <i class="judgp co_qq"></i>
+                                                <span>QQ</span>
+                                            </a>
+                                        </li>
+                                    </if>
+                                    <if condition="$v['code'] eq 'alipay'">
+                                        <li>
+                                            <a class="justclix" href="{:U('LoginApi/login',array('oauth'=>'alipay'))}" title="支付宝">
+                                                <i class="judgp co_alipay"></i>
+                                                <span>支付宝</span>
+                                            </a>
+                                        </li>
+                                    </if>
+                                </tpshop>
                             </ul>
                         </div>
                         <div class="register_c">
-                            <a class="justclix" href="/index.php/Home/User/reg.html">
+                            <a class="justclix" href="{:U('Home/User/reg')}">
                                 <i class="judgp co_register"></i>
                                 <span>立即注册</span>
                             </a>
@@ -102,7 +117,7 @@
     </div>
 </div>
 <!--footer-s-->
-@include('pc.particals.footer')
+    <include file="public/footer" />
 <!--footer-e-->
 <script type="text/javascript">
     $(function(){
@@ -197,6 +212,5 @@
         }
     });
 </script>
-
 </body>
-    @endsection
+</html>

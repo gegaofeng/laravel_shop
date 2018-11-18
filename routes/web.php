@@ -19,7 +19,7 @@ Route::namespace('PC')->group(function ()
     Route::get('register', 'Auth\RegisterController@index');
     Route::get('goodslist/id/{id}', 'GoodsController@goodsList');
     Route::get('goodsinfo/{id}', 'GoodsController@goodsInfo');
-    Route::post('goods/activity', 'GoodsController@activity');
+    Route::any('goods/activity', 'GoodsController@activity');
 
 
 }

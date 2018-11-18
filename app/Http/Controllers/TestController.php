@@ -18,6 +18,7 @@ class TestController extends Controller
     protected $model;
     public function __construct() {
         $this->model=new GoodsRepository();
+        $this->goodsSpecPriceRepository=new GoodsSpecPriceRepository();
     }
 
     public function test(){
@@ -33,6 +34,9 @@ class TestController extends Controller
 //        return view('test')->with('data',$data);
 //        return $this->model->getGoodsById(96);
         $tools=new Tools();
-        return $tools::create_goods_thum_images(202,236,236);
+//        return $tools::create_goods_thum_images(202,236,236);
+        $goodsSpecPriceRepository=new GoodsSpecPriceRepository();
+         $spec_goods_price=$goodsSpecPriceRepository->getGoodsSpecPriceByGoodsId(1);
+        return view('test')->with('spec_goods_price',$spec_goods_price);
     }
 }

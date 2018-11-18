@@ -172,7 +172,7 @@
         </div>
     </div>
     <div class="u-g-cart fr" id="hd-my-cart">
-        <a href="/Home/Cart/index.html">
+        <a href="{{url('cart')}}">
             <div class="c-n fl">
                 <i class="share-shopcar-index"></i>
                 <span> 我的购物车</span>

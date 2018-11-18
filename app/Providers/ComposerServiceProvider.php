@@ -15,7 +15,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         //
         view()->composer(
-            'pc.particals.head','App\Http\ViewComposer\NavigationComposer'
+            'pc.public.head','App\Http\ViewComposer\NavigationComposer'
         );
     }
 

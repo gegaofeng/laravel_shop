@@ -59,7 +59,7 @@
 </div>
 <div class="page p">
     <div class='dataTables_paginate paging_simple_numbers'>
-        {{$goods_list->links('pc.particals.paginator')}}
+        {{$goods_list->links('pc.public.paginator')}}
     </div>
 </div>
 <script>

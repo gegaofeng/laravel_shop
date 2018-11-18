@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="__STATIC__/css/base.css" />
 <div class="top-hander" moduleid="1539923">
     <div class="w1224 clearfix">
       <div class="fl">
@@ -7,12 +6,12 @@
                   <!--<a  href="{:U('Home/user/logout')}" style="margin:0 10px;" title="退出" target="_self">退出</a></li>-->
               <!--</li>-->
               <!--<else/>-->
-              <!--<li class="fl J_login_status"><a class="menu-item fl J_do_login J_chgurl" href="{:U('Home/user/login')}">-->
+              <!--<li class="fl J_login_status"><a class="menu-item fl J_do_login J_chgurl" href="{{url('login')}}">-->
                   <!--<span>Hi，请登录</span> </a><a class="menu-item fl ht" href="{:U('Home/user/reg')}">免费注册</a>-->
           <!--</if>-->
           <div class="ls-dlzc fl nologin">
-              <a href="{:U('Home/user/login')}">Hi,请登录</a>
-              <a class="red" href="{:U('Home/user/reg')}">免费注册</a>
+              <a href="{{url('login')}}">Hi,请登录</a>
+              <a class="red" href="{{url('register')}}">免费注册</a>
           </div>
           <div class="ls-dlzc fl islogin">
               <a class="red userinfo" href="{:U('Home/user/index')}"></a>
