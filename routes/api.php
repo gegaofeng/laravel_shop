@@ -28,5 +28,6 @@ Route::group(['namespace'=>'Common'],function(){
     //goodscat
     Route::get('getsoncategory','GoodsCategoryController@ajaxGetSonCategory');
     Route::get('getcatbrandlist','GoodsBrandController@ajaxGetCatBrandList');
+    Route::any('changetableval','CommonController@changeTabVal');
 });
 

@@ -95,7 +95,8 @@ $(function(){
 			"delPath":"{:U('Uploadify/delupload')}",
 			"chunked":false,
 			"chunkSize":1024000,
-			"fileNumLimit":{$info.num|default=1},
+			"fileNumLimit":1,
+//                            "fileNumLimit":{$info.num|default=1},
 			"fileSizeLimit":2097152000,
 			"fileSingleSizeLimit":20971520,
 			"fileVal":"file",
@@ -116,7 +117,8 @@ $(function(){
 	$(".statusBar .saveBtn").click(function(){
 		var callback = "{$info.func}";
 		var elementid = "{$info.input}";
-		var num = {$info.num|default=1};
+		var num = 1;
+//                    "fileNumLimit":{$info.num|default=1},
 		var fileurl_tmp = [];
 		if(callback != "undefined"){	
 			if(num > 1){	

@@ -39,8 +39,11 @@ class TestController extends Controller
 //        return $goods_cat-> getCatSonTree(14);
 //        return 1;
         $brand=new \App\Repositories\BrandRepository();
-        return $brand-> getSortBrands(33);
+//        return $brand-> getSortBrands(33);
         $cat=new GoodsCategoryRepository();
 //        return $cat-> getCatSonTree(13);
+     
+        $a=new GoodsRepository();
+        return $a-> getGoodsList();
     }
 }

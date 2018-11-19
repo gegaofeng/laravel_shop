@@ -14,4 +14,7 @@ class Goods extends Model
     public function brand(){
         return $this->hasOne(Brand::class,'id','brand_id');
     }
+    public function category(){
+        return $this -> hasOne(GoodsCategory::class,'id','cat_id');
+    }
 }

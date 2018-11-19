@@ -202,5 +202,5 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/uploadify'),function(){
 
 Route::get('test','TestController@Test');
 Route::get('tt',function (){
-    return view('pc.particals.head');
+    return view('test');
 });

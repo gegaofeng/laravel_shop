@@ -63,8 +63,17 @@ class GoodsController extends Controller {
         return view('admin.goods.addNewGoods');
     }
 
-    public function ajaxGoodsList() {
-        $goods_list = $this -> goodsRepository -> getGoodsList();
+    public function ajaxGoodsList(Request $request) {
+        $filter=[];
+        if(!is_null($request['brand_id']))$filter['brand_id']=$request['brand_id'];
+        if(!is_null($request['cat_id']))$filter['cat_id']=$request['cat_id'];
+        if(!is_null($request['is_on_sale']))$filter['is_on_sale']=$request['is_on_sale'];
+        if($request['intro']!='0') $filter[$request['intro']]='1';
+        $orderby=$request['orderby1'];
+        $order=$request['orderby2'];
+        $key_word=$request['key_word'];
+//        return $filter;
+        $goods_list = $this -> goodsRepository -> getGoodsList($filter,$orderby,$order,$key_word);
         return view('admin.goods.ajaxGoodsList') -> with('goods_list', $goods_list);
     }
 
