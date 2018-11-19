@@ -40,4 +40,7 @@ class GoodsSpecPriceRepository extends BaseRepository{
     public function getGoodsSpecPriceByGoodsId($goods_id,$order='store_count'){
         return $this->GoodsSpecPrice->where('goods_id',$goods_id)->orderBy($order)->get(array('key','item_id','price','store_count','market_price'))->keyBy('key');
     }
+    public function getGoodsSpecPriceByItemId($item_id){
+        return $this->GoodsSpecPrice->where('item_id',$item_id)->first();
+    }
 }
