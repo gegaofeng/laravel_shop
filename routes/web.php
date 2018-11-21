@@ -188,6 +188,7 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/goods',),function(){
     Route::get('goodsattributelist','GoodsController@goodsAttributeList');
     Route::get('brandlist','GoodsController@brandList');
     Route::get('addeditgoods/{id?}','GoodsController@addEditGoods');
+    Route::get('ajaxgetspecselect','GoodsController@ajaxgetspecselect');
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/plugin',),function(){
     Route::get('index','PluginController@index');

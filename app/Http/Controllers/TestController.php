@@ -38,12 +38,16 @@ class TestController extends Controller
 //        return view('test')->with('test',$goods_cat-> getSortGoodsCategory());
 //        return $goods_cat-> getCatSonTree(14);
 //        return 1;
-        $brand=new \App\Repositories\BrandRepository();
+//        $brand=new \App\Repositories\BrandRepository();
 //        return $brand-> getSortBrands(33);
-        $cat=new GoodsCategoryRepository();
+//        $cat=new GoodsCategoryRepository();
 //        return $cat-> getCatSonTree(13);
      
         $a=new GoodsRepository();
-        return $a-> getGoodsList();
+//        return view('test')->with('a',$a-> getGoodsById(1));
+//        var_dump($a-> getGoodsById(1));
+        $a=new \App\Repositories\GoodsSpecRepository();
+        var_dump($a-> getSpecListByTypeId(1));
+//         return $a-> getSpecListByTypeId(1);
     }
 }

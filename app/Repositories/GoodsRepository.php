@@ -22,7 +22,7 @@ class GoodsRepository extends BaseRepository{
         return $goods_list;
     }
     public function getGoodsById($goods_id){
-        $find=$this->goods->with('brand')->where('goods_id',$goods_id)->first();
+        $find=$this->goods->with('brand')->with('goodsImages')->where('goods_id',$goods_id)->first();
         return $find;
     }
     public function getGoodsCatById($goods_id){

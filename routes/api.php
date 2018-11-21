@@ -21,7 +21,7 @@ Route::group(['namespace'=>'admin'],function(){
     //goods
     Route::group(['prefix'=>'admin/goods'],function(){
         Route::any('ajaxgoodslist','GoodsController@ajaxGoodsList');
-        
+
     });
 });
 Route::group(['namespace'=>'Common'],function(){

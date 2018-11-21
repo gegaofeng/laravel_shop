@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Repositories\GoodsRepository;
 use App\Repositories\GoodsCategoryRepository;
 use App\Repositories\BrandRepository;
+use App\Repositories\GoodsTypeRepository;
+use App\Repositories\GoodsSpecRepository;
+use App\Repositories\GoodsSpecItemRepository;
+use App\Repositories\GoodsSpecImageRepository;
 
 class GoodsController extends Controller {
 
@@ -51,14 +55,15 @@ class GoodsController extends Controller {
     }
 
     public function addEditGoods($id=0) {
-        
+        $goods_type=new GoodsTypeRepository();
         $cat_list= $this ->goodsCategoryRepository-> getCatListByParentId(0);
+        $goods_type_list=$goods_type-> getGoodsTypeList();
         if($id){
             $goods= $this ->goodsRepository-> getGoodsById($id);
             $parent_cat= $this ->goodsCategoryRepository-> getParentCatById($goods['cat_id']);
 //            return $parent_cat;
             $level_cat=$parent_cat;
-            return view('admin.goods.addEditGoods')->with('goods',$goods)-> with('cat_list',$cat_list)->with('level_cat',$level_cat);
+            return view('admin.goods.addEditGoods')->with('goods',$goods)-> with('cat_list',$cat_list)->with('level_cat',$level_cat)-> with('goods_types',$goods_type_list);
         }       
         return view('admin.goods.addNewGoods');
     }
@@ -76,5 +81,16 @@ class GoodsController extends Controller {
         $goods_list = $this -> goodsRepository -> getGoodsList($filter,$orderby,$order,$key_word);
         return view('admin.goods.ajaxGoodsList') -> with('goods_list', $goods_list);
     }
-
+    public function ajaxGetSpecSelect(Request $request){
+        $goods_id=$request['goods_id']?$request['goods_id']:0;
+        $goods_spec_type=$request['spec_type'];
+        $goods_spec_repo=new GoodsSpecRepository();
+        $goods_spec_image=new GoodsSpecImageRepository();
+        $spec_list=$goods_spec_repo-> getSpecListByTypeId($goods_spec_type);
+        if($goods_id){
+            $goods_spec_image_list=$goods_spec_image-> getSpecImgListByGoodsId($goods_id);
+        }
+        $items_ids=[];
+        return view('admin.goods.ajaxSpecSelect')->with('spec_list', $spec_list)->with('spec_image_list',$goods_spec_image_list)-> with('items_ids',$items_ids);
+    }
 }

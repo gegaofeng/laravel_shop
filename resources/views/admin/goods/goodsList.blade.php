@@ -77,7 +77,7 @@
 
             <!--排序规则-->
             <input type="hidden" name="orderby1" value="goods_id" />
-            <input type="hidden" name="orderby2" value="desc" />
+            <input type="hidden" name="orderby2" value="asc" />
           <input type="text" size="30" name="key_word" class="qsbox" placeholder="搜索词...">
           <input type="button" onClick="ajax_get_table('search-form2',1)" class="btn" value="搜索">
         </div>

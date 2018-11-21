@@ -33,7 +33,7 @@
                 <div style="text-align: center; width: 100px;">{{$goods['goods_sn']}}</div>
             </td>
             <td align="center" axis="col0">
-                <div style="text-align: center; width: 100px;">{{json_decode(goods['category'])}}</div>
+                <div style="text-align: center; width: 100px;">{{$goods['category']['name']}}</div>
             </td>
             <td align="center" axis="col0">
                 <div style="text-align: center; width: 50px;">{{$goods['shop_price']}}</div>
