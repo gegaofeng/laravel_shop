@@ -19,9 +19,10 @@ class CartController extends Controller
         $this->cartRepository = new CartRepository();
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('pc.cart.index');
+        $cart_list=$this->cartRepository->getCartList($this->getUserId());
+        return view('pc.cart.index')->with('cart_list',$cart_list);
     }
 
     /**

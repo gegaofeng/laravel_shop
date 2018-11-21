@@ -186,8 +186,8 @@
 			<!---->
 			<!--</span>-->
 			<!--</div>-->
-			<volist name="cartList" id="cart">
-				<if condition="$cart['combination_cart']">
+			@foreach($cart_list as $cart)
+				@if($cart['combination_cart'])
 					<!--搭配套餐标题 s-->
 					<div class="meal-conts-name p edge_{$cart.id}" style="border-bottom: 1px solid #d5d5d5;">
 						<div class="fl">
@@ -204,11 +204,11 @@
 						<!---->
 						<!--</span>-->
 					</div>
-				</if>
+				@endif
 				<div class="shoplist_detail_a edge_{$cart.id}" style="border-top:1px" >
 				{{--<if condition='$key==0'> 1px solid #d5d5d5<else />none</if>--}}
 
-					<if condition="$cart['combination_cart']">
+					@if($cart['combination_cart'])
 						<!--搭配套餐 s-->
 						<div class="w1224">
 							<!--输出主商品-模块-->
@@ -360,7 +360,7 @@
 							<!--搭配套餐 遍历副商品-结束-->
 						</div>
 
-						<else />
+						@else
 						<!--普通商品-->
 						<div  id="edge_{$cart.id}" class="meal-conts-items">
 							<notempty name="$cart['prom_goods']">
@@ -373,13 +373,17 @@
 							<div class="item-single p">
 								<div class="breadth_phase">
 									<div class="column ">
-										<input class="check-box" name="checkItem" value="{$cart.id}" type="checkbox" <if condition='$cart[selected] eq 1'>checked="checked"</if> style="display: none;">
-										<i data-goods-id="{$cart.goods_id}" data-goods-cat-id3="{$cart['goods']['cat_id']}" data-cart-id="{$cart.id}" data-type="{$cart['prom_type']}" class="checkall checkItem <if condition='$cart[selected] eq 1'>checkall-true</if>"></i>
+										<input class="check-box" name="checkItem" value="{$cart.id}" type="checkbox"
+										@if($cart['selected']== 1)
+											checked="checked"
+										@endif
+										style="display: none;">
+										<i data-goods-id="{{$cart['goods_id']}}" data-goods-cat-id3="{$cart['goods']['cat_id']}" data-cart-id="{{$cart['id']}}" data-type="{$cart['prom_type']}" class="checkall checkItem <if condition='$cart[selected] eq 1'>checkall-true</if>"></i>
 										<img class="msp_picture" src="{$cart.goods_id|goods_thum_images=82,82}"/>
 									</div>
 									<div class="column t-goods">
 										<p class="msp_spname">
-											<a href="{:U('Home/Goods/goodsInfo',array('id'=>$cart[goods_id]))}">{$cart.goods_name}</a>
+											<a href="{{url('/goodsinfo/'.$cart['goods_id'])}}">{{$cart['goods_name']}}</a>
 											<!--团购--><if condition="$cart[prom_type] eq 2"><img  width="80" height="60" src="/public/images/groupby2.jpg" style="vertical-align:middle"></if>
 											<!--抢购--><if condition="$cart[prom_type] eq 1"><img  width="40" height="40" src="/public/images/qianggou2.jpg" style="vertical-align:middle"></if>
 										</p>
@@ -393,14 +397,14 @@
 									</div>
 								</div>
 								<div class="column t-props he87 stang">
-									<volist name="$cart[spec_key_name_arr]" id="spec_key_name">
-										<p>{$spec_key_name}</p>
-									</volist>
+									{{--@foreach($cart['spec_key_name_arr'] as  $spec_key_name)--}}
+										{{--<p>{{$spec_key_name}}</p>--}}
+									{{--@endforeach--}}
 								</div>
 								<div class="column t-price">
-									<span id="cart_{$cart.id}_goods_price">￥{$cart.goods_price}</span>
+									<span id="cart_{$cart.id}_goods_price">￥{{$cart['goods_price']}}</span>
 									<if condition="$cart.prom_type gt 0">
-										<p class="red">活动价：<span>￥{$cart.member_goods_price}</span></p>
+										<p class="red">活动价：<span>￥{{$cart['member_goods_price']}}</span></p>
 									</if>
 									<notempty name="$cart['prom_goods']">
 										<div class="promptions_in">
@@ -414,34 +418,34 @@
 									</notempty>
 								</div>
 								<div class="column t-quantity mtp quantity-form">
-									<a href="javascript:void(0);" class="decrement" id="decrement_{$cart['id']}">-</a>
-									<input name="changeQuantity_{$cart['id']}" type="text" id="changeQuantity_{$cart['id']}" value="{$cart['goods_num']}">
-									<a href="javascript:void(0);" class="increment" id="increment_{$cart['id']}">+</a>
+									<a href="javascript:void(0);" class="decrement" id="decrement_{{$cart['id']}}">-</a>
+									<input name="changeQuantity_{$cart['id']}" type="text" id="changeQuantity_{{$cart['id']}}" value="{{$cart['goods_num']}}">
+									<a href="javascript:void(0);" class="increment" id="increment_{{$cart['id']}}">+</a>
 									<!--无货时隐藏数量选择，显示无货-->
 									<!--<span>无货</span>-->
 								</div>
 								<div class="column t-sum sumpri">
-									<span id="cart_{$cart.id}_total_price">￥{$cart['goods_price']*$cart['goods_num']}</span>
+									<span id="cart_{{$cart['id']}}_total_price">￥{{$cart['goods_price']*$cart['goods_num']}}</span>
 									<if condition="$cart.prom_type gt 0">
-										<p class="red"><span id="cart_{$cart.id}_market_price">
+										<p class="red"><span id="cart_{{$cart['id']}}_market_price">
                                                         ￥{:round($cart.member_goods_price*$cart['goods_num'],2)}
                                                     </span></p>
 									</if>
 								</div>
 								<div class="column t-action">
 									<p>
-										<a href="javascript:void(0);" class="deleteGoods deleteItem" data-goodsid="{$cart.goods_id}" data-cart-id="{$cart.id}">
+										<a href="javascript:void(0);" class="deleteGoods deleteItem" data-goodsid="{{$cart['goods_id']}}" data-cart-id="{$cart.id}">
 											删除</a>
 									</p>
-									<p><a class="moveCollect collectItem" data-id="{$cart.goods_id}">移到我的收藏</a></p>
+									<p><a class="moveCollect collectItem" data-id="{{$cart['goods_id']}}">移到我的收藏</a></p>
 								</div>
 							</div>
 						</div>
 						<!--普通商品 遍历-结束-->
-					</if>
+					@endif
 
 				</div>
-			</volist>
+			@endforeach
 
 		</div>
 	</div>

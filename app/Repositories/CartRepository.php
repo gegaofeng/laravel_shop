@@ -11,6 +11,7 @@ namespace App\Repositories;
 
 use App\Exceptions\CartException;
 use App\Model\Cart;
+use http\Env\Request;
 
 class CartRepository extends BaseRepository
 {
@@ -27,6 +28,10 @@ class CartRepository extends BaseRepository
     public function __construct()
     {
         $this->cart = new Cart();
+    }
+    public function getCartList($user_id){
+        $cart_list=$this->cart->where('user_id',$user_id)->get();
+        return $cart_list;
     }
 
     /**

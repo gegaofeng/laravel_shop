@@ -40,6 +40,7 @@ class TestController extends Controller
          $spec_goods_price=$goodsSpecPriceRepository->getGoodsSpecPriceByGoodsId(1);
 //        return view('test')->with('spec_goods_price',$spec_goods_price);
         $a=new CartRepository();
-        return $a->setGoodsRepository(1211);
+//        return $a->setGoodsRepository(1211);
+        return $a->getCartList('0');
     }
 }
