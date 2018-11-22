@@ -7,7 +7,7 @@
             <td>{{$vo['name']}}:</td>
             <td>                            
                 @foreach($vo['goodsSpecItem'] as $k2=>$vo2)      
-            <button type="button" data-spec_id='{{$vo['id']}}' data-item_id='{{$k2}}' class="btn 
+            <button type="button" data-spec_id='{{$vo['id']}}' data-item_id='{{$vo2['id']}}' class="btn 
         <?php
             if (in_array($k2, $items_ids))
                 echo 'btn-success';
@@ -17,8 +17,10 @@
         " >
                 {{$vo2['item']}}
             </button>
-            <img width="35" height="35" src="{{$spec_image_list[$k2]}}" id="item_img_{$k2}" onclick="GetUploadify3('{$k2}');"/>
-            <input type="hidden" name="item_img[{{$k2}}]" value="{{$spec_image_list[$k2]}}" />
+                @if(isset($spec_image_list[$vo2['id']]))
+            <img width="35" height="35" src="{{$spec_image_list[$vo2['id']]}}" id="item_img_{$k2}" onclick="GetUploadify3('{$k2}');"/>
+            @endif
+            <input type="hidden" name="item_img[{{$k2}}]" value="{{$spec_image_list}}" />
             &nbsp;&nbsp;&nbsp;            
         @endforeach 
         </td>

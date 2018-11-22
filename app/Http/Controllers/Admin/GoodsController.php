@@ -88,8 +88,9 @@ class GoodsController extends Controller {
         $goods_spec_image=new GoodsSpecImageRepository();
         $spec_list=$goods_spec_repo-> getSpecListByTypeId($goods_spec_type);
         if($goods_id){
-            $goods_spec_image_list=$goods_spec_image-> getSpecImgListByGoodsId($goods_id);
+            $goods_spec_image_list=$goods_spec_image-> getSpecImgListByGoodsId($goods_id)->keyBy('spec_image_id');
         }
+//        return $goods_spec_image_list;
         $items_ids=[];
         return view('admin.goods.ajaxSpecSelect')->with('spec_list', $spec_list)->with('spec_image_list',$goods_spec_image_list)-> with('items_ids',$items_ids);
     }
