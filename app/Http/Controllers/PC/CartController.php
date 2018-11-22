@@ -22,7 +22,14 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $cart_list=$this->cartRepository->getCartList($this->getUserId());
-        return view('pc.cart.index')->with('cart_list',$cart_list);
+        $total_goods_num=0;
+        if ($cart_list->isEmpty()){
+            $total_goods_num=0;
+        }else{
+            foreach ($cart_list as $goods)
+                $total_goods_num+=$goods['goods_num'];
+        }
+        return view('pc.cart.index')->with('cart_list',$cart_list)->with('total_goods_num',$total_goods_num);
     }
 
     /**

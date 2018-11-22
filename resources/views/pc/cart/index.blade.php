@@ -129,7 +129,8 @@
 	</div>
 </div>
 <!--header-e-->
-<div class="shopcar_empty" <notempty name="cartList">style="display: none"</notempty>>
+@if($cart_list->isEmpty())
+<div class="shopcar_empty">
 <div class="w1224">
 	<div class="cart-empty">
 		<div class="message">
@@ -149,12 +150,12 @@
 	</div>
 </div>
 </div>
+@else
 <!-- 购物车列表 -->
-<notempty name="cartList">
 	<div id="tpshop-cart">
 		<div class="li3_address w1224 p">
 			<ul>
-				<li class="current"><a>全部商品数<em>（{$userCartGoodsTypeNum}）</em></a></li>
+				<li class="current"><a>全部商品数<em>（{{$total_goods_num}}）</em></a></li>
 			</ul>
 		</div>
 		<div class="shoplist_deta p">
@@ -363,29 +364,39 @@
 						@else
 						<!--普通商品-->
 						<div  id="edge_{$cart.id}" class="meal-conts-items">
-							<notempty name="$cart['prom_goods']">
+							@if($cart['prom_goods'])
 								<div class="brim_top">
 									<!--满减和换购两种-->
 									<span class="act_mjhg">促销</span>
-									<a class="condi">{$cart['prom_goods']['title']}</a>
+									<a class="condi">{{$cart['prom_goods']['title']}}</a>
 								</div>
-							</notempty>
+							@endif
 							<div class="item-single p">
 								<div class="breadth_phase">
 									<div class="column ">
-										<input class="check-box" name="checkItem" value="{$cart.id}" type="checkbox"
+										<input class="check-box" name="checkItem" value="{{$cart['id']}}" type="checkbox"
 										@if($cart['selected']== 1)
 											checked="checked"
 										@endif
 										style="display: none;">
-										<i data-goods-id="{{$cart['goods_id']}}" data-goods-cat-id3="{$cart['goods']['cat_id']}" data-cart-id="{{$cart['id']}}" data-type="{$cart['prom_type']}" class="checkall checkItem <if condition='$cart[selected] eq 1'>checkall-true</if>"></i>
-										<img class="msp_picture" src="{$cart.goods_id|goods_thum_images=82,82}"/>
+										<i data-goods-id="{{$cart['goods_id']}}" data-goods-cat-id3="{$cart['goods']['cat_id']}" data-cart-id="{{$cart['id']}}" data-type="{{$cart['prom_type']}}" class="checkall checkItem
+										@if($cart['selected']==1)
+												checkall-true
+												@endif
+												"></i>
+										<img class="msp_picture" src="{{goods_thum_images($cart['goods_id'],82,82)}}"/>
 									</div>
 									<div class="column t-goods">
 										<p class="msp_spname">
 											<a href="{{url('/goodsinfo/'.$cart['goods_id'])}}">{{$cart['goods_name']}}</a>
-											<!--团购--><if condition="$cart[prom_type] eq 2"><img  width="80" height="60" src="/public/images/groupby2.jpg" style="vertical-align:middle"></if>
-											<!--抢购--><if condition="$cart[prom_type] eq 1"><img  width="40" height="40" src="/public/images/qianggou2.jpg" style="vertical-align:middle"></if>
+											<!--团购-->
+											@if($cart['prom_type']==2)
+												<img  width="80" height="60" src="{{url('/images/groupby2.jpg')}}" style="vertical-align:middle">
+											@endif
+											<!--抢购-->
+											@if($cart['prom_type']==1)
+												<img  width="40" height="40" src="{{url('/images/qianggou2.jpg')}}" style="vertical-align:middle">
+											@endif
 										</p>
 										<div class="msp_return">
 											<!--<if condition="$store['qitian']">
@@ -397,25 +408,27 @@
 									</div>
 								</div>
 								<div class="column t-props he87 stang">
-									{{--@foreach($cart['spec_key_name_arr'] as  $spec_key_name)--}}
-										{{--<p>{{$spec_key_name}}</p>--}}
-									{{--@endforeach--}}
+									{{--商品规格显示待完善--}}
+									@foreach(explode(' ',$cart['spec_key_name']) as  $spec_key_name)
+										{{--<p>{{$cart['spec_key_name']}}</p>--}}
+										<p>{{$spec_key_name}}</p>
+									@endforeach
 								</div>
 								<div class="column t-price">
 									<span id="cart_{$cart.id}_goods_price">￥{{$cart['goods_price']}}</span>
-									<if condition="$cart.prom_type gt 0">
+									@if($cart['prom_type'] > 0)
 										<p class="red">活动价：<span>￥{{$cart['member_goods_price']}}</span></p>
-									</if>
-									<notempty name="$cart['prom_goods']">
+									@endif
+									@if($cart['prom_goods'])
 										<div class="promptions_in">
 											<span class="cx"><em>促销详情</em><i></i></span>
 											<div class="promotion-cont">
 												<ul>
-													<li>{$cart['prom_goods']['prom_detail']}</li>
+													<li>{{$cart['prom_goods']['prom_detail']}}</li>
 												</ul>
 											</div>
 										</div>
-									</notempty>
+									@endif
 								</div>
 								<div class="column t-quantity mtp quantity-form">
 									<a href="javascript:void(0);" class="decrement" id="decrement_{{$cart['id']}}">-</a>
@@ -426,11 +439,13 @@
 								</div>
 								<div class="column t-sum sumpri">
 									<span id="cart_{{$cart['id']}}_total_price">￥{{$cart['goods_price']*$cart['goods_num']}}</span>
-									<if condition="$cart.prom_type gt 0">
-										<p class="red"><span id="cart_{{$cart['id']}}_market_price">
-                                                        ￥{:round($cart.member_goods_price*$cart['goods_num'],2)}
-                                                    </span></p>
-									</if>
+									@if($cart['prom_type']>0)
+										<p class="red">
+											<span id="cart_{{$cart['id']}}_market_price">
+												￥{{round($cart['member_goods_price']*$cart['goods_num'],2)}}
+											</span>
+										</p>
+									@endif
 								</div>
 								<div class="column t-action">
 									<p>
@@ -523,7 +538,7 @@
         });
 	</script>
 	</div>
-</notempty>
+@endif
 <!--底部猜你喜欢-->
 <div class="shoplist_guess">
 	<div class="w1224">
@@ -1207,7 +1222,7 @@
     {
         var uname = getCookie('uname');
         if (uname == '') {
-            $('#history-products .s-panel-main').html('<p class="wefoc"><a href="{:U('User/login')}">登录</a>后将显示您之前浏览的商品</p>');
+            $('#history-products .s-panel-main').html('<p class="wefoc"><a href="{{url("login")}})}">登录</a>后将显示您之前浏览的商品</p>');
         } else {
             $.ajax({
                 type : "get",
