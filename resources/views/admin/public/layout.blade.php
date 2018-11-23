@@ -29,6 +29,7 @@
 <script src="{{asset('js/myFormValidate.js')}}"></script>
 <script src="{{asset('js/myAjax2.js')}}"></script>
 <script src="{{asset('js/global.js')}}"></script>
+<meta name='_token' content="{{csrf_token()}}">
     <script type="text/javascript">
     function delfunc(obj){
     	layer.confirm('确认删除？', {

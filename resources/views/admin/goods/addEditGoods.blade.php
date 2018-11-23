@@ -570,26 +570,35 @@
                 </dt>
                 <dd class="opt">
                     <div class="alisth0" id="alisth_0">
-                        单次购买个数达到
+                        <span>单次购买个数达到</span>
                         <input type="text" class="input-number addprine" name="ladder_amount[]" 
-                               <if condition="$goods['price_ladder']">value="{$goods['price_ladder'][0]['amount']}"</if> 
+                               @if($goods['price_ladder'])
+                               value="{$goods['price_ladder'][0]['amount']}"
+                               @endif 
                         onpaste="this.value=this.value.replace(/[^\d.]/g,'')" 
                         onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" 
                         style="width: 100px;" >&nbsp;
-                        价格
+                        <span>价格</span>
                         <input type="text" class="input-number addprine" name="ladder_price[]"  
-                               <if condition="$goods['price_ladder']">value="{$goods['price_ladder'][0]['price']}"</if> 
+                               @if($goods['price_ladder'])
+                               value="{$goods['price_ladder'][0]['price']}"
+                               @endif 
                         onpaste="this.value=this.value.replace(/[^\d.]/g,'')" 
                         onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" style="width: 100px;" >
                         <a class="p_plus" href="javascript:;">
                             <strong>[+]</strong>
                         </a>
                     </div>
+                    <div>{{var_dump($goods['price_ladder'])}}</div>
                 <volist name="goods['price_ladder']" id="vo" offset="1">
                     <div class="alisth">
-                        单次购买个数达到<input type="text" class="input-number addprine" name="ladder_amount[]" value="{$vo['amount']}" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value = this.value.replace(/[^\d.]/g, '')" style="width: 100px;" >&nbsp;
-                        价格<input type="text" class="input-number addprine" name="ladder_price[]" value="{$vo['price']}" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value = this.value.replace(/[^\d.]/g, '')" style="width: 100px;" >
-                        <a class="p_plus" onclick='$(this).parent().remove();'><strong>[-]</strong></a>
+                        <span>单次购买个数达到</span>
+                        <input type="text" class="input-number addprine" name="ladder_amount[]" value="{$vo['amount']}" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value = this.value.replace(/[^\d.]/g, '')" style="width: 100px;" >&nbsp;
+                        <span>价格</span>
+                        <input type="text" class="input-number addprine" name="ladder_price[]" value="{$vo['price']}" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value = this.value.replace(/[^\d.]/g, '')" style="width: 100px;" >
+                        <a class="p_plus" onclick='$(this).parent().remove();'>
+                            <strong>[-]</strong>
+                        </a>
                     </div>
                 </volist>
                 <span class="err" id="err_ladder_amount"></span>

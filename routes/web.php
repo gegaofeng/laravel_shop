@@ -43,7 +43,7 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/system',),function(){
     Route::get('index','SystemController@index');
     Route::get('navigationlist','SystemController@navigationlist');
     Route::get('cleancache','SystemController@cleancache');
-                    Route::get('rightlist','systemController@rightList');
+    Route::get('rightlist','systemController@rightList');
 });
 
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/smstemplate',),function(){
@@ -59,9 +59,9 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/block',),function(){
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/article',),function(){
     Route::get('/','ArticleController@index');
     Route::get('linklist','ArticleController@linkList');
-        Route::get('articlelist','ArticleController@articleList');
+    Route::get('articlelist','ArticleController@articleList');
     Route::get('categorylist','ArticleController@categoryList');
-        Route::get('agreement','ArticleController@agreement');
+    Route::get('agreement','ArticleController@agreement');
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/tools',),function(){
     Route::get('/','ToolsController@index');
@@ -144,7 +144,7 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/promotion',),function()
     Route::get('flash_sale','PromotionController@flashSale');
     Route::get('group_buy_list','PromotionController@groupBuyList');
     Route::get('prom_goods_list','PromotionController@promGoodsList');
-        Route::get('prom_order_list','PromotionController@promOrderList');
+    Route::get('prom_order_list','PromotionController@promOrderList');
     Route::get('pre_sell_list','PromotionController@preSellList');
 
 });
@@ -189,6 +189,7 @@ Route::group(array('namespace'=>'Admin','prefix'=>'admin/goods',),function(){
     Route::get('brandlist','GoodsController@brandList');
     Route::get('addeditgoods/{id?}','GoodsController@addEditGoods');
     Route::get('ajaxgetspecselect','GoodsController@ajaxgetspecselect');
+    Route::any('ajaxgetspecinput','GoodsController@ajaxGetSpecInput');
 });
 Route::group(array('namespace'=>'Admin','prefix'=>'admin/plugin',),function(){
     Route::get('index','PluginController@index');

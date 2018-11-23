@@ -47,7 +47,9 @@ class TestController extends Controller
 //        return view('test')->with('a',$a-> getGoodsById(1));
 //        var_dump($a-> getGoodsById(1));
         $a=new \App\Repositories\GoodsSpecRepository();
-        var_dump($a-> getSpecListByTypeId(1));
+//        var_dump($a-> getSpecListByTypeId(1));
 //         return $a-> getSpecListByTypeId(1);
+        $a=new GoodsSpecPriceRepository();
+        return $a-> getGoodsSpecItemIdByGoodsId(104);
     }
 }

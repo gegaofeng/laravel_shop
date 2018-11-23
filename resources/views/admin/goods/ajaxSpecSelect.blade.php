@@ -8,19 +8,20 @@
             <td>                            
                 @foreach($vo['goodsSpecItem'] as $k2=>$vo2)      
             <button type="button" data-spec_id='{{$vo['id']}}' data-item_id='{{$vo2['id']}}' class="btn 
-        <?php
-            if (in_array($k2, $items_ids))
-                echo 'btn-success';
-            else
-                echo 'btn-default';
-         ?>
-        " >
-                {{$vo2['item']}}
+        @if(in_array($vo2['id'], $items_ids))
+            btn-success
+        @else
+            btn-default
+        @endif
+        " >{{$vo2['item']}}
             </button>
-                @if(isset($spec_image_list[$vo2['id']]))
-            <img width="35" height="35" src="{{$spec_image_list[$vo2['id']]}}" id="item_img_{$k2}" onclick="GetUploadify3('{$k2}');"/>
+            @if(isset($spec_image_list[$vo2['id']])&&!empty($spec_image_list[$vo2['id']]['src']))
+            <img width="35" height="35" src="{{$spec_image_list[$vo2['id']]['src']}}" id="item_img_{{$vo2['id']}}" onclick="GetUploadify3('{{$vo2['id']}}');" if=""/>
+            <input type="hidden" name="item_img[{{$vo2['id']}}]" value="{{$spec_image_list[$vo2['id']]['src']}}" />
+            @else
+            <img width="35" height="35" src="{{url('/images/add-button.jpg')}}" id="item_img_{{$vo2['id']}}" onclick="GetUploadify3('{{$vo2['id']}}');" else=""/>
+            <input type="hidden" name="item_img[{{$vo2['id']}}]" value="{{url('/images/add-button.jpg')}}" />
             @endif
-            <input type="hidden" name="item_img[{{$k2}}]" value="{{$spec_image_list}}" />
             &nbsp;&nbsp;&nbsp;            
         @endforeach 
         </td>
@@ -55,6 +56,7 @@
             $(this).removeClass('btn-default');
             $(this).addClass('btn-success');
         }
+        console.log('spec button click')
         ajaxGetSpecInput();
     });
 
@@ -74,7 +76,7 @@
                 var spec_id = $(this).data('spec_id');
                 var item_id = $(this).data('item_id');
                 if (!spec_arr.hasOwnProperty(spec_id))
-                    spec_arr[spec_id] = [];
+                spec_arr[spec_id] = [];
                 spec_arr[spec_id].push(item_id);
                 //console.log(spec_arr);
             }
@@ -104,9 +106,10 @@
 
         var goods_id = $("input[name='goods_id']").val();
         $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
             type: 'POST',
             data: {spec_arr: spec_arr, goods_id: goods_id},
-            url: "/index.php/admin/Goods/ajaxGetSpecInput",
+            url: "/admin/goods/ajaxgetspecinput",
             success: function (data) {
                 $("#goods_spec_table2").html('').append(data);
                 hbdyg();  // 合并单元格
