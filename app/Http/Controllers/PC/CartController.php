@@ -52,6 +52,9 @@ class CartController extends Controller
             return $error;
         }
     }
+    public function asyncUpdateCart(Request $request){
+        return json_encode(['status'=>1]);
+    }
 
     public function openAddCart()
     {

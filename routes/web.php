@@ -31,6 +31,7 @@ Route::group(['namespace' => 'PC', 'prefix' => 'cart'], function ()
     Route::any('ajaxaddcart', 'CartController@ajaxAddCart');
     Route::get('openaddcart', 'CartController@openAddCart');
     Route::get('ajaxgetcartlist', 'CartController@ajaxGetCartList');
+    Route::post('asyncupdatecart','CartController@asyncUpdateCart');
 }
 );
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function ()

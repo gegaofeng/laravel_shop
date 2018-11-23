@@ -1,11 +1,11 @@
 @extends('pc.layouts.home')
 @section('personal_style')
 	<title>我的购物车列表</title>
-	<link rel="stylesheet" type="text/css" href="{{url('static/css/tpshop.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{url('home/css/tpshop.css')}}" />
 	<script src="{{url('js/locationJson.js')}}"></script>
 	<script src="{{url('static/js/location.js')}}" type="text/javascript" charset="utf-8"></script>
 	<script src="{{url('js/layer/layer.js')}}" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" href="{{url('static/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
+	<link rel="stylesheet" href="{{url('home/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
 <style>
 	.coupon_whether{ overflow:auto; height: 500px; width:400px; }
 </style>
@@ -707,8 +707,9 @@
             }
         })
         $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
             type : "POST",
-            url:"{:U('Home/Cart/AsyncUpdateCart')}",//,
+            url:"{{url('/cart/asyncupdatecart')}}",//,
             dataType:'json',
             data: {cart: cart},
             success: function(data){
@@ -878,8 +879,9 @@
         var goods_num = input.attr('value');
         var cart = new CartItem(cart_id, goods_num, 1);
         $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
             type: "POST",
-            url: "{:U('Home/Cart/changeNum')}",//+tab,
+            url: "{{url('cart/changenum')}}",//+tab,
             dataType: 'json',
             data: {cart: cart},
             success: function (data) {
@@ -1140,6 +1142,7 @@
                 })
             }
             $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
                 type: "POST",
                 url: "{:U('Home/Goods/collect_goods')}",//+tab,
                 data: {goods_ids: goods_arr},//+tab,
@@ -1281,6 +1284,7 @@
             goods_ids.push($(this).attr('data-goods-id'));
         })
         $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
             type : "POST",
             url:"{:U('Home/Cart/getStoreCoupon')}",//+tab,
             dataType:'json',
@@ -1323,6 +1327,7 @@
     function getCoupon(obj){
         var coupon_id = $(obj).attr('data-coupon-id');
         $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
             type : "POST",
             url:"{:U('Home/User/getCoupon')}",
             dataType:'json',
