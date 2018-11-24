@@ -27,6 +27,7 @@ class CartRequest extends FormRequest
             //
             'goods_id'=>'required',
             'goods_num'=>'required',
+//            'test'=>'required'
         ];
     }
 }

@@ -17,6 +17,10 @@ class GoodsController extends Controller
     protected $goodsRepository;
     protected $goodsImagesRepository;
     protected $goodsSpecPriceRepository;
+
+    /**
+     * GoodsController constructor.
+     */
     public function __construct() {
     $this->goodsCategoryRepository=new GoodsCategoryRepository();
     $this->goodsRepository=new GoodsRepository();
@@ -32,12 +36,16 @@ class GoodsController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function goodsList($id){
-        $goods_cat_tree=$this->goodsCategoryRepository->getCatSonTree($id);
-        $goods_list=$this->goodsRepository->getGoodsListByCategoryId($goods_cat_tree);
-        $goods_id_list=get_arr_column($goods_list,'goods_id');
-        $goods_images=$this->goodsImagesRepository->getGoodsImagesByGoodsId($goods_id_list);
-        return view('pc.goods.goodsList')->with('goods_list',$goods_list)->with('goods_images',$goods_images);
+        return view('pc.goods.goodsList')->with('id',$id);
     }
+
+    /**
+     * Notes:
+     * User:
+     * Date:2018/11/11
+     * @param $id
+     * @return mixed
+     */
     public function goodsInfo($id){
         $goods_info=$this->goodsRepository->getGoodsById($id);
         $goods_spec=$this->goodsSpecPriceRepository->getGoodsSpec($id);
@@ -48,7 +56,26 @@ class GoodsController extends Controller
         return view('pc.goods.goodsInfo')->with('goods',$goods_info)->with('cat_navigation',$cat_navigation)
             ->with('goods_images',$goods_images)->with('goods_spec',$goods_spec)->with('spec_goods_price',$spec_goods_price);
     }
-    public function activity(){
-        return json_encode(array('status'=>1));
+
+    /**
+     * Notes:
+     * User:
+     * Date:2018/11/11
+     * @return string
+     */
+    public function activity(Request $request){
+        $goods_id=$request['goods_id'];
+        $item_id=$request['item_id'];
+        $goods_num=$request['goods_num'];
+        $goods=$this->goodsRepository->getGoodsById($goods_id);
+        //商品活动逻辑省略待完善
+        return json_encode(array('status'=>1,'result'=>['goods'=>$goods]));
+    }
+    public function ajaxGetGoodsList(Request $request){
+        $goods_cat_tree=$this->goodsCategoryRepository->getCatSonTree($request['id']);
+        $goods_list=$this->goodsRepository->getGoodsListByCategoryId($goods_cat_tree);
+        $goods_id_list=get_arr_column($goods_list,'goods_id');
+        $goods_images=$this->goodsImagesRepository->getGoodsImagesByGoodsId($goods_id_list);
+        return view('pc.goods.ajaxGetGoodsList')->with('goods_list',$goods_list)->with('goods_images',$goods_images);
     }
 }

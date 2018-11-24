@@ -1,41 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
+@extends('pc.layouts.home')
+@section('personal_style')
 	<title>我的购物车列表</title>
-	<link rel="stylesheet" type="text/css" href="__STATIC__/css/tpshop.css" />
-	<script src="__STATIC__/js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="__PUBLIC__/js/global.js" type="text/javascript" charset="utf-8"></script>
-	<script src="__PUBLIC__/js/locationJson.js"></script>
-	<script src="__STATIC__/js/location.js" type="text/javascript" charset="utf-8"></script>
-	<script src="__PUBLIC__/js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
-	<script src="__PUBLIC__/js/pc_common.js"></script>
-	<link rel="stylesheet" href="__STATIC__/css/location.css" type="text/css"><!-- 收货地址，物流运费 -->
-</head>
+	<link rel="stylesheet" type="text/css" href="{{url('home/css/tpshop.css')}}" />
+	<script src="{{url('js/locationJson.js')}}"></script>
+	<script src="{{url('static/js/location.js')}}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{url('js/layer/layer.js')}}" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="{{url('home/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
 <style>
 	.coupon_whether{ overflow:auto; height: 500px; width:400px; }
 </style>
+	@endsection
+@section('body')
 <body>
 <!--顶部广告-s-->
-<adv pid="1" limit="1" item="v">
-	<div class="topic-banner" style="background: #f37c1e;">
-		<div class="w1224">
-			<a href="{$v.ad_link}">
-				<img src="{$v[ad_code]}"/>
-			</a>
-			<i onclick="$('.topic-banner').hide();"></i>
-		</div>
-	</div>
-</adv>
+{{--<adv pid="1" limit="1" item="v">--}}
+	{{--<div class="topic-banner" style="background: #f37c1e;">--}}
+		{{--<div class="w1224">--}}
+			{{--<a href="{$v.ad_link}">--}}
+				{{--<img src="{$v[ad_code]}"/>--}}
+			{{--</a>--}}
+			{{--<i onclick="$('.topic-banner').hide();"></i>--}}
+		{{--</div>--}}
+	{{--</div>--}}
+{{--</adv>--}}
 <!--顶部广告-e-->
 <!--header-s-->
 <div class="tpshop-tm-hander p" style="border-bottom: 0;">
-	<include file="public/sign-header" />
+	@include("pc.public.sign-header")
 	<div class="nav-middan-z p tphsop2_0">
 		<div class="header w1224">
 			<div class="ecsc-logo fon_gwcshcar">
 				<a href="/" class="logo">
-					<img src="{$tpshop_config['shop_info_store_logo']|default='__PUBLIC__/static/images/logo/pc_home_logo_default.png'}" style="max-width: 240px;max-height: 80px;">
+					<img src="{{url('static/images/logo/pc_home_logo_default.png')}}" style="max-width: 240px;max-height: 80px;">
 				</a>
 			</div>
 			<div class="ecsc-search mycarlist_search">
@@ -127,13 +123,14 @@
 			<div class="cont_aloinfon">
 				<i class="tit_sad"></i>
 				<span class="nitp">您还没有登录！登录后购物车的商品将保存在您的账号中</span>
-				<a class="loging_ex" href="{:U('Home/User/login')}">立即登录</a>
+				<a class="loging_ex" href="{{url('login')}}">立即登录</a>
 			</div>
 		</if>
 	</div>
 </div>
 <!--header-e-->
-<div class="shopcar_empty" <notempty name="cartList">style="display: none"</notempty>>
+@if($cart_list->isEmpty())
+<div class="shopcar_empty">
 <div class="w1224">
 	<div class="cart-empty">
 		<div class="message">
@@ -145,7 +142,7 @@
 					购物车空空的哦~，去看看心仪的商品吧~
 				</li>
 				<li class="mt10" style="padding-left: 100px;">
-					<a href="{:U('Home/User/login')}" class="btn-1 login-btn nologin">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="{{url('login')}}" class="btn-1 login-btn nologin">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="/" class="btn-1 login-btn islogin">去购物</a>
 				</li>
 			</ul>
@@ -153,12 +150,12 @@
 	</div>
 </div>
 </div>
+@else
 <!-- 购物车列表 -->
-<notempty name="cartList">
 	<div id="tpshop-cart">
 		<div class="li3_address w1224 p">
 			<ul>
-				<li class="current"><a>全部商品数<em>（{$userCartGoodsTypeNum}）</em></a></li>
+				<li class="current"><a>全部商品数<em>（{{$total_goods_num}}）</em></a></li>
 			</ul>
 		</div>
 		<div class="shoplist_deta p">
@@ -190,12 +187,14 @@
 			<!---->
 			<!--</span>-->
 			<!--</div>-->
-			<volist name="cartList" id="cart">
-				<if condition="$cart['combination_cart']">
+			@foreach($cart_list as $cart)
+				@if($cart['combination_cart'])
 					<!--搭配套餐标题 s-->
 					<div class="meal-conts-name p edge_{$cart.id}" style="border-bottom: 1px solid #d5d5d5;">
 						<div class="fl">
-							<input class="check-box" name="checkItem" value="{$cart['id']}" type="checkbox" <if condition='$cart[selected] eq 1'>checked="checked"</if> style="display: none;">
+							<input class="check-box" name="checkItem" value="{$cart['id']}" type="checkbox"
+							{{--<if condition='$cart[selected] eq 1'>checked="checked"</if> --}}
+							style="display: none;">
 							<i data-goods-id="{$cart['goods_id']}" data-goods-cat-id3="{$cart['goods']['cat_id']}" data-cart-id="{$cart['id']}" data-type="{$cart['prom_type']}" class="checkall checkItem <if condition='$cart[selected] eq 1'>checkall-true</if>"></i>
 						</div>
 						<!--<div class="meal-conts-tltle">-->
@@ -206,10 +205,11 @@
 						<!---->
 						<!--</span>-->
 					</div>
-				</if>
-				<div class="shoplist_detail_a edge_{$cart.id}" style="border-top: <if condition='$key==0'> 1px solid #d5d5d5<else />none</if> ">
+				@endif
+				<div class="shoplist_detail_a edge_{$cart.id}" style="border-top:1px" >
+				{{--<if condition='$key==0'> 1px solid #d5d5d5<else />none</if>--}}
 
-					<if condition="$cart['combination_cart']">
+					@if($cart['combination_cart'])
 						<!--搭配套餐 s-->
 						<div class="w1224">
 							<!--输出主商品-模块-->
@@ -361,28 +361,42 @@
 							<!--搭配套餐 遍历副商品-结束-->
 						</div>
 
-						<else />
+						@else
 						<!--普通商品-->
 						<div  id="edge_{$cart.id}" class="meal-conts-items">
-							<notempty name="$cart['prom_goods']">
+							@if($cart['prom_goods'])
 								<div class="brim_top">
 									<!--满减和换购两种-->
 									<span class="act_mjhg">促销</span>
-									<a class="condi">{$cart['prom_goods']['title']}</a>
+									<a class="condi">{{$cart['prom_goods']['title']}}</a>
 								</div>
-							</notempty>
+							@endif
 							<div class="item-single p">
 								<div class="breadth_phase">
 									<div class="column ">
-										<input class="check-box" name="checkItem" value="{$cart.id}" type="checkbox" <if condition='$cart[selected] eq 1'>checked="checked"</if> style="display: none;">
-										<i data-goods-id="{$cart.goods_id}" data-goods-cat-id3="{$cart['goods']['cat_id']}" data-cart-id="{$cart.id}" data-type="{$cart['prom_type']}" class="checkall checkItem <if condition='$cart[selected] eq 1'>checkall-true</if>"></i>
-										<img class="msp_picture" src="{$cart.goods_id|goods_thum_images=82,82}"/>
+										<input class="check-box" name="checkItem" value="{{$cart['id']}}" type="checkbox"
+										@if($cart['selected']== 1)
+											checked="checked"
+										@endif
+										style="display: none;">
+										<i data-goods-id="{{$cart['goods_id']}}" data-goods-cat-id3="{$cart['goods']['cat_id']}" data-cart-id="{{$cart['id']}}" data-type="{{$cart['prom_type']}}" class="checkall checkItem
+										@if($cart['selected']==1)
+												checkall-true
+												@endif
+												"></i>
+										<img class="msp_picture" src="{{goods_thum_images($cart['goods_id'],82,82)}}"/>
 									</div>
 									<div class="column t-goods">
 										<p class="msp_spname">
-											<a href="{:U('Home/Goods/goodsInfo',array('id'=>$cart[goods_id]))}">{$cart.goods_name}</a>
-											<!--团购--><if condition="$cart[prom_type] eq 2"><img  width="80" height="60" src="/public/images/groupby2.jpg" style="vertical-align:middle"></if>
-											<!--抢购--><if condition="$cart[prom_type] eq 1"><img  width="40" height="40" src="/public/images/qianggou2.jpg" style="vertical-align:middle"></if>
+											<a href="{{url('/goodsinfo/'.$cart['goods_id'])}}">{{$cart['goods_name']}}</a>
+											<!--团购-->
+											@if($cart['prom_type']==2)
+												<img  width="80" height="60" src="{{url('/images/groupby2.jpg')}}" style="vertical-align:middle">
+											@endif
+											<!--抢购-->
+											@if($cart['prom_type']==1)
+												<img  width="40" height="40" src="{{url('/images/qianggou2.jpg')}}" style="vertical-align:middle">
+											@endif
 										</p>
 										<div class="msp_return">
 											<!--<if condition="$store['qitian']">
@@ -394,55 +408,59 @@
 									</div>
 								</div>
 								<div class="column t-props he87 stang">
-									<volist name="$cart[spec_key_name_arr]" id="spec_key_name">
-										<p>{$spec_key_name}</p>
-									</volist>
+									{{--商品规格显示待完善--}}
+									@foreach(explode(' ',$cart['spec_key_name']) as  $spec_key_name)
+										{{--<p>{{$cart['spec_key_name']}}</p>--}}
+										<p>{{$spec_key_name}}</p>
+									@endforeach
 								</div>
 								<div class="column t-price">
-									<span id="cart_{$cart.id}_goods_price">￥{$cart.goods_price}</span>
-									<if condition="$cart.prom_type gt 0">
-										<p class="red">活动价：<span>￥{$cart.member_goods_price}</span></p>
-									</if>
-									<notempty name="$cart['prom_goods']">
+									<span id="cart_{$cart.id}_goods_price">￥{{$cart['goods_price']}}</span>
+									@if($cart['prom_type'] > 0)
+										<p class="red">活动价：<span>￥{{$cart['member_goods_price']}}</span></p>
+									@endif
+									@if($cart['prom_goods'])
 										<div class="promptions_in">
 											<span class="cx"><em>促销详情</em><i></i></span>
 											<div class="promotion-cont">
 												<ul>
-													<li>{$cart['prom_goods']['prom_detail']}</li>
+													<li>{{$cart['prom_goods']['prom_detail']}}</li>
 												</ul>
 											</div>
 										</div>
-									</notempty>
+									@endif
 								</div>
 								<div class="column t-quantity mtp quantity-form">
-									<a href="javascript:void(0);" class="decrement" id="decrement_{$cart['id']}">-</a>
-									<input name="changeQuantity_{$cart['id']}" type="text" id="changeQuantity_{$cart['id']}" value="{$cart['goods_num']}">
-									<a href="javascript:void(0);" class="increment" id="increment_{$cart['id']}">+</a>
+									<a href="javascript:void(0);" class="decrement" id="decrement_{{$cart['id']}}">-</a>
+									<input name="changeQuantity_{$cart['id']}" type="text" id="changeQuantity_{{$cart['id']}}" value="{{$cart['goods_num']}}">
+									<a href="javascript:void(0);" class="increment" id="increment_{{$cart['id']}}">+</a>
 									<!--无货时隐藏数量选择，显示无货-->
 									<!--<span>无货</span>-->
 								</div>
 								<div class="column t-sum sumpri">
-									<span id="cart_{$cart.id}_total_price">￥{$cart['goods_price']*$cart['goods_num']}</span>
-									<if condition="$cart.prom_type gt 0">
-										<p class="red"><span id="cart_{$cart.id}_market_price">
-                                                        ￥{:round($cart.member_goods_price*$cart['goods_num'],2)}
-                                                    </span></p>
-									</if>
+									<span id="cart_{{$cart['id']}}_total_price">￥{{$cart['goods_price']*$cart['goods_num']}}</span>
+									@if($cart['prom_type']>0)
+										<p class="red">
+											<span id="cart_{{$cart['id']}}_market_price">
+												￥{{round($cart['member_goods_price']*$cart['goods_num'],2)}}
+											</span>
+										</p>
+									@endif
 								</div>
 								<div class="column t-action">
 									<p>
-										<a href="javascript:void(0);" class="deleteGoods deleteItem" data-goodsid="{$cart.goods_id}" data-cart-id="{$cart.id}">
+										<a href="javascript:void(0);" class="deleteGoods deleteItem" data-goodsid="{{$cart['goods_id']}}" data-cart-id="{$cart.id}">
 											删除</a>
 									</p>
-									<p><a class="moveCollect collectItem" data-id="{$cart.goods_id}">移到我的收藏</a></p>
+									<p><a class="moveCollect collectItem" data-id="{{$cart['goods_id']}}">移到我的收藏</a></p>
 								</div>
 							</div>
 						</div>
 						<!--普通商品 遍历-结束-->
-					</if>
+					@endif
 
 				</div>
-			</volist>
+			@endforeach
 
 		</div>
 	</div>
@@ -520,7 +538,7 @@
         });
 	</script>
 	</div>
-</notempty>
+@endif
 <!--底部猜你喜欢-->
 <div class="shoplist_guess">
 	<div class="w1224">
@@ -658,7 +676,7 @@
 <!--删除商品弹窗-e-->
 <div class="ui-mask"></div>
 <!--footer-s-->
-<include file="public/footer" />
+@include("pc.public.footer")
 <!--footer-e-->
 <script type="text/javascript">
     $(document).ready(function(){
@@ -689,8 +707,9 @@
             }
         })
         $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
             type : "POST",
-            url:"{:U('Home/Cart/AsyncUpdateCart')}",//,
+            url:"{{url('/cart/asyncupdatecart')}}",//,
             dataType:'json',
             data: {cart: cart},
             success: function(data){
@@ -860,8 +879,9 @@
         var goods_num = input.attr('value');
         var cart = new CartItem(cart_id, goods_num, 1);
         $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
             type: "POST",
-            url: "{:U('Home/Cart/changeNum')}",//+tab,
+            url: "{{url('cart/changenum')}}",//+tab,
             dataType: 'json',
             data: {cart: cart},
             success: function (data) {
@@ -1122,6 +1142,7 @@
                 })
             }
             $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
                 type: "POST",
                 url: "{:U('Home/Goods/collect_goods')}",//+tab,
                 data: {goods_ids: goods_arr},//+tab,
@@ -1154,7 +1175,7 @@
     {
         var uname = getCookie('uname');
         if (uname == '') {
-            $('#collect-products .s-panel-main').html('<p class="wefoc"><a href="{:U('User/login')}">登录</a>后将显示您之前关注的商品</p>');
+            $('#collect-products .s-panel-main').html('<p class="wefoc"><a href="{{url('login')}}">登录</a>后将显示您之前关注的商品</p>');
         } else {
             $.ajax({
                 type : "get",
@@ -1204,7 +1225,7 @@
     {
         var uname = getCookie('uname');
         if (uname == '') {
-            $('#history-products .s-panel-main').html('<p class="wefoc"><a href="{:U('User/login')}">登录</a>后将显示您之前浏览的商品</p>');
+            $('#history-products .s-panel-main').html('<p class="wefoc"><a href="{{url("login")}})}">登录</a>后将显示您之前浏览的商品</p>');
         } else {
             $.ajax({
                 type : "get",
@@ -1263,6 +1284,7 @@
             goods_ids.push($(this).attr('data-goods-id'));
         })
         $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
             type : "POST",
             url:"{:U('Home/Cart/getStoreCoupon')}",//+tab,
             dataType:'json',
@@ -1305,6 +1327,7 @@
     function getCoupon(obj){
         var coupon_id = $(obj).attr('data-coupon-id');
         $.ajax({
+            headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
             type : "POST",
             url:"{:U('Home/User/getCoupon')}",
             dataType:'json',
@@ -1321,6 +1344,4 @@
     }
 </script>
 </body>
-
-
-</html>
+	@endsection

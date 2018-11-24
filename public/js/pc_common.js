@@ -13,11 +13,12 @@
 	 if (form.length > 0) {
 		 data = form.serialize();
 	 } else {
-		 data = {goods_id: goods_id, goods_num: num};
+		 data = {goods_id: goods_id, goods_num: num,};
 	 }
 	 $.ajax({
 		 type: "POST",
-		 url: "/index.php?m=Home&c=Cart&a=ajaxAddCart",
+		 url: "/cart/ajaxaddcart",
+		 headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
 		 data: data,
 		 dataType: 'json',
 		 success: function (data) {
@@ -26,7 +27,7 @@
 				 cart_num = parseInt(cart_quantity.html()) + parseInt($('input[name="goods_num"]').val());
 			 } else {
 				 if (data.status == -1) {
-					 location.href = "/index.php?m=Home&c=Goods&a=goodsInfo&id=" + goods_id;
+					 location.href = "/goodsinfo/" + goods_id;
 					 return false;
 				 }
 				 cart_num = parseInt(cart_quantity.html()) + parseInt(num);
@@ -47,9 +48,18 @@
 				 title: '温馨提示',
 				 skin: 'layui-layer-rim', //加上边框
 				 area: ['490px', '386px'], //宽高
-				 content: "/index.php?m=Home&c=Goods&a=open_add_cart"
+				 content: "/cart/openaddcart"
 			 });
-		 }
+		 },
+		 error:function () {
+             layer.open({
+                 type: 1,
+                 title: '温馨提示',
+                 skin: 'layui-layer-rim', //加上边框
+                 area: ['490px', '386px'], //宽高
+				 content:'加入购车失败,请重试'
+             });
+         }
 	 });
  }
  //购买兑换商品

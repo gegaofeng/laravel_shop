@@ -103,7 +103,7 @@ class GoodsCategoryRepository extends BaseRepository
         if (count($cat_son_tree)) {
             return $cat_son_tree;
         } else {
-            return '该分类下不存子分类';
+            return [$cat_id];
         }
 
     }

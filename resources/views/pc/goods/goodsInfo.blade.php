@@ -1,18 +1,14 @@
 @extends('pc.layouts.home')
 @section('personal_style')
-    <meta charset="UTF-8">
     <title>{{$goods['goods_name']}}-{$tpshop_config['shop_info_store_name']}</title>
     <meta name="keywords" content="{{$goods['keywords']}}"/>
     <meta name="description" content="{{$goods['goods_remark']}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('static/css/tpshop.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('static/css/jquery.jqzoom.css')}}">
-    <script src="{{asset('static/js/jquery-1.11.3.min.js')}}" type="text/javascript" charset="utf-8"></script>
-    <script src="{{asset('static/js/move.js')}}" type="text/javascript" charset="utf-8"></script>
-    <script src="{{asset('')}}/js/layer/layer-min.js"></script>
-    <script type="text/javascript" src="{{asset('static/js/jquery.jqzoom.js')}}"></script>
-    <script src="{{asset('/js/global.js')}}"></script>
-    <script src="{{asset('/js/pc_common.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('static/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
+    <link rel="stylesheet" type="text/css" href="{{asset('home/css/tpshop.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('home/css/jquery.jqzoom.css')}}">
+    <script src="{{asset('home/js/move.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{asset('js/layer/layer-min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('home/js/jquery.jqzoom.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('home/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
     <link rel="shortcut icon" type="image/x-icon"
           href="{$tpshop_config.shop_info_store_ico|default='/public/static/images/logo/storeico_default.png'}"
           media="screen"/>
@@ -20,7 +16,7 @@
 @section('body')
 <body>
 <!--header-s-->
-@include('pc.particals.head')
+@include('pc.public.head')
 <!--header-e-->
 <div class="search-box p">
     <div class="w1224">
@@ -154,12 +150,11 @@
             <input type="hidden" name="activity_title" value=""/><!-- 活动标题 -->
             <input type="hidden" name="prom_detail" value=""/><!-- 促销活动的促销类型 -->
             <input type="hidden" name="activity_is_on" value=""/><!-- 活动是否正在进行中 -->
-            <input type="hidden" name="item_id" value="{$Request.param.item_id}"/><!-- 商品规格id -->
-            <input type="hidden" name="exchange_integral" value="{$goods.exchange_integral}"/><!-- 积分 -->
+            <input type="hidden" name="item_id" value="0"/><!-- 商品规格id -->
+            <input type="hidden" name="exchange_integral" value="{{$goods['exchange_integral']}}"/><!-- 积分 -->
             <input type="hidden" name="point_rate" value="{$point_rate}"/><!-- 积分兑换比 -->
             <input type="hidden" name="is_virtual" value="{{$goods['is_virtual']}}"/><!-- 是否是虚拟商品 -->
             <input type="hidden" name="virtual_limit" id="virtual_limit" value="{{$goods['virtual_limit']}}"/>
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="detail-ggsl">
                 <h1>{{$goods['goods_name']}}</h1>
                 <div class="presale-time" style="display: none">
@@ -240,8 +235,8 @@
                                 </div>
                             </li>
                         </ul>
-                        <script src="{{asset('/js/locationJson.js')}}"></script>
-                        <script src="{{asset('/js/pc/location.js')}}"></script>
+                        <script src="{{asset('home/js/locationJson.js')}}"></script>
+                        <script src="{{asset('home/js/location.js')}}"></script>
                         <script>doInitRegion();</script>
                                                                         <!-- 收货地址，物流运费 -end-->
                     </div>
@@ -419,8 +414,8 @@
     <!--看了又看-s-->
 </div>
 <!--footer-e-->
-<script src="{{asset('static/js/lazyload.min.js')}}" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="{{asset('static/js/headerfooter.js')}}"></script>
+<script src="{{asset('home/js/lazyload.min.js')}}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="{{asset('home/js/headerfooter.js')}}"></script>
 <script>
     //缩略图切换
     $('.small-pic-li').mouseenter(function () {
@@ -433,6 +428,7 @@
     });
     //点击切换规格
     $(document).on('click', '.spec_item', function () {
+        console.log('qiehuanguige');
         var spec_item_img_src = $(this).find('img').attr('src');
         if (spec_item_img_src != '') {
             $('#zoomimg').attr('jqimg', spec_item_img_src).attr('src', spec_item_img_src);
@@ -452,10 +448,12 @@
     })
     //初始化商品价格库存
     function initGoodsPrice() {
+        console.log('初始化价格');
         var goods_id = $('input[name="goods_id"]').val();
         var goods_num = parseInt($('#number').val());
-        let _token=$('input[name="_token"]').val();
+        let _token=$('meta[name="_token"]').attr("content");
         if (!$.isEmptyObject(spec_goods_price)) {
+            // console.log('进入isempty');
             var goods_spec_arr = [];
             $("input[name^='goods_spec']").each(function () {
                 if ($(this).attr('checked') == 'checked') {
@@ -463,10 +461,13 @@
                 }
             });
             var spec_key = goods_spec_arr.sort(sortNumber).join('_');  //排序后组合成 key
+            console.log(spec_key);
             if (spec_goods_price[spec_key] != undefined) {
+                console.log('进入defined');
                 var item_id = spec_goods_price[spec_key]['item_id'];
                 $('input[name=item_id]').val(item_id);
             } else {
+                console.log('进入undefined');
                 $("#goods_price").html("<em>￥</em>" + 0); //变动价格显示
                 $('#spec_store_count').html(0);
                 $('input[name="shop_price"]').attr('value', 0);//商品价格
@@ -475,10 +476,10 @@
                 return false;
             }
         }
+        console.log('发送价格请求');
         $.ajax({
             type: 'post',
             dataType: 'json',
-            headers:{'X-CSRF-TOKEN':_token},
             data: {goods_id: goods_id, item_id: item_id, goods_num: goods_num,_token:_token},
             url: "/goods/activity",
             success: function (data) {
@@ -610,8 +611,12 @@
 
     //有规格id的时候，解析规格id选中规格
     function initSpec() {
+        console.log(spec_goods_price);
+        console.log('enter');
         var item_id = $("input[name='item_id']").val();
+        console.log(item_id);
         $.each(spec_goods_price, function (i, o) {
+            console.log('each');
             if (o.item_id == item_id) {
                 var spec_key_arr = o.key.split("_");
                 $.each(spec_key_arr, function (index, item) {
@@ -621,7 +626,8 @@
                     goods_spec_a.addClass('red');
                 })
             }
-        })
+        });
+        console.log('2')
         if (item_id > 0 && !$.isEmptyObject(spec_goods_price)) {
             var item_arr = [];
             $.each(spec_goods_price, function (i, o) {
@@ -976,7 +982,8 @@
         video.pause();
     });
     var commentType = 1;// 默认评论类型
-    var spec_goods_price = null;//规格库存价格
+    // var spec_goods_price = null;//规格库存价格
+    var spec_goods_price = {!!$spec_goods_price!!};//规格库存价格
     $(document).ready(function () {
         /*商品缩略图放大镜*/
         $(".jqzoom").jqueryzoom({
@@ -991,6 +998,7 @@
         initSpec();
         initGoodsPrice();
         changeImg();
+        // alert('aaa')
     });
 
     var buy_now = $('#buy_now');

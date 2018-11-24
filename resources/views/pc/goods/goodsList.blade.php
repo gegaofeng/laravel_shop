@@ -1,6 +1,6 @@
 @extends('pc.layouts.home')
 @section('personal_style')
-    <link rel="stylesheet" type="text/css" href="{{url('css/pc/tpshop.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{url('home/css/tpshop.css')}}"/>
     <link rel="shortcut icon" type="image/x-icon"
           href="/upload/logo/2018/04-09/516bc70315079d81dc3726991672b4af.png" media="screen"/>
     <script src="/js/layer/layer-min.js"></script>
@@ -24,7 +24,7 @@
     <body>
     {{--<link rel="stylesheet" type="text/css" href="/template/pc/rainbow/static/css/base.css"/>--}}
     {{--<link rel="shortcut icon" type="image/x-icon" href="/upload/logo/2018/04-09/516bc70315079d81dc3726991672b4af.png" media="screen"/>--}}
-    @include('pc.particals.head')
+    @include('pc.public.head')
 
     <div class="search-box p">
         <div class="w1430">
@@ -395,135 +395,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="shop-list-splb p">
-                    <ul>
-                        @foreach($goods_list as $goods)
-                            <li>
-                                <div class="s_xsall">
-                                    <div class="xs_img">
-                                        <a href="{{url('goodsinfo/'.$goods['goods_id'])}}">
-                                            <img class="lazy-list"
-                                                 data-original="{{goods_thum_images($goods['goods_id'],236,236)}}"/>
-                                        </a>
-                                    </div>
-                                    <div class="xs_slide">
-                                        <div class="small-xs-shop">
-                                            <ul>
-                                                @foreach($goods_images as $goods_image)
-                                                    @if($goods['goods_id']==$goods_image['goods_id'])
-                                                        <li>
-                                                            <a href="javascript:void(0);">
-                                                                <img class="lazy-list"
-                                                                     data-original="{{$goods_image['image_url']}}"/>
-                                                            </a>
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="price-tag">
-                                        <span class="now"><em class="li_xfo">￥</em><em>{{$goods['shop_price']}}</em></span>
-                                        <span class="old"><em>￥</em><em>{{$goods['market_price']}}</em></span>
-                                    </div>
-                                    <div class="shop_name2">
-                                        <a href="{{url('goodsinfo/'.$goods['goods_id'])}}">
-                                            {{$goods['goods_name']}}</a>
-                                    </div>
-                                    <div class="J_btn_statu">
-                                        <div class="p-num">
-                                            <input class="J_input_val" id="number_25" type="text" value="1">
-                                            <p class="act">
-                                                <a href="javascript:void(0);" onClick="goods_add(25);"
-                                                   class="litt-zzyl1"></a>
-                                                <a href="javascript:void(0);" onClick="goods_cut(25);"
-                                                   class="litt-zzyl2"></a>
-                                            </p>
-                                        </div>
-                                        <div class="p-btn">
-                                            <a href="javascript:void(0);"
-                                               onclick="AjaxAddCart(25,$('#number_'+25).val());">加入购物车</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                        <li>
-                            <div class="s_xsall">
-                                <div class="xs_img">
-                                    <a href="/Home/Goods/goodsInfo/id/1.html">
-                                        <img class="lazy-list"
-                                             data-original="/upload/goods/thumb/1/goods_thumb_1_0_236_236.png"/>
-                                    </a>
-                                </div>
-                                <div class="xs_slide">
-                                    <div class="small-xs-shop">
-                                        <ul>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/1/goods_sub_thumb_1_236_236.png"/>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/1/goods_sub_thumb_2_236_236.png"/>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/1/goods_sub_thumb_3_236_236.png"/>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="lazy-list"
-                                                         data-original="/upload/goods/thumb/1/goods_sub_thumb_4_236_236.png"/>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="price-tag">
-                                    <span class="now"><em class="li_xfo">￥</em><em>2999.00</em></span>
-                                    <span class="old"><em>￥</em><em>3198.00</em></span>
-                                </div>
-                                <div class="shop_name2">
-                                    <a href="/Home/Goods/goodsInfo/id/1.html">
-                                        vivoX21 6GB+128GB 4G全网通 全面屏 拍照手机 </a>
-                                </div>
-                                <div class="J_btn_statu">
-                                    <div class="p-num">
-                                        <input class="J_input_val" id="number_1" type="text" value="1">
-                                        <p class="act">
-                                            <a href="javascript:void(0);" onClick="goods_add(1);"
-                                               class="litt-zzyl1"></a>
-                                            <a href="javascript:void(0);" onClick="goods_cut(1);"
-                                               class="litt-zzyl2"></a>
-                                        </p>
-                                    </div>
-                                    <div class="p-btn">
-                                        <a href="javascript:void(0);" onclick="AjaxAddCart(1,$('#number_'+1).val());">加入购物车</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="page p">
-                    <div class='dataTables_paginate paging_simple_numbers'>
-                        <ul class='pagination'>
-                            <li class="paginate_button active"><a tabindex="0" data-dt-idx="1" aria-controls="example1"
-                                                                  href="#">1</a></li>
-                            <li class="paginate_button"><a class="num" href="/home/Goods/goodsList/id/31/p/2.html">2</a>
-                            </li>
-                            <li id="example1_next" class="paginate_button next"><a class="next"
-                                                                                   href="/home/Goods/goodsList/id/31/p/2.html">下一页</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div id="goods_list">
+
                 </div>
             </div>
         </div>
@@ -583,7 +456,7 @@
         }
     </script>
     <!--footer-s-->
-    @include('pc.particals.footer')
+    @include('pc.public.footer')
     @include('pc.public.sidebar_cart')
     <style>
         .mod_copyright {
@@ -647,9 +520,9 @@
         });
     </script>
     <!--footer-e-->
-    <script src="/static/js/lazyload.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/static/js/popt.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/static/js/headerfooter.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{{url('home/js/lazyload.min.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{url('home/js/popt.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{url('home/js/headerfooter.js')}}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
 
         //        更多
@@ -744,7 +617,7 @@
             //左侧边栏JS
 //		ajax_hot_goods();
 //		ajax_sales_goods();
-            //############   更多类别属性筛选  start     ###########
+//               更多类别属性筛选  start
             $('.moreamore').click(function () {
                 $('.m-tr').each(function (i, o) {
                     if (i > 7) {
@@ -762,7 +635,7 @@
                 } else {
                     $(this).addClass('checked').html('<a >更多选项</a>');
                 }
-            })
+            });
             $('.moreamore').trigger('click').html('<a >更多选项</a>'); //  默认点击一下
             //############   更多类别属性筛选   end    ###########
 
@@ -801,7 +674,7 @@
                 $(this).parents('.s_xsall').find('.xs_img').find('img').attr('src', small_src);
             }, function () {
 
-            })
+            });
             /***滑过浏览商品 end***/
         })
 
@@ -889,6 +762,37 @@
                 }
             }
         })*/
+        //商品分类id
+        let id ={{$id}};
+            //获取商品列表
+            function ajax_get_goods_list(page) {
+                $.ajax({
+                    type: "get",
+                    url: "/api/ajaxgetgoodslist",
+                    data: {'id': id, 'page': page},
+                    success: function (data) {
+                        $("#goods_list").html('');
+                        $("#goods_list").append(data);
+                        $("img.lazy-list").lazyload({
+                            placeholder: "images/white.gif", //用图片提前占位
+                            // placeholder,值为某一图片路径.此图片用来占据将要加载的图片的位置,待图片加载时,占位图则会隐藏
+                            effect: "fadeIn", // 载入使用何种效果
+                            // effect(特效),值有show(直接显示),fadeIn(淡入),slideDown(下拉)等,常用fadeIn
+                            threshold: 20, // 提前开始加载
+                            // threshold,值为数字,代表页面高度.如设置为200,表示滚动条在离目标位置还有200的高度时就开始加载图片,可以做到不让用户察觉
+                            //event: 'click',  // 事件触发时才加载
+                            // event,值有click(点击),mouseover(鼠标划过),sporty(运动的),foobar(…).可以实现鼠标莫过或点击图片才开始加载,后两个值未测试…
+                            //container: $("#container"),  // 对某容器中的图片实现效果
+                            // container,值为某容器.lazyload默认在拉动浏览器滚动条时生效,这个参数可以让你在拉动某DIV的滚动条时依次加载其中的图片
+                            //failure_limit : 10 // 图片排序混乱时
+                            // failure_limit,值为数字.lazyload默认在找到第一张不在可见区域里的图片时则不再继续加载,但当HTML容器混乱的时候可能出现可见区域内图片并没加载出来的情况,failurelimit意在加载N张可见区域外的图片,以避免出现这个问题.
+                            vertical_only: false,
+                            no_fake_img_loader: true
+                        });
+                    }
+                });
+            }
+        $(ajax_get_goods_list(1));
     </script>
     </body>
 @endsection

@@ -24,7 +24,7 @@
     <body>
     {{--<link rel="stylesheet" type="text/css" href="/template/pc/rainbow/static/css/base.css"/>--}}
     {{--<link rel="shortcut icon" type="image/x-icon" href="/public/upload/logo/2018/04-09/516bc70315079d81dc3726991672b4af.png" media="screen"/>--}}
-    @include('pc.particals.head')
+    @include('pc.public.head')
 
     <div class="search-box p">
         <div class="w1430">
@@ -1705,7 +1705,7 @@
         }
     </script>
     <!--footer-s-->
-    @include('pc.particals.footer')
+    @include('pc.public.footer')
 
     <style>
         .mod_copyright {

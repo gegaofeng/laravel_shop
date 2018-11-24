@@ -912,7 +912,7 @@
 							layer.msg(data.msg, {icon: 2, time: 1000},function(){
 								// 登录超时
 								if (data.status == -100) {
-									location.href = "{:U('Home/User/login')}";
+									location.href = "{{url('login')}}";
 								}
 							});
 							// 显示商品有货无货配送
@@ -977,7 +977,7 @@
 							});
 							// 登录超时
 							if (data.status == -100){
-								location.href = "{:U('Home/User/login')}";
+								location.href = "{{url('login')}}";
 							}
 							return false;
 						}

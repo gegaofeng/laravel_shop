@@ -12,7 +12,7 @@
                     <div class="hinihdk">
                         <img src="{{asset('static/images/dl.png')}}"/>
 
-                        <p class="loginafter nologin"><span>你好，请先</span><a href="{:U('Home/user/login')}">登录！</a></p>
+                        <p class="loginafter nologin"><span>你好，请先</span><a href="{{url('login')}}">登录！</a></p>
                         <!--未登录-e--->
                         <!--登录后-s--->
                         <p class="loginafter islogin">
