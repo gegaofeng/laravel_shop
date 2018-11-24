@@ -16,7 +16,20 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::group(['namespace'=>'admin'],function(){
 
 Route::group(['namespace'=>'PC'],function (){
    Route::get('ajaxgetgoodslist','GoodsController@ajaxGetGoodsList');
+    //goods
+    Route::group(['prefix'=>'admin/goods'],function(){
+        Route::any('ajaxgoodslist','GoodsController@ajaxGoodsList');
+
+    });
 });
+Route::group(['namespace'=>'Common'],function(){
+    //goodscat
+    Route::get('getsoncategory','GoodsCategoryController@ajaxGetSonCategory');
+    Route::get('getcatbrandlist','GoodsBrandController@ajaxGetCatBrandList');
+    Route::any('changetableval','CommonController@changeTabVal');
+});
+

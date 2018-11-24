@@ -43,4 +43,12 @@ class GoodsSpecPriceRepository extends BaseRepository{
     public function getGoodsSpecPriceByItemId($item_id){
         return $this->GoodsSpecPrice->where('item_id',$item_id)->first();
     }
+    public function getGoodsSpecItemIdByGoodsId($goods_id){
+        $spec_price_list= $this -> getGoodsSpecPriceByGoodsId($goods_id);
+        $item_id_list=[];
+        foreach($spec_price_list as $spec_price){
+            $item_id_list= array_merge($item_id_list, explode('_', $spec_price['key']));
+        }
+        return array_unique($item_id_list);
+    }
 }

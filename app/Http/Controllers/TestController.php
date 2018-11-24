@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Model\GoodsSpec;
 use App\Model\GoodsSpecItem;
-use App\Repositories\CartRepository;
 use App\Repositories\GoodsCategoryRepository;
 use App\Repositories\GoodsImagesRepository;
 use App\Repositories\GoodsRepository;
@@ -20,6 +19,7 @@ class TestController extends Controller
     public function __construct() {
         $this->model=new GoodsRepository();
         $this->goodsSpecPriceRepository=new GoodsSpecPriceRepository();
+//        $this->model=new GoodsRepository();
     }
 
     public function test(){
@@ -42,5 +42,24 @@ class TestController extends Controller
         $a=new CartRepository();
 //        return $a->setGoodsRepository(1211);
         return $a->getCartList('0');
+//        $tools=new Tools();
+//        return $tools::create_goods_thum_images(88,236,236);
+//        $goods_cat=new GoodsCategoryRepository();
+//        return view('test')->with('test',$goods_cat-> getSortGoodsCategory());
+//        return $goods_cat-> getCatSonTree(14);
+//        return 1;
+//        $brand=new \App\Repositories\BrandRepository();
+//        return $brand-> getSortBrands(33);
+//        $cat=new GoodsCategoryRepository();
+//        return $cat-> getCatSonTree(13);
+
+        $a=new GoodsRepository();
+//        return view('test')->with('a',$a-> getGoodsById(1));
+//        var_dump($a-> getGoodsById(1));
+        $a=new \App\Repositories\GoodsSpecRepository();
+//        var_dump($a-> getSpecListByTypeId(1));
+//         return $a-> getSpecListByTypeId(1);
+        $a=new GoodsSpecPriceRepository();
+        return $a-> getGoodsSpecItemIdByGoodsId(104);
     }
 }

@@ -7,6 +7,7 @@
  */
 namespace App\Repositories;
 use App\Model\Goods;
+use Illuminate\Support\Facades\DB;
 
 
 class GoodsRepository extends BaseRepository{
@@ -21,17 +22,14 @@ class GoodsRepository extends BaseRepository{
         return $goods_list;
     }
     public function getGoodsById($goods_id){
-        $find=$this->goods->with('brand')->where('goods_id',$goods_id)->first();
-        $goods= $this->goods->where('goods_id',$goods_id)->get();
-//        var_dump($find);
-//        return $im=$goods->goodsImages;
+        $find=$this->goods->with('brand')->with('goodsImages')->where('goods_id',$goods_id)->first();
         return $find;
     }
     public function getGoodsCatById($goods_id){
         return $this->goods->where('goods_id',$goods_id)->pluck('cat_id');
     }
-    public function getGoodsList(){
-        $goods_list= $this ->goods->paginate(15);
+    public function getGoodsList(array $filter=[],$orderby='goods_id',$order='asc',$key_word=''){
+        $goods_list= $this ->goods-> with('category')->where($filter)->orderBy($orderby,$order)->paginate(15);
         return $goods_list;
     }
 }
