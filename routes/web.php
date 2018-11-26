@@ -12,7 +12,7 @@
 */
 
 
-Route::namespace('PC')->group(function ()
+Route::group(['namespace'=>'PC'],function ()
 {
     Route::get('/', 'IndexController@index');
     Route::get('login', 'Auth\LoginController@index');
@@ -329,12 +329,6 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin/combination',), fu
     Route::get('index', 'CombinationController@index');
 }
 );
-Route::group(array('namespace' => 'Admin', 'prefix' => 'admin/Combination',), function ()
-{
-    Route::get('/', 'CombinationController@index');
-    Route::get('index', 'CombinationController@index');
-}
-);
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin/wechat',), function ()
 {
     Route::get('index', 'WechatController@index');
@@ -418,7 +412,9 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin/goods',), function
     Route::get('brandlist', 'GoodsController@brandList');
     Route::get('addeditgoods/{id?}', 'GoodsController@addEditGoods');
     Route::get('ajaxgetspecselect', 'GoodsController@ajaxgetspecselect');
-    Route::any('ajaxgetspecinput', 'GoodsController@ajaxGetSpecInput');
+    Route::post('ajaxgetspecinput', 'GoodsController@ajaxGetSpecInput');
+    Route::get('addeditcategory/id/{id?}','GoodsController@addEditCategory');
+    Route::post('addeditcategory/','GoodsController@editCategory');
 }
 );
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin/plugin',), function ()

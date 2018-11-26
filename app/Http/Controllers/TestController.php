@@ -39,9 +39,9 @@ class TestController extends Controller
         $goodsSpecPriceRepository=new GoodsSpecPriceRepository();
          $spec_goods_price=$goodsSpecPriceRepository->getGoodsSpecPriceByGoodsId(1);
 //        return view('test')->with('spec_goods_price',$spec_goods_price);
-        $a=new CartRepository();
+//        $a=new CartRepository();
 //        return $a->setGoodsRepository(1211);
-        return $a->getCartList('0');
+//        return $a->getCartList('0');
 //        $tools=new Tools();
 //        return $tools::create_goods_thum_images(88,236,236);
 //        $goods_cat=new GoodsCategoryRepository();
@@ -60,6 +60,8 @@ class TestController extends Controller
 //        var_dump($a-> getSpecListByTypeId(1));
 //         return $a-> getSpecListByTypeId(1);
         $a=new GoodsSpecPriceRepository();
-        return $a-> getGoodsSpecItemIdByGoodsId(104);
+//        return $a-> getGoodsSpecItemIdByGoodsId(104);
+        $a=new GoodsCategoryRepository();
+        return $a-> getGoodsCategoryTree();
     }
 }

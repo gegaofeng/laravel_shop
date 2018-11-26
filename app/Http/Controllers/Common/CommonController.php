@@ -10,7 +10,7 @@ class CommonController extends Controller
 {
     //
     public function changeTabVal(Request $request){
-                $table = $request['table']; // 表名
+            $table = $request['table']; // 表名
             $id_name = $request['id_name']; // 表主键id名
             $id_value = $request['id_value']; // 表主键id值
             $field  = $request['field']; // 修改哪个字段

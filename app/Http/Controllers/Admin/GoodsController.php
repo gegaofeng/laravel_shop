@@ -32,7 +32,21 @@ class GoodsController extends Controller {
     }
 
     public function categoryList() {
-        return view('admin.goods.categoryList');
+        $cat_list= $this ->goodsCategoryRepository-> getGoodsCategoryTree(1);
+        return view('admin.goods.categoryList')-> with('cat_list',$cat_list);
+    }
+    public function addEditCategory(Request $request){
+        $cate_id=$request['id'];
+        $cate_info= $this ->goodsCategoryRepository-> getById($cate_id);
+        $cat_list = $this -> goodsCategoryRepository -> getGoodsCategoryTree(1);
+        return view('admin.goods.addEditCategory')->with('goods_category_info',$cate_info)->with('cat_list',$cat_list);
+    }
+    public function editCategory(Request $request){
+//        var_dump($request-> except(['_token','id']));
+        $data=($request-> except(['_token','id']));
+        $id=$request['id'];
+        $this ->goodsCategoryRepository->update($data,$id);
+        return json_encode(['satus'=>'a']);
     }
 
     public function stockList() {
@@ -123,7 +137,7 @@ class GoodsController extends Controller {
         foreach ($spec as $k=>$v){
             $spec[$k]=(array)$v;
         }
-        $specItem = DB::table('goods_spec_items') -> get()->toArray(); //规格项
+        $specItem = DB::table('goods_spec_items') -> get()->keyBy('id'); //规格项
         foreach ($specItem as $k =>$v){
             $specItem[$k]=(array)$v;
         }
@@ -168,6 +182,7 @@ class GoodsController extends Controller {
         foreach ($spec_arr2 as $k => $v) {
             $str .= "<tr>";
             $item_key_name = array();
+//            var_dump($v);
             foreach ($v as $k2 => $v2) {
 //                var_dump( $specItem[$v2]);
 //                $str .= "<td>{$specItem[$v2][item]}</td>";
@@ -175,9 +190,11 @@ class GoodsController extends Controller {
                 $str .= $specItem[$v2]['item'];
                 $str .= "</td>";
 //                var_dump($spec[$specItem[$v2]['spec_id']]);
+//                var_dump($specItem[$v2]);
                 $item_key_name[$v2] = $spec[$specItem[$v2]['spec_id']]['name'] . ':' . $specItem[$v2]['item'];
+//                var_dump($item_key_name[$v2]);
             }
-            var_dump($item_key_name);
+//            var_dump($item_key_name);
             ksort($item_key_name);
             $item_key = implode('_', array_keys($item_key_name));
             $item_name = implode(' ', $item_key_name);

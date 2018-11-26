@@ -27,6 +27,9 @@ class GoodsCategoryRepository extends BaseRepository {
     public function getAll() {
         return $this -> goodsCategory -> get();
     }
+    public function getById($id) {
+        return $this ->goodsCategory->where('id',$id)->first();
+    }
 
     /**
      * Notes:
@@ -34,9 +37,15 @@ class GoodsCategoryRepository extends BaseRepository {
      * Date:2018/10/28
      * @return array
      */
-    public function getGoodsCategoryTree() {
+    public function getGoodsCategoryTree($is_show=0) {
         $tree = $arr = $result = $category_list = array();
-        $category_list = $this -> goodsCategory -> orderBy('sort_order') -> get();
+        if($is_show)
+        {
+            $category_list = $this -> goodsCategory ->withoutGlobalScope(new \App\Scopes\ShowScope())-> orderBy('sort_order') -> get();
+        }else{
+            $category_list = $this -> goodsCategory -> orderBy('sort_order') -> get();
+        }
+        
         if ($category_list) {
             foreach ($category_list as $val) {
                 if ($val['level'] == 2) {
@@ -162,4 +171,8 @@ class GoodsCategoryRepository extends BaseRepository {
         return $cat_list;
     }
 
+    public function update(Array $data,$id){
+        $result=$this ->goodsCategory->where('id',$id)-> update($data);
+        return $result;
+    }
 }

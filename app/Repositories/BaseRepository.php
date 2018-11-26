@@ -7,10 +7,5 @@
  */
 namespace App\Repositories;
 abstract class BaseRepository{
-    public function getById(){
 
-    }
-    public function getAll(){
-
-    }
 }

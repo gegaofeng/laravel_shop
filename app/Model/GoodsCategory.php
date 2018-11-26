@@ -16,5 +16,9 @@ class GoodsCategory extends Model
     public static function boot(){
         parent::boot();
         static::addGlobalScope(new ShowScope());
+//        static::addGlobalScope("is_show",function (Builder $builder)
+//        {
+//            $builder->whereIn('is_show',[1]);
+//        });
     }
 }

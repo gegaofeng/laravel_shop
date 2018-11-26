@@ -32,6 +32,8 @@ Route::group(['namespace'=>'admin'],function()
 );
 Route::group(['namespace' => 'PC'], function ()
 {
+}
+);
     Route::group(['namespace' => 'Common'], function ()
     {
         //goodscat
@@ -40,6 +42,4 @@ Route::group(['namespace' => 'PC'], function ()
         Route::any('changetableval', 'CommonController@changeTabVal');
     }
     );
-}
-);
 

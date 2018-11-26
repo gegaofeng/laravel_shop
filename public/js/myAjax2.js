@@ -51,7 +51,7 @@ function del_fun(del_url)
 // 修改指定表的指定字段值 包括有按钮点击切换是否 或者 排序 或者输入框文字
 function changeTableVal(table, id_name, id_value, field, obj,yes,no) {
 	var value = $(obj).val();
-        console.log($(obj));
+//        console.log($(obj));
     if(yes == '' || typeof(yes)== 'undefined')yes='是';
     if(no == '' || typeof(no) == 'undefined')no='否';
 	if ($(obj).hasClass('no')) // 图片点击是否操作

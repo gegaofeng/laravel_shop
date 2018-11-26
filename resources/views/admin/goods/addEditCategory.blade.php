@@ -1,4 +1,4 @@
-<include file="public/layout" />
+@include("admin.public.layout")
 <body style="background-color: #FFF; overflow: auto;">
 <div id="append_parent"></div>
 <div id="ajaxwaitid"></div>
@@ -24,14 +24,14 @@
       <li>2.WAP,APP端的图标在下列编辑框"分类展示图片"上传即可<strong>(特别注意:该图标有且仅是第三级分类才有效)</strong></li>
     </ul>
   </div>
-  <form action="{:U('Goods/addEditCategory')}" method="post" class="form-horizontal" id="category_form">
+  <form action="{{url('admin/goods/addeditcategory')}}" method="post" class="form-horizontal" id="category_form">
     <div class="ncap-form-default">
       <dl class="row">
         <dt class="tit">
           <label for="t_mane"><em>*</em>分类名称</label>
         </dt>
         <dd class="opt">
-          <input type="text" placeholder="名称" class="input-txt" name="name" value="{$goods_category_info.name}">
+          <input type="text" placeholder="名称" class="input-txt" name="name" value="{{$goods_category_info['name']}}">
           <span class="err" id="err_name" style="color:#F00; display:none;"></span>
           <p class="notic"></p>
         </dd>
@@ -41,7 +41,7 @@
           <label for="t_mane"><em>*</em>手机分类名称</label>
         </dt>
         <dd class="opt">
-          <input type="text" placeholder="手机分类名称" class="input-txt" name="mobile_name" value="{$goods_category_info.mobile_name}">
+          <input type="text" placeholder="手机分类名称" class="input-txt" name="mobile_name" value="{{$goods_category_info['mobile_name']}}">
           <span class="err" id="err_mobile_name" style="color:#F00; display:none;"></span>
           <p class="notic"></p>
         </dd>
@@ -54,7 +54,20 @@
           <div id="gcategory">
             <select name="parent_id" id="parent_id" class="class-select valid">
                 <option value="0">顶级分类</option>
-				{$cat_select}                                         
+		@foreach($cat_list as $key=>$cat)
+                @if($goods_category_info['parent_id']==$cat['id'])
+                <option value="{{$cat['id']}}" selected="selected">{{$cat['name']}}</option>
+                @else
+                <option value="{{$cat['id']}}">{{$cat['name']}}</option>
+                @endif
+                @foreach($cat['tmenu'] as $key2=>$cat2)
+                @if($goods_category_info['parent_id']==$cat2['id'])
+                <option value="{{$cat2['id']}}" selected="selected">&nbsp;&nbsp{{$cat2['name']}}</option>
+                @else
+                <option value="{{$cat2['id']}}">&nbsp;&nbsp{{$cat2['name']}}</option>
+                @endif
+                @endforeach   
+                @endforeach                          
             </select>                    
           </div>
           <p class="notic">如果选择上级分类，那么新增的分类则为被选择上级分类的子分类</p>
@@ -66,10 +79,20 @@
         </dt>
         <dd class="opt">
           <div class="onoff">
-            <label for="goods_category1" class="cb-enable <if condition="$goods_category_info[is_show] eq 1">selected</if>">是</label>
-            <label for="goods_category0" class="cb-disable <if condition="$goods_category_info[is_show] eq 0">selected</if>">否</label>
-            <input id="goods_category1" name="is_show" value="1" type="radio" <if condition="$goods_category_info[is_show] eq 1"> checked="checked"</if>>
-            <input id="goods_category0" name="is_show" value="0" type="radio" <if condition="$goods_category_info[is_show] eq 0"> checked="checked"</if>>
+            <label for="goods_category1" class="cb-enable 
+                   @if($goods_category_info['is_show']== 1)selected
+                   @endif">是</label>
+            <label for="goods_category0" class="cb-disable 
+                   @if($goods_category_info['is_show']==0)selected
+                   @endif">否</label>
+            <input id="goods_category1" name="is_show" value="1" type="radio" 
+                   @if($goods_category_info['is_show']== 1)checked="checked"
+                   @endif
+                   >
+            <input id="goods_category0" name="is_show" value="0" type="radio" 
+            @if($goods_category_info['is_show']== 0)checked="checked"
+            @endif
+            >
           </div>
           <p class="notic">是否在导航栏显示</p>
         </dd>        
@@ -82,27 +105,13 @@
         <dd class="opt">
           <div>
               <select name="cat_group" id="cat_group" class="form-control">
-                <option value="0">0</option>                                        
-                <option value='1' <if condition="$goods_category_info[cat_group] eq 1"> selected='selected'</if>>1</option>"
-                <option value='2' <if condition="$goods_category_info[cat_group] eq 2"> selected='selected'</if>>2</option>"
-                <option value='3' <if condition="$goods_category_info[cat_group] eq 3"> selected='selected'</if>>3</option>"
-                <option value='4' <if condition="$goods_category_info[cat_group] eq 4"> selected='selected'</if>>4</option>"
-                <option value='5' <if condition="$goods_category_info[cat_group] eq 5"> selected='selected'</if>>5</option>"
-                <option value='6' <if condition="$goods_category_info[cat_group] eq 6"> selected='selected'</if>>6</option>"
-                <option value='7' <if condition="$goods_category_info[cat_group] eq 7"> selected='selected'</if>>7</option>"
-                <option value='8' <if condition="$goods_category_info[cat_group] eq 8"> selected='selected'</if>>8</option>"
-                <option value='9' <if condition="$goods_category_info[cat_group] eq 9"> selected='selected'</if>>9</option>"
-                <option value='10' <if condition="$goods_category_info[cat_group] eq 10"> selected='selected'</if>>10</option>"
-                <option value='11' <if condition="$goods_category_info[cat_group] eq 11"> selected='selected'</if>>11</option>"
-                <option value='12' <if condition="$goods_category_info[cat_group] eq 12"> selected='selected'</if>>12</option>"
-                <option value='13' <if condition="$goods_category_info[cat_group] eq 13"> selected='selected'</if>>13</option>"
-                <option value='14' <if condition="$goods_category_info[cat_group] eq 14"> selected='selected'</if>>14</option>"
-                <option value='15' <if condition="$goods_category_info[cat_group] eq 15"> selected='selected'</if>>15</option>"
-                <option value='16' <if condition="$goods_category_info[cat_group] eq 16"> selected='selected'</if>>16</option>"
-                <option value='17' <if condition="$goods_category_info[cat_group] eq 17"> selected='selected'</if>>17</option>"
-                <option value='18' <if condition="$goods_category_info[cat_group] eq 18"> selected='selected'</if>>18</option>"
-                <option value='19' <if condition="$goods_category_info[cat_group] eq 19"> selected='selected'</if>>19</option>"
-                <option value='20' <if condition="$goods_category_info[cat_group] eq 20"> selected='selected'</if>>20</option>"
+                <option value="0">0</option>
+                @for($i=1;$i<=20;$i++)
+                <option value='1' 
+              @if($goods_category_info['cat_group']==$i) selected='selected'
+              @endif
+              >{{$i}}</option>"
+                @endfor
               </select>                             
           </div>
           <p class="notic">有时候左侧菜单栏同一行显示多个分类, 所以给他们一个分组</p>
@@ -116,12 +125,12 @@
         <dd class="opt">
           <div class="input-file-show">
             <span class="show">
-                <a id="img_a" target="_blank" class="nyroModal" rel="gal" href="{$goods_category_info.image}">
-                  <i id="img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$goods_category_info.image}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                <a id="img_a" target="_blank" class="nyroModal" rel="gal" href="{{$goods_category_info['image']}}">
+                  <i id="img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={{$goods_category_info['image']}}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
                 </a>
             </span>
             <span class="type-file-box">
-                <input type="text" id="image" name="image" value="{$goods_category_info.image}" class="type-file-text">
+                <input type="text" id="image" name="image" value="{{$goods_category_info['image']}}" class="type-file-text">
                 <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
                 <input class="type-file-file" onClick="GetUploadify(1,'','category','img_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
             </span>
@@ -135,7 +144,7 @@
           <label for="t_sort"><em>*</em>排序</label>
         </dt>
         <dd class="opt">
-          <input type="text" class="t_mane" name="sort_order" id="t_sort" value="{$goods_category_info.sort_order}">
+          <input type="text" class="t_mane" name="sort_order" id="t_sort" value="{{$goods_category_info['sort_order']}}">
           <span class="err" style="color:#F00; display:none;" id="err_sort_order"></span>
           <p class="notic">根据排序进行由小到大排列显示。</p>
         </dd>
@@ -145,14 +154,15 @@
           <label for="t_sort"><em>*</em>分佣比例</label>
         </dt>
         <dd class="opt">
-          <input type="text" class="t_mane" name="commission_rate" value="{$goods_category_info.commission_rate}">%
+          <input type="text" class="t_mane" name="commission_rate" value="{{$goods_category_info['commission_rate']}}">%
           <span class="err" style="color:#F00; display:none;" id="err_commission_rate"></span>
           <p class="notic">用于商城分销,微信三级分销。</p>
         </dd>
       </dl>                         
-      <div class="bot"><a id="submitBtn" class="ncap-btn-big ncap-btn-green" href="JavaScript:void(0);" onClick="ajax_submit_form('category_form','{:U('Goods/addEditCategory?is_ajax=1')}');">确认提交</a></div>
+      <div class="bot"><a id="submitBtn" class="ncap-btn-big ncap-btn-green" href="JavaScript:void(0);" onClick="ajax_submit_form('category_form','{{url('admin/goods/addeditcategory')}}');">确认提交</a></div>
     </div>
-    <input type="hidden" name="id" value="{$goods_category_info.id}">
+    <input type="hidden" name="id" value="{{$goods_category_info['id']}}">
+    <input type='hidden' name='_token' value="{{CSRF_TOKEN()}}">
   </form>
 </div>
 <script>  
