@@ -3,7 +3,7 @@
 	<title>我的购物车列表</title>
 	<link rel="stylesheet" type="text/css" href="{{url('home/css/tpshop.css')}}" />
 	<script src="{{url('js/locationJson.js')}}"></script>
-	<script src="{{url('static/js/location.js')}}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{url('home/js/location.js')}}" type="text/javascript" charset="utf-8"></script>
 	<script src="{{url('js/layer/layer.js')}}" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="{{url('home/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
 <style>
@@ -718,20 +718,20 @@
                     $('.current').find('em').text('（'+data.result.goods_num+'）'); //数量
                     $('#total_fee').empty().html('￥'+data.result.total_fee);
                     $('#goods_fee').empty().html('-￥'+data.result.goods_fee);
-                    var cartList = data.result.cartList;
-                    if(cartList.length > 0){
-                        for(var i = 0; i < cartList.length; i++){
-                            $('#store_'+cartList[0].id+'_total_price').empty().html('￥'+cartList[i].total_price);
-                            if(cartList[i].cut_fee > 0){
-                                $('#store_'+cartList[0].id+'_cut_price').empty().html('减：'+cartList[i].cut_fee);
+                    var cart_list = data.result.cart_list;
+                    if(cart_list.length > 0){
+                        for(var i = 0; i < cart_list.length; i++){
+                            $('#store_'+cart_list[0].id+'_total_price').empty().html('￥'+cart_list[i].total_price);
+                            if(cart_list[i].cut_fee > 0){
+                                $('#store_'+cart_list[0].id+'_cut_price').empty().html('减：'+cart_list[i].cut_fee);
                             }else{
-                                $('#store_'+cartList[0].id+'_cut_price').empty();
+                                $('#store_'+cart_list[0].id+'_cut_price').empty();
                             }
-                            $('#cart_'+cartList[i].id+'_goods_price').empty().html('￥'+cartList[i].goods_price);
-                            $('#cart_'+cartList[i].id+'_total_price').empty().html('￥'+cartList[i].total_fee);
-                            var member_goods_price = (cartList[i].member_goods_price*cartList[i].goods_num).toFixed(2);
-                            $('#cart_'+cartList[i].id+'_market_price').empty().html('￥'+member_goods_price); //活动价格
-                            $('#changeQuantity_'+cartList[i].id).empty().html(cartList[i].goods_num); //数量
+                            $('#cart_'+cart_list[i].id+'_goods_price').empty().html('￥'+cart_list[i].goods_price);
+                            $('#cart_'+cart_list[i].id+'_total_price').empty().html('￥'+cart_list[i].total_fee);
+                            var member_goods_price = (cart_list[i].member_goods_price*cart_list[i].goods_num).toFixed(2);
+                            $('#cart_'+cart_list[i].id+'_market_price').empty().html('￥'+member_goods_price); //活动价格
+                            $('#changeQuantity_'+cart_list[i].id).empty().html(cart_list[i].goods_num); //数量
                         }
 
                     }else{

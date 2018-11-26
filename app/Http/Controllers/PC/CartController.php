@@ -53,7 +53,9 @@ class CartController extends Controller
         }
     }
     public function asyncUpdateCart(Request $request){
-        return json_encode(['status'=>1]);
+        $cart=$request['cart'];
+        $result=$this->cartRepository->asyncUpdateCart($cart);
+        return json_encode($result);
     }
 
     public function openAddCart()

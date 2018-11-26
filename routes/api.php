@@ -16,9 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+//Admin
 Route::group(['namespace'=>'admin'],function()
 {
-    Route::get('ajaxgetgoodslist', 'GoodsController@ajaxGetGoodsList');
     //goods
     Route::group(['prefix' => 'admin/goods'], function ()
     {
@@ -30,6 +30,7 @@ Route::group(['namespace'=>'admin'],function()
 
 }
 );
+//PC
 Route::group(['namespace' => 'PC'], function ()
 {
     Route::group(['namespace' => 'Common'], function ()
@@ -40,6 +41,7 @@ Route::group(['namespace' => 'PC'], function ()
         Route::any('changetableval', 'CommonController@changeTabVal');
     }
     );
+    Route::get('ajaxgetgoodslist', 'GoodsController@ajaxGetGoodsList');
 }
 );
 
