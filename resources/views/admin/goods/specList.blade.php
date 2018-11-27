@@ -5,6 +5,7 @@
 <div class="page">
   <div class="fixed-bar">
     <div class="item-title">
+        <a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
       <div class="subject">
         <h3>商品规格</h3>
         <h5>商品规格及管理</h5>

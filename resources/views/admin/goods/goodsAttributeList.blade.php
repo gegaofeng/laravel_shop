@@ -5,6 +5,7 @@
 <div class="page">
   <div class="fixed-bar">
     <div class="item-title">
+        <a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
       <div class="subject">
         <h3>商品属性</h3>
         <h5>商品属性及管理</h5>
@@ -46,6 +47,7 @@
            </select>
             <!--排序规则-->             
           <input type="button" onClick="ajax_get_table('search-form2',1)" class="btn" value="搜索"  id="button-filter" />
+          <input type="hidden" name="_token" value="{{CSRF_TOKEN()}}">
         </div>
       </div>
      </form>
@@ -93,7 +95,7 @@
     <div class="tDiv">
       <div class="tDiv2">
         <div class="fbutton">       
-          <a href="{:U('Admin/goods/addEditGoodsAttribute')}">
+          <a href="{{url('admin/goods/addeditgoodsattribute')}}">
           <div class="add" title="添加属性">
             <span><i class="fa fa-plus"></i>添加属性</span>
           </div>
@@ -133,7 +135,7 @@
 		cur_page = page; //当前页面 保存为全局变量
             $.ajax({
                 type : "POST",
-                url:"/index.php?m=Admin&c=goods&a=ajaxGoodsAttributeList&p="+page,//+tab,
+                url:"/admin/goods/ajaxgoodsattributelist?page="+page,//+tab,
                 data : $('#'+form).serialize(),// 你的formid
                 success: function(data){
                     $("#flexigrid").html('');

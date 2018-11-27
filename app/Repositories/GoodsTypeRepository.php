@@ -19,7 +19,16 @@ class GoodsTypeRepository {
     public function __construct() {
         $this ->goodsType=new GoodsType();
     }
-    public function getGoodsTypeList(){
-        return $this ->goodsType->get();
+    public function getGoodsTypeList($order_by='id',$order='asc',$page=10){
+        return $this ->goodsType->orderBy($order_by,$order)->paginate($page);
+    }
+    public function update( array $data){
+        $model=$this ->goodsType->whereId($data['id'])->first();
+        $model->name=$data['name'];
+        return $model->save();
+    }
+    public function insert(array $data){
+        $result=$this ->goodsType->create($data);
+        return $result;
     }
 }

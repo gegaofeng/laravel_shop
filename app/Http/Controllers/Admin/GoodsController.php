@@ -54,7 +54,9 @@ class GoodsController extends Controller {
     }
 
     public function goodsTypeList() {
-        return view('admin.goods.goodsTypeList');
+        $goods_type_rep=new GoodsTypeRepository();
+        $goods_type_list=$goods_type_rep-> getGoodsTypeList();
+        return view('admin.goods.goodsTypeList')->with('goods_type_list',$goods_type_list);
     }
 
     public function specList() {
@@ -66,7 +68,42 @@ class GoodsController extends Controller {
     }
 
     public function goodsAttributeList() {
+        
         return view('admin.goods.goodsAttributeList');
+    }
+    public function addEditGoodsType(Request $request){
+        $id=$request['id'];
+        if($id){
+            $goods_type= (Array)DB::table('Goods_Types')->where('id',$id)->first();
+            return view('admin.goods.addEditGoodsType')-> with('goods_type',$goods_type);
+        }else{
+            $goods_type['name']=[];
+            return view('admin.goods.addEditGoodsType')-> with('goods_type');
+        }        
+    }
+    public function addGoodsType(Request $request){
+        $data['name']=$request['name'];
+        $data['id']=$request['id'];
+        $goods_type_rep=new GoodsTypeRepository();
+        if($request['id']){
+            $result=$goods_type_rep->update($data);
+            if($result){
+                return redirect('/admin/goods/goodstypelist');
+            }else{
+                return '失败';
+            } 
+        }else{
+            $result=$goods_type_rep->insert($data);
+            if($result){
+               return redirect('/admin/goods/goodstypelist'); 
+            }else{
+                return '失败';
+            }
+            
+        }      
+    }
+    public function delGoodsType(Request $request){
+        return 123; 
     }
 
     public function addEditGoods($id = 0) {
@@ -120,6 +157,9 @@ class GoodsController extends Controller {
         $goods_id = $request['goods_id'];
         $goods_spec_arr = $request['spec_arr'];
         return $this -> getSpecInput($goods_id, $goods_spec_arr);
+    }
+    public function ajaxGoodsAttributeList(Request $request){
+        return view('admin.goods.ajaxGoodsAttributeList');
     }
 
     public function getSpecInput($goods_id, $spec_arr) {
@@ -219,5 +259,4 @@ class GoodsController extends Controller {
         $str .= "</table>";
         return $str;
     }
-
 }

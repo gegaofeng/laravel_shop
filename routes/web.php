@@ -415,6 +415,12 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin/goods',), function
     Route::post('ajaxgetspecinput', 'GoodsController@ajaxGetSpecInput');
     Route::get('addeditcategory/id/{id?}','GoodsController@addEditCategory');
     Route::post('addeditcategory/','GoodsController@editCategory');
+    Route::get('goodsattributelist/{id?}','GoodsController@goodsAttributeList');
+    Route::post('ajaxgoodsattributelist','GoodsController@ajaxGoodsAttributeList');
+    Route::get('speclist/{id?}','GoodsController@specList');
+    Route::get('addeditgoodstype/{id?}','GoodsController@addEditGoodsType');
+    Route::get('delgoodstype/{id?}','GoodsController@delGoodsType');
+    Route::post('addeditgoodstype/{id?}','GoodsController@addGoodsType');
 }
 );
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin/plugin',), function ()

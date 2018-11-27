@@ -25,7 +25,7 @@
     <div class="mDiv">
       <div class="ftitle">
         <h3>模型列表</h3>
-        <h5>(共{$pager->totalRows}条记录)</h5>
+        <h5>(共{{$goods_type_list->total()}}条记录)</h5>
           <div class="fbutton">
               <a href="http://help.tp-shop.cn/Index/Help/info/cat_id/5/id/33.html" target="_blank">
                   <div class="add" title="帮助">
@@ -63,7 +63,7 @@
     </div>
     <div class="tDiv">
       <div class="tDiv2">
-        <div class="fbutton"> <a href="{:U('Admin/goods/addEditGoodsType')}">
+        <div class="fbutton"> <a href="{{url('admin/goods/addeditgoodstype')}}">
           <div class="add" title="新增商品模型">
             <span><i class="fa fa-plus"></i>新增商品模型</span>
           </div>
@@ -76,37 +76,40 @@
       <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
         <table>
           <tbody>
-            <volist name="goodsTypeList" id="list">
+            @foreach($goods_type_list as $list)
               <tr>
                 <td class="sign">
                   <div style="width: 24px;"><i class="ico-check"></i></div>
                 </td>
                 <td align="left" class="">
-                  <div style="text-align: left; width: 100px;">{$list.id}</div>
+                  <div style="text-align: left; width: 100px;">{{$list['id']}}</div>
                 </td>
                 <td align="left" class="">
-                  <div style="text-align: left; width: 150px;">{$list.name}</div>
+                  <div style="text-align: left; width: 150px;">{{$list['name']}}</div>
                 </td>                
                 <td align="center" class="handle">
                   <div style="text-align: center; width: 270px; max-width:350px;">
-                    <a href="{:U('Admin/Goods/goodsAttributeList',array('type_id'=>$list['id']))}" class="btn blue"><i class="fa fa-search"></i>属性列表</a>                   
-                    <a href="{:U('Admin/Goods/specList',array('type_id'=>$list['id']))}" class="btn blue"><i class="fa fa-search"></i>规格列表</a>                   
-                    <a href="{:U('Admin/goods/addEditGoodsType',array('id'=>$list['id']))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>编辑</a> 
-                    <a class="btn red"  href="javascript:del_fun('{:U('Goods/delGoodsType',array('id'=>$list['id']))}');"><i class="fa fa-trash-o"></i>删除</a>                    
+                    <a href="{{url('admin/goods/goodsattributelist',array('type_id'=>$list['id']))}}" class="btn blue"><i class="fa fa-search"></i>属性列表</a>                   
+                    <a href="{{url('admin/goods/speclist/'.$list['id'])}}" class="btn blue"><i class="fa fa-search"></i>规格列表</a>                   
+                    <a href="{{url('admin/goods/addeditgoodstype/'.$list['id'])}}" class="btn blue"><i class="fa fa-pencil-square-o"></i>编辑</a> 
+                    <a class="btn red"  href="javascript:del_fun('{{url('admin/goods/delgoodstype/'.$list['id'])}}')"><i class="fa fa-trash-o"></i>删除</a>                    
                   </div>
                 </td>
                 <td align="" class="" style="width: 100%;">
                   <div>&nbsp;</div>
                 </td>
               </tr>
-            </volist>
+            @endforeach
           </tbody>
         </table>
       </div>
       <div class="iDiv" style="display: none;"></div>
     </div>
     <!--分页位置--> 
-    {$pager->show()} </div>
+    <div class="dataTables_paginate paging_simple_numbers">
+        {{$goods_type_list->links('pc.particals.paginator')}}
+    </div>
+  </div>
 </div>
 <script>
     $(document).ready(function(){	

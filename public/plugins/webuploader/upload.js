@@ -1,40 +1,27 @@
 $(function() {
-
 	var $wrap = $('#uploader'),
-
 		// 图片容器
 		$queue = $( '<ul class="filelist"></ul>' ).appendTo( $wrap.find( '.queueList' ) ),
-
 		// 状态栏，包括进度和控制按钮
 		$statusBar = $wrap.find( '.statusBar' ),
-
 		// 文件总体选择信息。
 		$info = $statusBar.find( '.info' ),
-
 		// 上传按钮
 		$upload = $wrap.find( '.uploadBtn' ),
-
 		// 没选择文件之前的内容。
 		$placeHolder = $wrap.find( '.placeholder' ),
-
 		$progress = $statusBar.find( '.progress' ).hide(),
-
 		// 添加的文件数量
 		fileCount = 0,
-
 		// 添加的文件总大小
 		fileSize = 0,
-
 		// 优化retina, 在retina下这个值是2
 		ratio = window.devicePixelRatio || 1,
-
 		// 缩略图大小
 		thumbnailWidth = 110 * ratio,
 		thumbnailHeight = 110 * ratio,
-
 		// 可能有pedding, ready, uploading, confirm, done.
 		state = 'pedding',
-
 		// 所有文件的进度信息，key为file id
 		percentages = {},
 		// 判断浏览器是否支持图片的base64
@@ -49,11 +36,9 @@ $(function() {
 			data.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 			return support;
 		} )(),
-
 		// 检测是否已经安装flash，检测flash的版本
 		flashVersion = ( function() {
 			var version;
-
 			try {
 				version = navigator.plugins[ 'Shockwave Flash' ];
 				version = version.description;
@@ -67,7 +52,6 @@ $(function() {
 			version = version.match( /\d+/g );
 			return parseFloat( version[ 0 ] + '.' + version[ 1 ], 10 );
 		} )(),
-
 		supportTransition = (function(){
 			var s = document.createElement('p').style,
 				r = 'transition' in s ||
@@ -78,10 +62,8 @@ $(function() {
 			s = null;
 			return r;
 		})(),
-
 		// WebUploader实例
 		uploader;
-
 	if ( !WebUploader.Uploader.support('flash') && WebUploader.browser.ie ) {
 		// flash 安装了但是版本过低。
 		if (flashVersion) {
@@ -102,7 +84,6 @@ $(function() {
 					}
 					delete window['expressinstallcallback'];
 				};
-
 				var swf = 'js/expressInstall.swf';
 				// insert flash object
 				var html = '<object type="application/x-shockwave-flash" data="' +  swf + '" ';
@@ -124,14 +105,11 @@ $(function() {
 		} else {
 			$wrap.html('<a href="http://www.adobe.com/go/getflashplayer" target="_blank" border="0"><img alt="get flash player" src="http://www.adobe.com/macromedia/style_guide/images/160x41_Get_Flash_Player.jpg" /></a>');
 		}
-
 		return;
 	} else if (!WebUploader.Uploader.support()) {
 		alert( '您的浏览器不支持上传！');
 		return;
 	}
-
-
 	function updateStatus() {
 		var text = '', stats;
 		if ( state === 'ready' ) {
@@ -142,30 +120,23 @@ $(function() {
 				text = '已成功上传' + stats.successNum+ '份图片，'+
 						stats.uploadFailNum + '份照片上传失败，<a class="retry" href="#">重新上传</a>失败图片或<a class="ignore" href="#">忽略</a>'
 			}
-
 		} else {
 			stats = uploader.getStats();
 			text = '共' + fileCount + '份（' + WebUploader.formatSize( fileSize ) + '），已上传' + fileCount + '份';
-
 			if ( stats.uploadFailNum ) {
 				text += '，失败' + stats.uploadFailNum + '份';
 			}
 		}
-
 		$info.html( text );
 	}
-
 	function setState( val ) {
 		var file, stats;
-
 		if ( val === state ) {
 			return;
 		}
-
 		$upload.removeClass( 'state-' + state );
 		$upload.addClass( 'state-' + val );
 		state = val;
-
 		switch ( state ) {
 			case 'pedding':
 				$placeHolder.removeClass( 'element-invisible' );
@@ -173,7 +144,6 @@ $(function() {
 				$statusBar.addClass( 'element-invisible' );
 				uploader.refresh();
 				break;
-
 			case 'ready':
 				$placeHolder.addClass( 'element-invisible' );
 				$( '#filePicker2' ).removeClass( 'element-invisible');
@@ -181,18 +151,15 @@ $(function() {
 				$statusBar.removeClass('element-invisible');
 				uploader.refresh();
 				break;
-
 			case 'uploading':
 				$( '#filePicker2' ).addClass( 'element-invisible' );
 				$progress.show();
 				$upload.text( '暂停上传' );
 				break;
-
 			case 'paused':
 				$progress.show();
 				$upload.text( '继续上传' );
 				break;
-
 			case 'confirm':
 				$progress.hide();
 				$( '#filePicker2' ).removeClass( 'element-invisible' );
@@ -218,8 +185,6 @@ $(function() {
 		}
 		updateStatus();
 	}
-
-
 	// 根据ID获取file对象
 	function getFileById(ID){
 		var file;
