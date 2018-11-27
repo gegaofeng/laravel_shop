@@ -26,9 +26,10 @@ class CartRepository extends BaseRepository
     /**
      * CartRepository constructor.
      */
-    public function __construct()
+    public function __construct($user_id=0)
     {
         $this->cart = new Cart();
+        $this->user_id=$user_id;
     }
     public function getCartList($user_id){
         $cart_list=$this->cart->where('user_id',$user_id)->get();
@@ -207,7 +208,7 @@ class CartRepository extends BaseRepository
     }
 
     /**
-     * Notes:购物车中已存在该商品时更新数量
+     * Notes:商品加入购物车，购物车中已存在该商品时更新数量
      * User:Feng
      * Date:2018/11/20
      * @param $goods_num
@@ -227,7 +228,7 @@ class CartRepository extends BaseRepository
     }
 
     /**
-     * Notes:
+     * Notes:商品加入购物车，购物车中不存在该商品时，增加该商品
      * User:Feng
      * Date:2018/11/20
      * @param $data
@@ -241,6 +242,13 @@ class CartRepository extends BaseRepository
         }
     }
 
+    /**
+     * Notes:更新购物车信息
+     * User:Feng
+     * Date:2018/11/27
+     * @param array $cart
+     * @return array
+     */
     public function asyncUpdateCart($cart=[]){
         $cart_list=$cart_selected_id=$cart_no_selected_id=[];
         if (empty($cart)){
@@ -265,7 +273,7 @@ class CartRepository extends BaseRepository
         DB::table('carts')->whereIn('id',$cart_selected_id)->update(['selected'=>1]);
         $cart_list=DB::table('carts')->whereIn('id',$cart_selected_id)->get()->toArray();
         foreach ($cart_list as $v){
-            $cart_list_attr[]=array_merge((Array)$v,['cut_fee'=>0,'total_fee'=>0,'goods_fee'=>0]);
+            $cart_list_attr[]=array_merge((Array)$v,['cut_fee'=>0,'total_fee'=>$v->goods_price*$v->goods_num,'goods_fee'=>$v->goods_price]);
         }
 
         //搭配购买待完善
@@ -298,5 +306,35 @@ class CartRepository extends BaseRepository
             }
         }
         return compact('total_fee','goods_fee','goods_num');
+    }
+
+    /**
+     * Notes:更改购物车商品数量
+     * User:Feng
+     * Date:2018/11/27
+     * @param $id
+     * @param $num
+     * @return array
+     */
+    public function changeNum($id,$num){
+        if (!$this->user_id){
+            $cart=$this->cart->where('user_id',$this->user_id)->whereId($id)->first();
+        }else{
+
+        }
+
+        $cart->goods_num=$num;
+        $result=$cart->save();
+        if ($result){
+            return ['status' => 1, 'msg' => '修改商品数量成功', 'result' => ''];
+        }else{
+            return ['status'=>0,'msg'=>'修改商品数量失败，请重试','result'=>''];
+        }
+    }
+    public function delete(array $cart_id){
+        if (!$this->user_id){
+            $result=$this->cart->where('user_id',$this->user_id)->whereIn('id',$cart_id)->delete();
+        }
+        return $result;
     }
 }
