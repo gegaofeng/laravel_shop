@@ -17,7 +17,7 @@ Route::group(['namespace'=>'PC'],function ()
     Route::get('/', 'IndexController@index');
     Route::get('login', 'Auth\LoginController@index');
     Route::get('register', 'Auth\RegisterController@index');
-    Route::get('goodsList/id/{id}', 'GoodsController@goodsList');
+    Route::get('goodslist/id/{id}', 'GoodsController@goodsList');
     Route::get('goodsinfo/{id}', 'GoodsController@goodsInfo');
     Route::post('goods/activity', 'GoodsController@activity');
 
@@ -368,6 +368,8 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin/order',), function
     Route::get('returnlist', 'OrderController@returnList');
     Route::get('addorder', 'OrderController@addOrder');
     Route::get('orderlog', 'OrderController@orderLog');
+    Route::post('ajaxindex','OrderController@ajaxIndex');
+    Route::get('detail/{id}','OrderController@detail');
 }
 );
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin/import',), function ()

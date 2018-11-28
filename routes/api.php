@@ -18,7 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::group(['namespace'=>'admin'],function()
 {
-    Route::get('ajaxgetgoodslist', 'GoodsController@ajaxGetGoodsList');
     //goods
     Route::group(['prefix' => 'admin/goods'], function ()
     {
@@ -32,6 +31,7 @@ Route::group(['namespace'=>'admin'],function()
 );
 Route::group(['namespace' => 'PC'], function ()
 {
+        Route::get('ajaxgetgoodslist', 'GoodsController@ajaxGetGoodsList');
 }
 );
     Route::group(['namespace' => 'Common'], function ()

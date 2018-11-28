@@ -11,6 +11,7 @@ use App\Repositories\GoodsTypeRepository;
 use App\Repositories\GoodsSpecRepository;
 use App\Repositories\GoodsSpecItemRepository;
 use App\Repositories\GoodsSpecImageRepository;
+use App\Repositories\GoodsAttributeRepository;
 use Illuminate\Support\Facades\DB;
 
 class GoodsController extends Controller {
@@ -68,8 +69,9 @@ class GoodsController extends Controller {
     }
 
     public function goodsAttributeList() {
-        
-        return view('admin.goods.goodsAttributeList');
+        $goods_type_rep=new GoodsTypeRepository();
+        $goods_type_list=$goods_type_rep-> getAll();
+        return view('admin.goods.goodsAttributeList')-> with('goods_type_list',$goods_type_list);
     }
     public function addEditGoodsType(Request $request){
         $id=$request['id'];
@@ -147,7 +149,6 @@ class GoodsController extends Controller {
         if ($goods_id) {
             $goods_spec_image_list = $goods_spec_image -> getSpecImgListByGoodsId($goods_id) -> keyBy('spec_image_id');
         }
-//        return $goods_spec_image_list;
         $goods_spec_price = new \App\Repositories\GoodsSpecPriceRepository();
         $items_ids = $goods_spec_price -> getGoodsSpecItemIdByGoodsId($goods_id);
         return view('admin.goods.ajaxSpecSelect') -> with('spec_list', $spec_list) -> with('spec_image_list', $goods_spec_image_list) -> with('items_ids', $items_ids);
@@ -159,7 +160,18 @@ class GoodsController extends Controller {
         return $this -> getSpecInput($goods_id, $goods_spec_arr);
     }
     public function ajaxGoodsAttributeList(Request $request){
-        return view('admin.goods.ajaxGoodsAttributeList');
+        if($request['type_id']){
+            $where['type_id']=$request['type_id'];
+        }else{
+            $where=[];
+        }
+        $goods_attr_rep=new GoodsAttributeRepository();
+        $goods_attr_list= $goods_attr_rep-> getGoodsAttributeList($where);
+        $goods_type_rep=new GoodsTypeRepository();    
+        $goods_type_list=$goods_type_rep-> getAll();
+//        var_dump( $goods_attr_list);
+        $attr_input_type = array(0=>'手工录入',1=>' 从列表中选择',2=>' 多行文本框');
+    return view('admin.goods.ajaxGoodsAttributeList')->with('goods_attribute_list', $goods_attr_list)-> with('attr_input_type',$attr_input_type)->with('goods_type_list',$goods_type_list);
     }
 
     public function getSpecInput($goods_id, $spec_arr) {

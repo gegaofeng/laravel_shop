@@ -41,9 +41,9 @@
         <div class="sDiv2"> 
           <select name="type_id" id="type_id"  class="select">
                 <option value="">所有模型</option>
-                <foreach name="goodsTypeList" item="v" key="k" >
-                   <option value="{$v['id']}">{$v['name']}</option>
-                </foreach>
+                @foreach($goods_type_list as $goods_type)
+                   <option value="{{$goods_type['id']}}">{{$goods_type['name']}}</option>
+                @endforeach
            </select>
             <!--排序规则-->             
           <input type="button" onClick="ajax_get_table('search-form2',1)" class="btn" value="搜索"  id="button-filter" />

@@ -31,4 +31,7 @@ class GoodsTypeRepository {
         $result=$this ->goodsType->create($data);
         return $result;
     }
+    public function getAll($order_by='id',$order='asc'){
+        return $this ->goodsType->orderBy($order_by,$order)->get();
+    }
 }

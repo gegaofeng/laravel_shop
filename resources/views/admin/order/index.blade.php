@@ -1,6 +1,5 @@
 @include("admin.public.layout")
-<script type="text/javascript" src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
-
+<script type="text/javascript" src="{{url('/static/js/layer/laydate/laydate.js')}}"></script>
 <body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
 <div id="append_parent"></div>
 <div id="ajaxwaitid"></div>
@@ -32,14 +31,14 @@
         <h5>(共{$page->totalRows}条记录)</h5>
       </div>
       <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
-	  <form class="navbar-form form-inline"  method="post" action="{:U('Admin/order/export_order')}"  name="search-form2" id="search-form2">  
-	  		<input type="hidden" name="order_by" value="order_id">
+	  <form class="navbar-form form-inline"  method="post" action="{{url('admin/order/export_order')}}"  name="search-form2" id="search-form2">  
+            <input type="hidden" name="order_by" value="order_id">
             <input type="hidden" name="sort" value="desc">
             <input type="hidden" name="user_id" value="{$Request.param.user_id}">
             <input type="hidden" name="order_ids" value="">
             <!--用于查看结算统计 包含了哪些订单-->
             <input type="hidden" value="{$_GET['order_statis_id']}" name="order_statis_id" />
-                                    
+            <input type="hidden" name="_token" value="{{CSRF_TOKEN()}}">              
       <div class="sDiv">
         <div class="sDiv2">
         	<input type="text" size="30" id="start_time" name="start_time" value="{$start_time}" class="qsbox"  placeholder="下单开始时间">
@@ -51,7 +50,7 @@
         	<select name="pay_status" class="select sDiv3" style="margin-right:5px;margin-left:5px">
                     <option value="">支付状态</option>
                     <option value="0">未支付</option>
-        			<option value="1">已支付</option>
+                    <option value="1">已支付</option>
             </select>
         </div>
         <div class="sDiv2">	   
@@ -172,18 +171,14 @@
    	</div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){	
-	   
+    $(document).ready(function(){	   
      	$('#start_time').layDate();
-     	$('#end_time').layDate();
-     	
+     	$('#end_time').layDate();   	
 		// 点击刷新数据
-		$('.fa-refresh').click(function(){
+    $('.fa-refresh').click(function(){
 			location.href = location.href;
 		});
-		
 		ajax_get_table('search-form2',1);
-		
 		$('.ico-check ' , '.hDivBox').click(function(){
 			$('tr' ,'.hDivBox').toggleClass('trSelected' , function(index,currentclass){
 	    		var hasClass = $(this).hasClass('trSelected');
@@ -207,7 +202,7 @@
         cur_page = page; //当前页面 保存为全局变量
         $.ajax({
             type : "POST",
-            url:"/index.php/Admin/order/ajaxindex/p/"+page,//+tab,
+            url:"/admin/order/ajaxindex?page="+page,//+tab,
             data : $('#'+tab).serialize(),//
             success: function(data){
                 $("#flexigrid").html('');
@@ -231,7 +226,7 @@
         ajax_get_table('search-form2',cur_page);
     }
 	
-	function exportReport(){
+    function exportReport(){
         var selected_ids = '';
         $('.trSelected' , '#flexigrid').each(function(i){
             selected_ids += $(this).data('order-id')+',';
@@ -240,9 +235,7 @@
             $('input[name="order_ids"]').val(selected_ids.substring(0,selected_ids.length-1));
         }
 		$('#search-form2').submit();
-	}
-	
-	 
+    }	 
 </script>
 </body>
 </html>
