@@ -5,8 +5,8 @@
    <title>登录-{$tpshop_config['shop_info_store_title']}</title>
    <meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
-  <link rel="stylesheet" href="__STATIC__/css/fn_login.css">
-  <script src="__STATIC__/js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="{{asset('home/css/fn_login.css')}}">
+  <script src="{{asset('home/js/jquery-1.11.3.min.js')}}" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 <div class="u-diaolog-login-content">

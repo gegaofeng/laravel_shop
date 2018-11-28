@@ -452,7 +452,7 @@
 										<a href="javascript:void(0);" class="deleteGoods deleteItem" data-goodsid="{{$cart['goods_id']}}" data-cart-id="{{$cart['id']}}">
 											删除</a>
 									</p>
-									<p><a class="moveCollect collectItem" data-id="{{$cart['goods_id']}}">移到我的收藏</a></p>
+									<p><a href="javascript:void(0);" class="moveCollect collectItem" data-id="{{$cart['goods_id']}}">移到我的收藏</a></p>
 								</div>
 							</div>
 						</div>
@@ -466,7 +466,7 @@
 	</div>
 	<!--购物车商品列表-e-->
 
-	<!--全选按钮-s-->
+	<!--结算栏-s-->
 	<div class="shoplist_deta floatflex">
 		<div class="w1224">
 			<div class="edge_tw_foot">
@@ -486,7 +486,7 @@
 						</div>
 						<div class="column widallr">
 							<div class="butpayin">
-								<a class="paytotal" href="javascript:void(0)" data-url="{:U('Home/Cart/cart2')}">去结算</a>
+								<a class="paytotal" href="javascript:void(0)" data-url="{{url('cart/cart2')}}">去结算</a>
 							</div>
 							<div class="totalprice">
 								<span class="car_sumprice">总价：<em id="total_fee">￥0</em><i class="bulb"></i></span>
@@ -503,7 +503,7 @@
 			</div>
 		</div>
 	</div>
-	<!--全选按钮-e-->
+	<!--结算栏-e-->
 	<script type="text/javascript">
         //去结算旁边的小图标
         $(function(){
@@ -1140,7 +1140,7 @@
             $.ajax({
                 headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
                 type: "POST",
-                url: "{:U('Home/Goods/collect_goods')}",//+tab,
+                url: "{{url('goods/collectgoods')}}",//+tab,
                 data: {goods_ids: goods_arr},//+tab,
                 dataType: 'json',
                 success: function (data) {
@@ -1163,7 +1163,7 @@
             shadeClose: true,
             shade: 0.5,
             area: ['490px', '460px'],
-            content: "{:U('Home/User/pop_login')}",
+            content: "{{url('poplogin')}}",
         });
     }
     //我的收藏
@@ -1175,7 +1175,7 @@
         } else {
             $.ajax({
                 type : "get",
-                url:"{:U('Home/User/myCollect')}",//+tab,
+                url:"{{url('user/mycollect')}}",//+tab,
                 dataType:'json',
                 success: function(data){
                     if(data.status == 1){
@@ -1197,7 +1197,7 @@
                             if(data.result[i].goods[0].is_virtual != 1){
                                 products_html +=  '<a onclick="javascript:AjaxAddCart('+data.result[i].goods_id+',1);" class="btn-append"><b></b>加入购物车</a>';
                             }else{
-                                products_html +=  '<a href="/index.php/home/Goods/goodsInfo/id/'+data.result[i].goods_id+'" class="btn-append"><b></b>加入购物车</a>';
+                                products_html +=  '<a href="/goodsinfo/'+data.result[i].goods_id+'" class="btn-append"><b></b>加入购物车</a>';
                             }
                             products_html += '</div></div></li>';
                             if(i%4 == 3){
@@ -1225,7 +1225,7 @@
         } else {
             $.ajax({
                 type : "get",
-                url:"{:U('Home/User/historyLog')}",//+tab,
+                url:"{{url('user/historylog')}}",//+tab,
                 dataType:'json',
                 success: function(data){
                     if(data.status == 1){
@@ -1247,7 +1247,7 @@
                             if(data.result[i].goods[0].is_virtual != 1){
                                 products_html +=  '<a onclick="javascript:AjaxAddCart('+data.result[i].goods_id+',1);" class="btn-append"><b></b>加入购物车</a>';
                             }else{
-                                products_html +=  '<a href="/index.php/home/Goods/goodsInfo/id/'+data.result[i].goods_id+'" class="btn-append"><b></b>加入购物车</a>';
+                                products_html +=  '<a href="/goodsinfo/'+data.result[i].goods_id+'" class="btn-append"><b></b>加入购物车</a>';
                             }
                             products_html += '</div></div></li>';
                             if(i%4 == 3){

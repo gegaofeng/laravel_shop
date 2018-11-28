@@ -17,4 +17,7 @@ class LoginController extends Controller
     public function index(){
         return view('pc.user.login');
     }
+    public function popLogin(){
+        return view('pc.user.popLogin');
+    }
 }
