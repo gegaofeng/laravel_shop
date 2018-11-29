@@ -61,6 +61,8 @@
                         <div class="login_bnt">
                             <a href="javascript:void(0);" onclick="checkSubmit();" class="J-login-submit" name="sbtbutton">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
                         </div>
+                        <input type="hidden" name="_token" value="{{CSRF_TOKEN()}}">
+                        <input type="hidden" name="pre_url" value="{{url()->previous()}}">
                     </div>
                 </form>
                 <div class="layel3">
@@ -127,8 +129,8 @@
             return false;
         }
         if(!checkMobile(username) && !checkEmail(username)){
-            showErrorMsg('账号格式不匹配!');
-            return false;
+            // showErrorMsg('账号格式不匹配!');
+             // return false;
         }
         if(password == ''){
             showErrorMsg('密码不能为空!');
@@ -140,11 +142,12 @@
         }
         $.ajax({
             type : 'post',
-            url : '/index.php?m=Home&c=User&a=do_login&t='+Math.random(),
+            url : '/login?t='+Math.random(),
             data : $('#loginform').serialize(),
             dataType : 'json',
             success : function(res){
                 if(res.status == 1){
+                    alert(res.url);
                     window.location.href = res.url;
                 }else{
                     showErrorMsg(res.msg);

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Model\GoodsSpec;
 use App\Model\GoodsSpecItem;
+use App\Model\User;
+use App\Repositories\CartRepository;
 use App\Repositories\GoodsCategoryRepository;
 use App\Repositories\GoodsImagesRepository;
 use App\Repositories\GoodsRepository;
@@ -11,6 +13,8 @@ use App\Repositories\GoodsSpecPriceRepository;
 use App\Repositories\NavigationRepository;
 use App\Tools\Tools;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class TestController extends Controller
 {
@@ -22,7 +26,22 @@ class TestController extends Controller
 //        $this->model=new GoodsRepository();
     }
 
-    public function test(){
+    public function test(Request $request){
+        $data=['name'=>'test','email'=>'123@qq.com','password'=>'test'];
+        return \App\User::create([
+                                'name' => $data['name'],
+                                'email' => $data['email'],
+                                'password' => Hash::make($data['password']),
+                            ]);
+        var_dump(Auth::user());
+        var_dump(Auth::id());
+        $request->session()->put('time',time());
+        $request->session()->put('user_id',time());
+        var_dump($request->session()->all());
+        var_dump($request->session()->get('_token'));
+//        $request->session()->regenerate();
+        var_dump($request->session()->all());
+        var_dump($request->session()->get('_token'));
 //        $a=GoodsSpec::with('goodsSpecItem')->whereIn('id',[1,2])->get();
 //        $a=GoodsSpecItem::with('spec')->whereIn('id',[9,11,16,12,13])->get();
 //        return $a;
@@ -34,14 +53,14 @@ class TestController extends Controller
 ////        return $data;
 //        return view('test')->with('data',$data);
 //        return $this->model->getGoodsById(96);
-        $tools=new Tools();
+//        $tools=new Tools();
 //        return $tools::create_goods_thum_images(202,236,236);
-        $goodsSpecPriceRepository=new GoodsSpecPriceRepository();
-         $spec_goods_price=$goodsSpecPriceRepository->getGoodsSpecPriceByGoodsId(1);
+//        $goodsSpecPriceRepository=new GoodsSpecPriceRepository();
+//         $spec_goods_price=$goodsSpecPriceRepository->getGoodsSpecPriceByGoodsId(1);
 //        return view('test')->with('spec_goods_price',$spec_goods_price);
-        $a=new CartRepository();
+//        $a=new CartRepository();
 //        return $a->setGoodsRepository(1211);
-        return $a->getCartList('0');
+//        return $a->getCartList('0');
 //        $tools=new Tools();
 //        return $tools::create_goods_thum_images(88,236,236);
 //        $goods_cat=new GoodsCategoryRepository();
@@ -53,13 +72,13 @@ class TestController extends Controller
 //        $cat=new GoodsCategoryRepository();
 //        return $cat-> getCatSonTree(13);
 
-        $a=new GoodsRepository();
+//        $a=new GoodsRepository();
 //        return view('test')->with('a',$a-> getGoodsById(1));
 //        var_dump($a-> getGoodsById(1));
-        $a=new \App\Repositories\GoodsSpecRepository();
+//        $a=new \App\Repositories\GoodsSpecRepository();
 //        var_dump($a-> getSpecListByTypeId(1));
 //         return $a-> getSpecListByTypeId(1);
-        $a=new GoodsSpecPriceRepository();
-        return $a-> getGoodsSpecItemIdByGoodsId(104);
+//        $a=new GoodsSpecPriceRepository();
+//        return $a-> getGoodsSpecItemIdByGoodsId(104);
     }
 }
