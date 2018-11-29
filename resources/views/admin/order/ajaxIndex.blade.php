@@ -25,13 +25,16 @@
           <div style="text-align: center; width: 60px;" class="">{{$list['order_amount']}}</div>
         </td>
         <td align="center" abbr="article_time" axis="col6" class="">
-          <div style="text-align: center; width: 60px;" class="">{$order_status[$list[order_status]]}<if condition="$list['is_cod'] eq '1'"><span style="color: red">(货到付款)</span></if></div>
+          <div style="text-align: center; width: 60px;" class="">{{$order_status[$list['order_status']]}}
+              @if($list['is_cod'] == '1')<span style="color: red">(货到付款)</span>
+              @endif
+          </div>
         </td>
         <td align="center" abbr="article_time" axis="col6" class="">
-          <div style="text-align: center; width: 60px;" class="">{$pay_status[$list[pay_status]]}</div>
+          <div style="text-align: center; width: 60px;" class="">{{$pay_status[$list['pay_status']]}}</div>
         </td>
         <td align="center" abbr="article_time" axis="col6" class="">
-          <div style="text-align: center; width: 60px;" class="">{$shipping_status[$list[shipping_status]]}</div>
+          <div style="text-align: center; width: 60px;" class="">{{$shipping_status[$list['shipping_status']]}}</div>
         </td>
         <td align="center" abbr="article_time" axis="col6" class="">
           <div style="text-align: center; width: 60px;" class="">{{$list['pay_name'] }}</div>
@@ -64,6 +67,7 @@
 <div class="row">
     <div class="col-sm-6 text-left"></div>
     <div class="col-sm-6 text-right">{{$order_list->links('pc.particals.paginatorAjax')}}</div>
+    <div class="col-sm-6"><h5>(共{{$order_list->total()}}条记录)</h5></div>
 </div>
 <script>
     $(".pagination  a").click(function(){
