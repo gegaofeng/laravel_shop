@@ -26,13 +26,15 @@
     <div class="u-input mb10">
       <label for="loginpwd" class="u-label u-pwd"></label>
       <input id="password" type="password" class="u-txt J-txt" name="password" tabindex="2" placeholder="密码">
+        <input id="_token" type="hidden" name="_token" value="{{CSRF_TOKEN()}}">
     </div>
     <div class="u-forget fn-clear">
       <p class="ltxt">
-      	<label><input type="hidden" name="referurl" id="referurl" value="{$referurl}">
+      	<label>
+            <input type="hidden" name="referurl" id="referurl" value="{{$refer_url}}">
       	<input type="checkbox" class="ainput" name="chkRememberMe" />自动登录</label>
       </p>
-      <a class="f12" href="{:U('Home/User/forget_pwd')}" target="_blank">忘记密码了？</a>
+      <a class="f12" href="{{url('user/forget_pwd')}}" target="_blank">忘记密码了？</a>
     </div>
     <div class="u-input u-authcode mt10" id="logincaptcha">
         <div class="u-vcode">
@@ -62,13 +64,14 @@ function checkSubmit()
 	var password = $.trim($('#password').val());
 	var referurl = $('#referurl').val();
 	var verify_code = $.trim($('#verify_code').val());
+	let _token=$('#_token').val();
 	if(username == ''){
 		showErrorMsg('用户名不能为空!');
 		return false;
 	}
 	if(!checkMobile(username) && !checkEmail(username)){
 		showErrorMsg('账号格式不匹配!');
-		return false;
+		// return false;
 	}
 	if(password == ''){
 		showErrorMsg('密码不能为空!');
@@ -82,8 +85,8 @@ function checkSubmit()
 	//$('#login-form').submit();
 	$.ajax({
 		type : 'post',
-		url : '/index.php?m=Home&c=User&a=do_login&t='+Math.random(),
-		data : {username:username,password:password,referurl:referurl,verify_code:verify_code},		
+		url : '/login?t='+Math.random(),
+		data : {username:username,password:password,referurl:referurl,verify_code:verify_code,_token:_token},
 		dataType : 'json',
 		success : function(res){
 			if(res.status == 1){

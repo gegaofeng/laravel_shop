@@ -34,13 +34,13 @@
             </div>
         </div>
         <ul class="top-ri-header fr clearfix">
-            <li><a target="_blank" href="/Home/Order/order_list.html">我的订单</a></li>
+            <li><a target="_blank" href="{{url('order/list')}}">我的订单</a></li>
             <li class="spacer"></li>
-            <li><a target="_blank" href="/Home/User/visit_log.html">我的浏览</a></li>
+            <li><a target="_blank" href="{{url('user/visit')}}">我的浏览</a></li>
             <li class="spacer"></li>
-            <li><a target="_blank" href="/Home/User/goods_collect.html">我的收藏</a></li>
+            <li><a target="_blank" href="{{url('user/collection')}}">我的收藏</a></li>
             <li class="spacer"></li>
-            <li><a target="_blank" href="http://help.tp-shop.cn/Index/Help/channel/cat_id/5.html">帮助中心</a></li>
+            <li><a target="_blank" href="{{url('help')}}">帮助中心</a></li>
             <li class="spacer"></li>
             <li class="hover-ba-navdh">
                 <div class="nav-dh">
@@ -79,7 +79,7 @@
                 <ul id="search_list"></ul>
             </div>
             <script type="text/javascript">
-                ;(function ($) {
+                (function ($) {
                     $.fn.extend({
                         donetyping: function (callback, timeout) {
                             timeout = timeout || 1e3;

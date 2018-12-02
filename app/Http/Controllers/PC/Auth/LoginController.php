@@ -19,14 +19,15 @@ class LoginController extends Controller
         return view('pc.user.login');
     }
     public function popLogin(){
-        return view('pc.user.popLogin');
+        $refer_url=isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:url('/');
+        return view('pc.user.popLogin')->with('refer_url',$refer_url);
     }
     public function login(Request $request){
         $username=$request['username'];
         $password=$request['password'];
-        $pre_url=$request['pre_url'];
+        $refer_url=$request['referurl'];
         if (Auth::attempt(array('name'=>$username,'password'=>$password))){
-            return json_encode(['status'=>1,'url'=>$pre_url]);
+            return json_encode(['status'=>1,'url'=>$refer_url]);
         }else{
             return 'error';
         }
