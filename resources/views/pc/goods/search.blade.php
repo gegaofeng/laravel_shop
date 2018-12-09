@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
+@extends('pc.layouts.home')
+@section('personal_style')
 	<title>搜索列表</title>
-	<link rel="stylesheet" type="text/css" href="__STATIC__/css/tpshop.css" />
-	<script src="__STATIC__/js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="__PUBLIC__/js/layer/layer-min.js"></script>
-	<script src="__PUBLIC__/js/global.js"></script>
-	<script src="__PUBLIC__/js/pc_common.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{asset('home/css/tpshop.css')}}" />
     <style>
 		@media screen and (min-width:1260px) and (max-width: 1465px) {
 			.w1430{width: 1224px;}
@@ -16,10 +10,11 @@
 			.w1430{width: 983px;}
 		}
     </style>
-</head>
+	@endsection
+@section('body')
 <body>
 <!--header-s-->
-<include file="public/header" w='w1430'/>
+@include('pc.public.head')
 <!--header-e-->
 <div class="search-box p">
 	<div class="w1430">
@@ -161,7 +156,7 @@
 						<div class="lr-more">
 							<!--<a href="javascript:void(0)"><span class="dx_choice">多选</span><i class="litt-pluscr"></i></a>
                             <a href="javascript:void(0)"><span class="gd_more">更多</span><i class="litt-tcr"></i></a>-->
-							<form action="<?php echo urldecode(U('/Home/Goods/search',$filter_param,''));?>" method="post" id="price_form">
+							<form action="" method="post" id="price_form">
 								<input type="text" onpaste="this.value=this.value.replace(/[^\d]/g,'')" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" name="start_price" id="start_price" value=""/>
 								<span>-</span>
 								<input type="text" onpaste="this.value=this.value.replace(/[^\d]/g,'')" onkeyup="this.value=this.value.replace(/[^\d]/g,'')"  name="end_price" id="end_price" value=""/>
@@ -214,15 +209,15 @@
 			<div class="sx_topb ba-dark-bg">
 				<div class="f-sort fl">
 					<ul>
-						<li class="<if condition="$Request.param.sort eq ''">red</if>"><a href="<?php echo urldecode(U("/Home/Goods/search",$filter_param,''));?>">综合</a></li>
-						<li class="<if condition="$Request.param.sort eq 'sales_sum'">red</if>"><a href="<?php echo urldecode(U("/Home/Goods/search",array_merge($filter_param,array('sort'=>'sales_sum')),''));?>">销量</a></li>
+						<li class="<if condition="$Request.param.sort eq ''">red</if>"><a href="">综合</a></li>
+						<li class="<if condition="$Request.param.sort eq 'sales_sum'">red</if>"><a href="">销量</a></li>
 						<if condition="$Request.param.sort_asc eq 'desc'">
-							<li class="<if condition="$Request.param.sort eq 'shop_price'">red</if>"><a href="<?php echo urldecode(U("/Home/Goods/search",array_merge($filter_param,array('sort'=>'shop_price','sort_asc'=>'asc')),''));?>">价格<i class="litt-zzx1"></i></a></li>
+							<li class="<if condition="$Request.param.sort eq 'shop_price'">red</if>"><a href="">价格<i class="litt-zzx1"></i></a></li>
 						<else />
-							<li class="<if condition="$Request.param.sort eq 'shop_price'">red</if>"><a href="<?php echo urldecode(U("/Home/Goods/search",array_merge($filter_param,array('sort'=>'shop_price','sort_asc'=>'desc')),''));?>">价格<i class="litt-zzx1"></i></a></li>
+							<li class="<if condition="$Request.param.sort eq 'shop_price'">red</if>"><a href="">价格<i class="litt-zzx1"></i></a></li>
 						</if>
-						<li class="<if condition="$Request.param.sort eq 'comment_count'">red</if>"><a href="<?php echo urldecode(U("/Home/Goods/search",array_merge($filter_param,array('sort'=>'comment_count')),''));?>">评论</a></li>
-						<li class="<if condition="$Request.param.sort eq 'is_new'">red</if>"><a href="<?php echo urldecode(U("/Home/Goods/search",array_merge($filter_param,array('sort'=>'is_new')),''));?>">新品</a></li>
+						<li class="<if condition="$Request.param.sort eq 'comment_count'">red</if>"><a href="">评论</a></li>
+						<li class="<if condition="$Request.param.sort eq 'is_new'">red</if>"><a href="">新品</a></li>
 					</ul>
 				</div>
 				<!--<div class="f-address fl">-->
@@ -301,7 +296,7 @@
 				</ul>
 			</div>
 			<div class="page p">
-				{$page->show()}
+				{{$goods_list->links()}}
 			</div>
 		</div>
 	</div>
@@ -327,7 +322,7 @@
 		favorite_page++;
 		$.ajax({
 			type: "GET",
-			url: "/index.php?m=Home&c=Index&a=ajax_favorite&i=7&p="+favorite_page,//+tab,
+			url: "/ajaxfavorite?p="+favorite_page,//+tab,
 			success: function (data) {
 				if(data == ''&& favorite_page > 1){
 					favorite_page = 0;
@@ -342,14 +337,11 @@
 	}
 </script>
 <!--footer-s-->
-<div class="footer p">
-    <include file="public/footer" />
-	<include file="public/sidebar_cart" />
-</div>
+@include("pc.public.footer")
 <!--footer-e-->
-<script src="__STATIC__/js/lazyload.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="__STATIC__/js/popt.js" type="text/javascript" charset="utf-8"></script>
-<script src="__STATIC__/js/headerfooter.js" type="text/javascript" charset="utf-8"></script>
+<script src="{{asset('home/js/lazyload.min.js')}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{asset('home/js/popt.js')}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{asset('home/js/headerfooter.js')}}" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     //更多
      $('.gd_more').parent().click(function(){
@@ -571,4 +563,4 @@
     }
 </script>
 </body>
-</html>
+@endsection

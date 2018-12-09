@@ -9,6 +9,7 @@ use App\Repositories\GoodsSpecPriceRepository;
 use App\Tools\Tools;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class GoodsController extends Controller
 {
@@ -77,5 +78,16 @@ class GoodsController extends Controller
         $goods_id_list=get_arr_column($goods_list,'goods_id');
         $goods_images=$this->goodsImagesRepository->getGoodsImagesByGoodsId($goods_id_list);
         return view('pc.goods.ajaxGetGoodsList')->with('goods_list',$goods_list)->with('goods_images',$goods_images);
+    }
+    public function search(Request $request){
+        $q=urldecode(trim($request['q']));
+        $key_word='%'.$q."%";
+//        return $q;
+//        $where['goods_name']=array('like', '%' . $q . '%');
+//        $goodsHaveSearchWord = DB::table('goods')->where('goods_name','like','%'.$q.'%')->count();
+//        return $goodsHaveSearchWord;
+        $goods_list=$this->goodsRepository->search($key_word);
+//        return $goods_list;
+        return view('pc.goods.search')->with('goods_list',$goods_list);
     }
 }

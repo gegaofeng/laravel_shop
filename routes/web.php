@@ -22,7 +22,8 @@ Route::group(['namespace'=>'PC'],function ()
     Route::get('goodslist/id/{id}', 'GoodsController@goodsList');
     Route::get('goodsinfo/{id}', 'GoodsController@goodsInfo');
     Route::post('goods/activity', 'GoodsController@activity');
-
+    Route::get('search','GoodsController@search');
+    Route::get('ajaxfavorite','IndexController@ajaxFavorite');
 
 }
 );
