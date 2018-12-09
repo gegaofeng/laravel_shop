@@ -16,11 +16,14 @@ Route::group(['namespace'=>'PC'],function ()
 {
     Route::get('/', 'IndexController@index');
     Route::get('login', 'Auth\LoginController@index');
+    Route::post('login','Auth\LoginController@login');
+    Route::get('poplogin','Auth\LoginController@popLogin');
     Route::get('register', 'Auth\RegisterController@index');
     Route::get('goodslist/id/{id}', 'GoodsController@goodsList');
     Route::get('goodsinfo/{id}', 'GoodsController@goodsInfo');
     Route::post('goods/activity', 'GoodsController@activity');
-
+    Route::get('search','GoodsController@search');
+    Route::get('ajaxfavorite','IndexController@ajaxFavorite');
 
 }
 );
@@ -32,6 +35,7 @@ Route::group(['namespace' => 'PC', 'prefix' => 'cart'], function ()
     Route::get('openaddcart', 'CartController@openAddCart');
     Route::get('ajaxgetcartlist', 'CartController@ajaxGetCartList');
     Route::post('asyncupdatecart', 'CartController@asyncUpdateCart');
+    Route::post('delete','CartController@delete');
 }
 );
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function ()
@@ -62,6 +66,7 @@ Route::group(['namespace' => 'PC', 'prefix' => 'cart'], function ()
     Route::post('ajaxaddcart', 'CartController@ajaxAddCart');
     Route::get('openaddcart', 'CartController@openAddCart');
     Route::get('ajaxgetcartlist', 'CartController@ajaxGetCartList');
+    Route::post('changenum','CartController@changeNum');
 }
 );
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function ()

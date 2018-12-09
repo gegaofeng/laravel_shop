@@ -16,9 +16,16 @@ class CartController extends Controller
 
     public function __construct()
     {
-        $this->cartRepository = new CartRepository();
+        $this->cartRepository = new CartRepository($this->user_id);
     }
 
+    /**
+     * Notes:购物车首页
+     * User:Feng
+     * Date:2018/11/27
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
         $cart_list=$this->cartRepository->getCartList($this->getUserId());
@@ -52,10 +59,45 @@ class CartController extends Controller
             return $error;
         }
     }
+
+    /**
+     * Notes:异步更新购物车信息
+     * User:Feng
+     * Date:2018/11/27
+     * @param Request $request
+     * @return string
+     */
     public function asyncUpdateCart(Request $request){
-        return json_encode(['status'=>1]);
+        $cart=$request['cart'];
+        $result=$this->cartRepository->asyncUpdateCart($cart);
+        return json_encode($result);
     }
 
+    /**
+     * Notes:修改购物车商品数量
+     * User:Feng
+     * Date:2018/11/27
+     * @param Request $request
+     * @return string
+     */
+    public function changeNum(Request $request){
+        $cart=$request->post('cart');
+        if (empty($cart)){
+            return json_encode(['status'=>0,'msg'=>'请选择要更改数量的商品','result'=>'']);
+        }
+        $result=$this->cartRepository->changeNum($cart['id'],$cart['goods_num']);
+        return json_encode($result);
+    }
+public function delete(Request $request){
+        $carts_id=$request['cart_ids'];
+//        return $carts_id;
+        $result=$this->cartRepository->delete($carts_id);
+        if ($result){
+            return json_encode(['status' => 1, 'msg' => '删除成功', 'result' => $result]);
+        }else{
+            return json_encode(['status' => 0, 'msg' => '删除失败', 'result' => $result]);
+        }
+}
     public function openAddCart()
     {
         return view('pc.cart.openAddCart');

@@ -3,7 +3,7 @@
 	<title>我的购物车列表</title>
 	<link rel="stylesheet" type="text/css" href="{{url('home/css/tpshop.css')}}" />
 	<script src="{{url('js/locationJson.js')}}"></script>
-	<script src="{{url('static/js/location.js')}}" type="text/javascript" charset="utf-8"></script>
+	<script src="{{url('home/js/location.js')}}" type="text/javascript" charset="utf-8"></script>
 	<script src="{{url('js/layer/layer.js')}}" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="{{url('home/css/location.css')}}" type="text/css"><!-- 收货地址，物流运费 -->
 <style>
@@ -190,7 +190,7 @@
 			@foreach($cart_list as $cart)
 				@if($cart['combination_cart'])
 					<!--搭配套餐标题 s-->
-					<div class="meal-conts-name p edge_{$cart.id}" style="border-bottom: 1px solid #d5d5d5;">
+					<div class="meal-conts-name p edge_{{$cart['id']}}" style="border-bottom: 1px solid #d5d5d5;">
 						<div class="fl">
 							<input class="check-box" name="checkItem" value="{$cart['id']}" type="checkbox"
 							{{--<if condition='$cart[selected] eq 1'>checked="checked"</if> --}}
@@ -206,7 +206,7 @@
 						<!--</span>-->
 					</div>
 				@endif
-				<div class="shoplist_detail_a edge_{$cart.id}" style="border-top:1px" >
+				<div class="shoplist_detail_a edge_{{$cart['id']}}" style="border-top:1px" >
 				{{--<if condition='$key==0'> 1px solid #d5d5d5<else />none</if>--}}
 
 					@if($cart['combination_cart'])
@@ -449,10 +449,10 @@
 								</div>
 								<div class="column t-action">
 									<p>
-										<a href="javascript:void(0);" class="deleteGoods deleteItem" data-goodsid="{{$cart['goods_id']}}" data-cart-id="{$cart.id}">
+										<a href="javascript:void(0);" class="deleteGoods deleteItem" data-goodsid="{{$cart['goods_id']}}" data-cart-id="{{$cart['id']}}">
 											删除</a>
 									</p>
-									<p><a class="moveCollect collectItem" data-id="{{$cart['goods_id']}}">移到我的收藏</a></p>
+									<p><a href="javascript:void(0);" class="moveCollect collectItem" data-id="{{$cart['goods_id']}}">移到我的收藏</a></p>
 								</div>
 							</div>
 						</div>
@@ -466,7 +466,7 @@
 	</div>
 	<!--购物车商品列表-e-->
 
-	<!--全选按钮-s-->
+	<!--结算栏-s-->
 	<div class="shoplist_deta floatflex">
 		<div class="w1224">
 			<div class="edge_tw_foot">
@@ -477,7 +477,7 @@
 							<i class="checkall checkFull"></i>
 							全选
 							<a class="mal18 deleteGoods deleteAll" href="javascript:void(0);">删除选中的商品</a>
-							<a class="mal18 moveCollect collectAll">移到我的收藏</a>
+							<a class="mal18 moveCollect collectAll" href="javascript:void(0);">移到我的收藏</a>
 						</div>
 					</div>
 					<div class="row_foot_last">
@@ -486,7 +486,7 @@
 						</div>
 						<div class="column widallr">
 							<div class="butpayin">
-								<a class="paytotal" href="javascript:void(0)" data-url="{:U('Home/Cart/cart2')}">去结算</a>
+								<a class="paytotal" href="javascript:void(0)" data-url="{{url('cart/cart2')}}">去结算</a>
 							</div>
 							<div class="totalprice">
 								<span class="car_sumprice">总价：<em id="total_fee">￥0</em><i class="bulb"></i></span>
@@ -503,7 +503,7 @@
 			</div>
 		</div>
 	</div>
-	<!--全选按钮-e-->
+	<!--结算栏-e-->
 	<script type="text/javascript">
         //去结算旁边的小图标
         $(function(){
@@ -718,20 +718,20 @@
                     $('.current').find('em').text('（'+data.result.goods_num+'）'); //数量
                     $('#total_fee').empty().html('￥'+data.result.total_fee);
                     $('#goods_fee').empty().html('-￥'+data.result.goods_fee);
-                    var cartList = data.result.cartList;
-                    if(cartList.length > 0){
-                        for(var i = 0; i < cartList.length; i++){
-                            $('#store_'+cartList[0].id+'_total_price').empty().html('￥'+cartList[i].total_price);
-                            if(cartList[i].cut_fee > 0){
-                                $('#store_'+cartList[0].id+'_cut_price').empty().html('减：'+cartList[i].cut_fee);
+                    var cart_list = data.result.cart_list;
+                    if(cart_list.length > 0){
+                        for(var i = 0; i < cart_list.length; i++){
+                            $('#store_'+cart_list[0].id+'_total_price').empty().html('￥'+cart_list[i].total_price);
+                            if(cart_list[i].cut_fee > 0){
+                                $('#store_'+cart_list[0].id+'_cut_price').empty().html('减：'+cart_list[i].cut_fee);
                             }else{
-                                $('#store_'+cartList[0].id+'_cut_price').empty();
+                                $('#store_'+cart_list[0].id+'_cut_price').empty();
                             }
-                            $('#cart_'+cartList[i].id+'_goods_price').empty().html('￥'+cartList[i].goods_price);
-                            $('#cart_'+cartList[i].id+'_total_price').empty().html('￥'+cartList[i].total_fee);
-                            var member_goods_price = (cartList[i].member_goods_price*cartList[i].goods_num).toFixed(2);
-                            $('#cart_'+cartList[i].id+'_market_price').empty().html('￥'+member_goods_price); //活动价格
-                            $('#changeQuantity_'+cartList[i].id).empty().html(cartList[i].goods_num); //数量
+                            $('#cart_'+cart_list[i].id+'_goods_price').empty().html('￥'+cart_list[i].goods_price);
+                            $('#cart_'+cart_list[i].id+'_total_price').empty().html('￥'+cart_list[i].total_fee);
+                            var member_goods_price = (cart_list[i].member_goods_price*cart_list[i].goods_num).toFixed(2);
+                            $('#cart_'+cart_list[i].id+'_market_price').empty().html('￥'+member_goods_price); //活动价格
+                            $('#changeQuantity_'+cart_list[i].id).empty().html(cart_list[i].goods_num); //数量
                         }
 
                     }else{
@@ -845,8 +845,8 @@
         $(document).on("click", '.increment', function (e) {
             var changeQuantityNum = $(this).parent().find('input').val();
             if(changeQuantityNum > 199){
-                changeQuantityNum = 199;
-                layer.msg("购买商品数量不能大于200",{icon:2});
+                // changeQuantityNum = 199;
+                // layer.msg("购买商品数量不能大于200",{icon:2});
             }
             $(this).parent().find('input').attr('value', parseInt(changeQuantityNum) + 1).val(parseInt(changeQuantityNum) + 1);
             initDecrement();
@@ -855,7 +855,7 @@
     })
     //手动输入购买数量
     $(function () {
-        $(document).on("blur", '.quantity-form input', function (e) {
+        $(document).on("change", '.quantity-form input', function (e) {
             var changeQuantityNum = parseInt($(this).val());
             if(changeQuantityNum <= 0){
                 layer.alert('商品数量必须大于0', {icon:2});
@@ -888,8 +888,8 @@
                 if(data.status == 1){
                     AsyncUpdateCart();
                 }else{
-                    input.val(data.result.limit_num);
-                    input.attr('value',data.result.limit_num);
+                    // input.val(data.result.limit_num);
+                    // input.attr('value',data.result.limit_num);
                     layer.alert(data.msg,{icon:2});
                 }
             }
@@ -952,7 +952,7 @@
             if($(this).hasClass('deleteItem')){
                 //删除单个
                 $('#removeGoods').removeClass('deleteAll').addClass('deleteItem').attr('data-cart-id',$(this).data('cart-id'));
-                $('#addCollect').attr('data-id',$(this).data('goodsid'))
+                $('#addCollect').attr('data-id',$(this).data('goodsid'));
                 $('#addCollect').removeClass('collectAll').addClass('collectItem');
             }else{
                 //删除多个
@@ -984,8 +984,9 @@
                 })
             }
             $.ajax({
+                headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
                 type : "POST",
-                url:"{:U('Home/Cart/delete')}",//,
+                url:"{{url('cart/delete')}}",//,
                 dataType:'json',
                 data: {cart_ids: cart_ids},
                 success: function(data){
@@ -995,16 +996,10 @@
 							var types = $('#edge_' + cart_ids[i]).attr('data-type');
 							var goods_id = $('#edge_' + cart_ids[i]).attr('data-cart-id');
                             var cart_id = p.find('.meal-conts-items').eq(0).attr('data-cart-id');//主商品cart_id
-							// console.log(cart_id)
 							$('#edge_' + cart_ids[i]).remove();
                             $('.edge_' + cart_ids[i]).remove();
-                            //删除掉剩余一个主商品做处理
-                            // console.log(p.find('.meal-conts-items').length);
                             if(p.find('.meal-conts-items').length == 1){
-                                // console.log(p.children().eq(0))
                                 if(types == 7 && cart_id != goods_id){
-                                    // console.log(333)
-                                    // console.log(cart_id)
                                     console.log(p.children().eq(0).attr('data-goods-item'));
                                     recoveryGoods(p.children().eq(0).attr('data-goods-id'),p.children().eq(0).attr('data-goods-item'))
                                 }
@@ -1026,6 +1021,7 @@
                             $('.shopcar_empty').show();
                             $('.shoplist_deta').empty();
                         }
+                        layer.msg(data.msg,{icon:1});
                     }else{
                         layer.msg(data.msg,{icon:2});
                     }
@@ -1144,7 +1140,7 @@
             $.ajax({
                 headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')},
                 type: "POST",
-                url: "{:U('Home/Goods/collect_goods')}",//+tab,
+                url: "{{url('goods/collectgoods')}}",//+tab,
                 data: {goods_ids: goods_arr},//+tab,
                 dataType: 'json',
                 success: function (data) {
@@ -1167,7 +1163,7 @@
             shadeClose: true,
             shade: 0.5,
             area: ['490px', '460px'],
-            content: "{:U('Home/User/pop_login')}",
+            content: "{{url('poplogin')}}",
         });
     }
     //我的收藏
@@ -1179,7 +1175,7 @@
         } else {
             $.ajax({
                 type : "get",
-                url:"{:U('Home/User/myCollect')}",//+tab,
+                url:"{{url('user/mycollect')}}",//+tab,
                 dataType:'json',
                 success: function(data){
                     if(data.status == 1){
@@ -1201,7 +1197,7 @@
                             if(data.result[i].goods[0].is_virtual != 1){
                                 products_html +=  '<a onclick="javascript:AjaxAddCart('+data.result[i].goods_id+',1);" class="btn-append"><b></b>加入购物车</a>';
                             }else{
-                                products_html +=  '<a href="/index.php/home/Goods/goodsInfo/id/'+data.result[i].goods_id+'" class="btn-append"><b></b>加入购物车</a>';
+                                products_html +=  '<a href="/goodsinfo/'+data.result[i].goods_id+'" class="btn-append"><b></b>加入购物车</a>';
                             }
                             products_html += '</div></div></li>';
                             if(i%4 == 3){
@@ -1229,7 +1225,7 @@
         } else {
             $.ajax({
                 type : "get",
-                url:"{:U('Home/User/historyLog')}",//+tab,
+                url:"{{url('user/historylog')}}",//+tab,
                 dataType:'json',
                 success: function(data){
                     if(data.status == 1){
@@ -1251,7 +1247,7 @@
                             if(data.result[i].goods[0].is_virtual != 1){
                                 products_html +=  '<a onclick="javascript:AjaxAddCart('+data.result[i].goods_id+',1);" class="btn-append"><b></b>加入购物车</a>';
                             }else{
-                                products_html +=  '<a href="/index.php/home/Goods/goodsInfo/id/'+data.result[i].goods_id+'" class="btn-append"><b></b>加入购物车</a>';
+                                products_html +=  '<a href="/goodsinfo/'+data.result[i].goods_id+'" class="btn-append"><b></b>加入购物车</a>';
                             }
                             products_html += '</div></div></li>';
                             if(i%4 == 3){

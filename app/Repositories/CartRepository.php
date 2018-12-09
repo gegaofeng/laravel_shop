@@ -12,6 +12,7 @@ namespace App\Repositories;
 use App\Exceptions\CartException;
 use App\Model\Cart;
 use http\Env\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartRepository extends BaseRepository
 {
@@ -25,9 +26,10 @@ class CartRepository extends BaseRepository
     /**
      * CartRepository constructor.
      */
-    public function __construct()
+    public function __construct($user_id=0)
     {
         $this->cart = new Cart();
+        $this->user_id=$user_id;
     }
     public function getCartList($user_id){
         $cart_list=$this->cart->where('user_id',$user_id)->get();
@@ -206,7 +208,7 @@ class CartRepository extends BaseRepository
     }
 
     /**
-     * Notes:购物车中已存在该商品时更新数量
+     * Notes:商品加入购物车，购物车中已存在该商品时更新数量
      * User:Feng
      * Date:2018/11/20
      * @param $goods_num
@@ -226,7 +228,7 @@ class CartRepository extends BaseRepository
     }
 
     /**
-     * Notes:
+     * Notes:商品加入购物车，购物车中不存在该商品时，增加该商品
      * User:Feng
      * Date:2018/11/20
      * @param $data
@@ -238,5 +240,101 @@ class CartRepository extends BaseRepository
         if ($result == false) {
             throw new CartException("加入购物车", 0, ['status' => 0, 'msg' => '加入购物车失败']);
         }
+    }
+
+    /**
+     * Notes:更新购物车信息
+     * User:Feng
+     * Date:2018/11/27
+     * @param array $cart
+     * @return array
+     */
+    public function asyncUpdateCart($cart=[]){
+        $cart_list=$cart_selected_id=$cart_no_selected_id=[];
+        if (empty($cart)){
+            return ['status'=>0,'msg'=>'购物车没有商品','result'=>compact('total_fee','goods_fee','goods_num','cart_list')];
+        }
+        foreach ($cart as $key=>$val){
+            if ($cart[$key]['selected']==1){
+                $cart_selected_id[]=$cart[$key]['id'];
+            }else{
+                $cart_no_selected_id[]=$cart[$key]['id'];
+            }
+        }
+        //省略用户判断代码
+        if (!empty($cart_no_selected_id)){
+            DB::table('carts')->whereIn('id',$cart_no_selected_id)->update(['selected'=>0]);
+        }
+        if (empty($cart_selected_id)){
+            $cart_price_info=$this->getCartPriceInfo();
+            $cart_price_info['cart_list']=$cart_list;
+            return ['status'=>1,'msg'=>'没有选中任何商品','result'=>$cart_price_info];
+        }
+        DB::table('carts')->whereIn('id',$cart_selected_id)->update(['selected'=>1]);
+        $cart_list=DB::table('carts')->whereIn('id',$cart_selected_id)->get()->toArray();
+        foreach ($cart_list as $v){
+            $cart_list_attr[]=array_merge((Array)$v,['cut_fee'=>0,'total_fee'=>$v->goods_price*$v->goods_num,'goods_fee'=>$v->goods_price]);
+        }
+
+        //搭配购买待完善
+//        var_dump($cart_list_attr);
+        if ($cart_list_attr){
+            $cart_price_info=$this->getCartPriceInfo($cart_list_attr);
+            $cart_price_info['cart_list']=$cart_list_attr;
+            return ['status'=>1,'msg'=>'计算成功','result'=>$cart_price_info];
+        }else{
+            $cart_price_info=$this->getCartPriceInfo();
+            $cart_price_info['cart_list']=$cart_list_attr;
+            return ['status'=>1,'msg'=>'没有选中任何商品','result'=>$cart_price_info];
+        }
+    }
+
+    /**
+     * Notes:计算购物车商品数量、商品价格
+     * User:Feng
+     * Date:2018/11/26
+     * @param array $cart_list
+     * @return array
+     */
+    public function getCartPriceInfo($cart_list=[]){
+        $total_fee=$goods_fee=$goods_num=0;
+        if ($cart_list){
+            foreach ($cart_list as $key=>$value){
+                $total_fee+=$value['goods_price']*$value['goods_num'];
+                $goods_fee+=$value['cut_fee'];
+                $goods_num+=$value['goods_num'];
+            }
+        }
+        return compact('total_fee','goods_fee','goods_num');
+    }
+
+    /**
+     * Notes:更改购物车商品数量
+     * User:Feng
+     * Date:2018/11/27
+     * @param $id
+     * @param $num
+     * @return array
+     */
+    public function changeNum($id,$num){
+        if (!$this->user_id){
+            $cart=$this->cart->where('user_id',$this->user_id)->whereId($id)->first();
+        }else{
+
+        }
+
+        $cart->goods_num=$num;
+        $result=$cart->save();
+        if ($result){
+            return ['status' => 1, 'msg' => '修改商品数量成功', 'result' => ''];
+        }else{
+            return ['status'=>0,'msg'=>'修改商品数量失败，请重试','result'=>''];
+        }
+    }
+    public function delete(array $cart_id){
+        if (!$this->user_id){
+            $result=$this->cart->where('user_id',$this->user_id)->whereIn('id',$cart_id)->delete();
+        }
+        return $result;
     }
 }

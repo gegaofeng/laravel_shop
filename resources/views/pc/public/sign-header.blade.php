@@ -39,11 +39,11 @@
         </li>-->
       </div>
       <ul class="top-ri-header fr clearfix">
-          <li><a target="_blank" href="{:U('Home/Order/order_list')}">我的订单</a></li>
+          <li><a target="_blank" href="{{url('order/list')}}">我的订单</a></li>
           <li class="spacer"></li>
-          <li><a target="_blank" href="{:U('Home/User/visit_log')}">我的浏览</a></li>
+          <li><a target="_blank" href="{{url('user/visit')}}">我的浏览</a></li>
           <li class="spacer"></li>
-          <li><a target="_blank" href="{:U('Home/User/goods_collect')}">我的收藏</a></li>
+          <li><a target="_blank" href="{{url('user/collection')}}">我的收藏</a></li>
           <li class="spacer"></li>
           <li>客户服务</li>
           <li class="spacer"></li>
