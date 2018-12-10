@@ -2,6 +2,7 @@
 @section('personal_style')
 	<title>搜索列表</title>
 	<link rel="stylesheet" type="text/css" href="{{asset('home/css/tpshop.css')}}" />
+	<script src="{{asset('js/layer/layer-min.js')}}"></script>
     <style>
 		@media screen and (min-width:1260px) and (max-width: 1465px) {
 			.w1430{width: 1224px;}
@@ -227,7 +228,7 @@
 					<!--</div>-->
 				<!--</div>-->
 				<div class="f-total fr">
-					<div class="all-sec">共<span>{$page->totalRows}</span>个商品</div>
+					<div class="all-sec">共<span>{{$goods_list->total()}}</span>个商品</div>
 					<div class="all-fy">
 						<php>$nowPage = $page->nowPage;$totalPages = $page->totalPages;</php>
 						<a <if condition="$nowPage gt 1">href="{:U('Home/Goods/search',array_merge($filter_param,array('p'=>$nowPage-1)))}" </if>>&lt;</a>
@@ -238,65 +239,67 @@
 			</div>
 			<div class="shop-list-splb p">
 				<ul>
-                    <empty name="goods_list">
+                    @if($goods_list->isEmpty())
                         <p class="ncyekjl" style="font-size: 16px;margin:100px auto;text-align: center;">-- 抱歉没找到您要搜索的商品，换个条件试试！--</p>
-                    <else/>
-					    <foreach name="goods_list" item="v" key="k">
+                    @else
+					    @foreach($goods_list as $k=>$v)
 						<li>
 							<div class="s_xsall">
 								<div class="xs_img">
-									<a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">
-										<img class="lazy-list" data-original="{$v.goods_id|goods_thum_images=236,236}"/>
+									<a href="{{url('goodsinfo/'.$v['goods_id'])}}">
+										<img class="lazy-list" data-original="{{goods_thum_images($v['goods_id'],236,236)}}"/>
 									</a>
 								</div>
 								<div class="xs_slide">
 									<div class="small-xs-shop">
 										<ul>
-											<foreach name="goods_images" item="v2" key="k2">
-												<if condition="$v2[goods_id] eq $v[goods_id]">
+											@foreach($goods_images as $k2=>$v2)
+												@if($v2['goods_id']==$v['goods_id'])
 													<li>
 														<a href="javascript:void(0);">
-															<img class="lazy-list" data-original="{$v2|get_sub_images=$v[goods_id],236,236}"/>
+															<img class="lazy-list" data-original="{{$v2['image_url']}}"/>
 														</a>
 													</li>
-												</if>
-											</foreach>
+												@endif
+											@endforeach
 										</ul>
 									</div>
 								</div>
 								<div class="price-tag">
-									<span class="now"><em class="li_xfo">￥</em><em>{$v[shop_price]}</em></span>
-									<span class="old"><em>￥</em><em>{$v[market_price]}</em></span>
+									<span class="now"><em class="li_xfo">￥</em><em>{{$v['shop_price']}}</em></span>
+									<span class="old"><em>￥</em><em>{{$v['market_price']}}</em></span>
 								</div>
 								<div class="shop_name2">
-									<a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">
-										{$v[goods_name]}
+									<a href="{{url('goodsinfo/'.$v['goods_id'])}}">
+										{{$v['goods_name']}}
 									</a>
 								</div>
 								<div class="J_btn_statu">
 									<div class="p-num">
-										<input class="J_input_val" id="number_{$v.goods_id}" type="text" value="1">
+										<input class="J_input_val" id="number_{{$v['goods_id']}}" type="text" value="1">
 										<p class="act">
-											<a href="javascript:void(0);" onClick="goods_add({$v.goods_id});" class="litt-zzyl1"></a>
-											<a href="javascript:void(0);" onClick="goods_cut({$v.goods_id});"  class="litt-zzyl2"></a>
+											<a href="javascript:void(0);" onClick="goods_add({{$v['goods_id']}});" class="litt-zzyl1"></a>
+											<a href="javascript:void(0);" onClick="goods_cut({{$v['goods_id']}});"  class="litt-zzyl2"></a>
 										</p>
 									</div>
 									<div class="p-btn">
-										<if condition="($v['is_virtual'] eq 1)">
-											<a href="{:U('/Home/Goods/goodsInfo',array('id'=>$v[goods_id]))}">查看详情</a>
-											<else/>
-											<a href="javascript:void(0);" onclick="AjaxAddCart({$v[goods_id]},$('#number_'+{$v.goods_id}).val());">加入购物车</a>
-										</if>
+										@if($v['is_virtual'] ==1)
+											<a href="{{url('goodsinfo/'.$v['goods_id'])}}">查看详情</a>
+										@else
+											<a href="javascript:void(0);" onclick="AjaxAddCart({{$v['goods_id']}},$('#number_'+{{$v['goods_id']}}).val());">加入购物车</a>
+										@endif
 									</div>
 								</div>
 							</div>
 						</li>
-					</foreach>
-                    </empty>
+					@endforeach
+                    @endif
 				</ul>
 			</div>
 			<div class="page p">
-				{{$goods_list->links()}}
+				<div class='dataTables_paginate paging_simple_numbers'>
+					{{$goods_list->links('pc.public.paginator')}}
+				</div>
 			</div>
 		</div>
 	</div>

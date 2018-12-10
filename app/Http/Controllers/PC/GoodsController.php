@@ -87,7 +87,9 @@ class GoodsController extends Controller
 //        $goodsHaveSearchWord = DB::table('goods')->where('goods_name','like','%'.$q.'%')->count();
 //        return $goodsHaveSearchWord;
         $goods_list=$this->goodsRepository->search($key_word);
+        $goods_id_list=get_arr_column($goods_list,'goods_id');
+        $goods_images=$this->goodsImagesRepository->getGoodsImagesByGoodsId($goods_id_list);
 //        return $goods_list;
-        return view('pc.goods.search')->with('goods_list',$goods_list);
+        return view('pc.goods.search')->with('goods_list',$goods_list)->with('goods_images',$goods_images);
     }
 }

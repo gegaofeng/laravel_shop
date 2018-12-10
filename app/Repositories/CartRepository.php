@@ -331,6 +331,14 @@ class CartRepository extends BaseRepository
             return ['status'=>0,'msg'=>'修改商品数量失败，请重试','result'=>''];
         }
     }
+
+    /**
+     * Notes:
+     * User:Feng
+     * Date:2018/12/10
+     * @param array $cart_id
+     * @return mixed
+     */
     public function delete(array $cart_id){
         if (!$this->user_id){
             $result=$this->cart->where('user_id',$this->user_id)->whereIn('id',$cart_id)->delete();
