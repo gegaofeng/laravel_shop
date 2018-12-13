@@ -564,6 +564,10 @@
         }
         location.href ="/index.php?m=Home&c=Goods&a=search"+url;
     }
+    function ajax_get_goods_list() {
+        let url='1';
+		console.log('url为：'+url);
+    }
 </script>
 </body>
 @endsection
