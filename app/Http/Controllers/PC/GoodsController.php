@@ -10,6 +10,7 @@ use App\Tools\Tools;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class GoodsController extends Controller
 {
@@ -80,6 +81,20 @@ class GoodsController extends Controller
         return view('pc.goods.ajaxGetGoodsList')->with('goods_list',$goods_list)->with('goods_images',$goods_images);
     }
     public function search(Request $request){
+        return url()->full();
+        $url=Input::all();
+        foreach ($url as $k=>$v){
+            echo $k.'为'.$v;
+        }
+//        var_dump($url);
+        return $url;
+        $id=$request['id'];
+        $brand_id=$request['brand_id'];
+        $sort=$request['sort'];
+        $sort_asc=$request['sort_asc'];
+        $price=$request['price'];
+        $start_price=$request['start_price'];
+        $end_price=$request['end_price'];
         $q=urldecode(trim($request['q']));
         $key_word='%'.$q."%";
 //        return $q;

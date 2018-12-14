@@ -562,7 +562,7 @@
         {
             url += "&"+k+'='+get_parment[k];
         }
-        location.href ="/index.php?m=Home&c=Goods&a=search"+url;
+        location.href ="/search"+url;
     }
     function ajax_get_goods_list() {
         let url='1';
