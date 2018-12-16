@@ -7,6 +7,7 @@ use App\Http\Requests\CartRequest;
 use App\Repositories\CartRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -31,6 +32,8 @@ class CartController extends Controller
      */
     public function index(Request $request)
     {
+        var_dump(Auth::check());
+        return Auth::id();
         $cart_list = $this->cartRepository->getCartList($this->getUserId());
         $total_goods_num = 0;
         if ($cart_list->isEmpty()) {

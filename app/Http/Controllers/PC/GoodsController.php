@@ -73,6 +73,14 @@ class GoodsController extends Controller
         //商品活动逻辑省略待完善
         return json_encode(array('status'=>1,'result'=>['goods'=>$goods]));
     }
+
+    /**
+     * Notes:
+     * User:Feng
+     * Date:2018/12/16
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function ajaxGetGoodsList(Request $request){
         $goods_cat_tree=$this->goodsCategoryRepository->getCatSonTree($request['id']);
         $goods_list=$this->goodsRepository->getGoodsListByCategoryId($goods_cat_tree);
@@ -80,6 +88,14 @@ class GoodsController extends Controller
         $goods_images=$this->goodsImagesRepository->getGoodsImagesByGoodsId($goods_id_list);
         return view('pc.goods.ajaxGetGoodsList')->with('goods_list',$goods_list)->with('goods_images',$goods_images);
     }
+
+    /**
+     * Notes:
+     * User:Feng
+     * Date:2018/12/16
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function search(Request $request){
         return url()->full();
         $url=Input::all();

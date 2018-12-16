@@ -27,6 +27,9 @@ class TestController extends Controller
     }
 
     public function test(Request $request){
+        var_dump(Auth::check());
+        var_dump(Auth::user());
+        return Auth::id();
         $data=['name'=>'test','email'=>'123@qq.com','password'=>'test'];
         return \App\User::create([
                                 'name' => $data['name'],

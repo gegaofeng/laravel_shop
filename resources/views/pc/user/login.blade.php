@@ -147,7 +147,7 @@
             dataType : 'json',
             success : function(res){
                 if(res.status == 1){
-                    alert(res.url);
+                    // alert(res.url);
                     window.location.href = res.url;
                 }else{
                     showErrorMsg(res.msg);

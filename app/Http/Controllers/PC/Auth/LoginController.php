@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\PC\Auth;
 
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    //
+    use AuthenticatesUsers;
+    protected $username='username';
     /**
      * Notes:
      * User:
@@ -25,11 +27,18 @@ class LoginController extends Controller
     public function login(Request $request){
         $username=$request['username'];
         $password=$request['password'];
-        $refer_url=$request['referurl'];
-        if (Auth::attempt(array('name'=>$username,'password'=>$password))){
+        $refer_url=$request['pre_url'];
+        if ($this->hasTooManyLoginAttempts($request)){
+            $this->fireLockoutEvent($request);
+            return $this->sendLockoutResponse($request);
+        }
+        if ($this->attemptLogin($request)){
             return json_encode(['status'=>1,'url'=>$refer_url]);
         }else{
             return 'error';
         }
+    }
+    public function attemptLogin(Request $request){
+        return $this->guard()->attempt($request->only('username','password'),$request->filled('remember'));
     }
 }
