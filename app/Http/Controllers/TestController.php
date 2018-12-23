@@ -23,7 +23,6 @@ class TestController extends Controller
     public function __construct() {
         $this->model=new GoodsRepository();
         $this->goodsSpecPriceRepository=new GoodsSpecPriceRepository();
-//        $this->model=new GoodsRepository();
     }
 
     public function test(Request $request){
