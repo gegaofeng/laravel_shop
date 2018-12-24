@@ -38,10 +38,6 @@ Route::group(['namespace' => 'PC', 'prefix' => 'cart'], function ()
     Route::post('delete','CartController@delete');
 }
 );
-Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function ()
-{
-    Route::get('/', 'AuthController@login');
-}
 );
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin/home',), function ()
 {
