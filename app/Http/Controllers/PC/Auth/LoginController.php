@@ -25,8 +25,6 @@ class LoginController extends Controller
         return view('pc.user.popLogin')->with('refer_url',$refer_url);
     }
     public function login(Request $request){
-        $username=$request['username'];
-        $password=$request['password'];
         $refer_url=$request['pre_url'];
         if ($this->hasTooManyLoginAttempts($request)){
             $this->fireLockoutEvent($request);
